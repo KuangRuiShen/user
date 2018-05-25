@@ -35,13 +35,8 @@ public class UserController {
 			if (bindingResult.hasErrors()) {
 				 return JsonResult.buildFailuredResult(ResultCode.PARAMS_ERROR, bindingResult.getFieldError().getDefaultMessage());
 		      }	
-			Integer add = userService.add(u);
-			if(add == 1 ){
-				return JsonResult.buildSuccessResult();	
-			}else{
-				return JsonResult.buildFailuredResult(ResultCode.SYS_ERROR,"系统异常");
-			}
-			
+			userService.add(u);
+			return JsonResult.buildSuccessResult();				
 		} catch (Exception e) {
 			e.printStackTrace();
 			return JsonResult.buildFailuredResult(ResultCode.SYS_ERROR,"系统异常");

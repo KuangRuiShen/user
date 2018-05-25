@@ -13,6 +13,6 @@ public interface UserService {
 
 	List<User> find(String username);
 
-	int add(User u);
+	void add(User u);
 
 }
