@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 /**
- * @author krs
+ * @author k
  * @date 创建时间2017年7月20日  上午10:13:29
  * @describe 启动服务
  */

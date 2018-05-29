@@ -3,21 +3,22 @@ package com.app.view.util;
 /**
  * json数据返回类型
  * 
- * @author zhanglei
+ * 
  *
  */
 public class JsonResult<T> {
 
 	private int code;
 	private String message;
-//	private long total;
-//	private int pageSize;
+	private long total;
+	private int pageSize;
 	public static int PAGESIZR = 10;
 	private T data;
 
 	public JsonResult() {
 		setCode(ResultCode.SUCCESS);
 		setMessage(null);
+		setPageSize(PAGESIZR);
 	}
 	
 	public JsonResult(ResultCode code) {
@@ -25,33 +26,40 @@ public class JsonResult<T> {
 		if (ResultCode.SUCCESS != code) {
 			setMessage(code.getMsg());
 		}
+		setPageSize(PAGESIZR);
 	}
 
 	public JsonResult(ResultCode code, String message) {
 		setCode(code);
 		setMessage(message);
+		setPageSize(PAGESIZR);
 	}
 
 	public JsonResult(ResultCode code, String message, T data) {
 		setCode(code);
 		setMessage(message);
+		setPageSize(PAGESIZR);
 		setData(data);
 	}
 
 	public JsonResult(int codeVal, String message, T data) {
 		setCode(codeVal);
 		setMessage(message);
+		setPageSize(PAGESIZR);
 		setData(data);
 	}
 
 	public JsonResult(ResultCode success, T data, long total) {
 		setCode(success);
+		setTotal(total);
+		setPageSize(PAGESIZR);
 		setData(data);
 	}
 
 	public JsonResult(ResultCode success, T data, int pageSize, long total) {
 		setCode(success);
-		
+		setTotal(total);
+		setPageSize(pageSize);
 		setData(data);
 	}
 
@@ -75,6 +83,13 @@ public class JsonResult<T> {
 		this.message = message;
 	}
 
+	public long getTotal() {
+		return this.total;
+	}
+
+	public void setTotal(long total) {
+		this.total = total;
+	}
 
 	public T getData() {
 		return this.data;
@@ -82,6 +97,14 @@ public class JsonResult<T> {
 
 	public void setData(T data) {
 		this.data = data;
+	}
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
 	}
 
 	public static <T> JsonResult<T> buildSuccessResult() {
