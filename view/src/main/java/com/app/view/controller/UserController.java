@@ -55,7 +55,7 @@ public class UserController {
 		if(pageSize == null || pageSize <10)
 		  pageSize = JsonResult.PAGESIZR;	
 //		  PageHelper.startPage(page, pageSize);
-      	  List<User> list = userService.find("");
+      	  List<User> list = userService.find(name);
           PageInfo<User> pageInfo = new PageInfo<User>(list);
           return JsonResult.buildSuccessResult(list,pageInfo.getTotal());
 	}

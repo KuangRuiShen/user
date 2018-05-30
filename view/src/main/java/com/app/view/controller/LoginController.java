@@ -2,6 +2,7 @@ package com.app.view.controller;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,6 +29,10 @@ public class LoginController {
 	@PostMapping
 	public JsonResult<?> list(@RequestBody LoginUser user){
 			try {
+				
+				if(StringUtils.isBlank(user.getUsername())){
+					return JsonResult.buildFailuredResult(ResultCode.PARAMS_ERROR, "用户名或者密码错误");
+				}
 				List<LoginUser> users = loginService.login(user.getUsername());
 				String password = MD5.enc(user.getPassword());
 				if(users.size() == 1 &&  password.equals(users.get(0).getPassword())){
