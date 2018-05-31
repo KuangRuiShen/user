@@ -6,8 +6,12 @@ spring :
       url : jdbc:mysql://localhost:3306/app_db?useUnicode=true&characterEncoding=utf8
       username : root
       password : root
-      driver-class-name: com.mysql.jdbc.Driver    
-
+      driver-class-name: com.mysql.jdbc.Driver 
+         
+  http:
+    multipart:
+     maxFileSize: 10Mb
+     maxRequestSize: 100Mb 
 
 #mybatis配置
 mybatis: 
@@ -20,7 +24,10 @@ pagehelper:
   reasonable: true
   support-methods-arguments: true
   params: count=countSql    
-      
+  
+
+   
+         
 server : 
   port : 7001 
   tomcat: 

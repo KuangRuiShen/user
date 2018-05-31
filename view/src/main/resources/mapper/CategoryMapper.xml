@@ -13,12 +13,12 @@
 	</select>
 	
 	<insert id="add" parameterType="com.app.view.pojo.Category">
-		INSERT INTO LY_XTGL_YHZ (id,name,remark,px,imgurl) VALUES (
+		INSERT INTO category (id,name,remark,imgurl,px) VALUES (
 		#{id,jdbcType=VARCHAR},
-		#{name,jdbcType=VARCHAR},
-		#{px,jdbcType=INTEGER},
-		#{remark,jdbcType=VARCHAR},
-		#{imgurl,jdbcType=VARCHAR}
+		#{name,jdbcType=VARCHAR},	
+		#{remark,jdbcType=VARCHAR},	 
+		#{imgurl,jdbcType=VARCHAR},
+		 #{px,jdbcType=INTEGER}
 		)
 	</insert>
 	
@@ -26,9 +26,9 @@
 		UPDATE category SET
 		name=#{name,jdbcType=VARCHAR},
 		PX=#{px,jdbcType=INTEGER},
-		remark=#{remark,jdbcType=VARCHAR}
+		remark=#{remark,jdbcType=VARCHAR},
 		imgurl=#{imgurl,jdbcType=VARCHAR}
-		WHERE yhzbh = #{yhzbh}
+		WHERE id = #{id}
 	</update>
 	
 	<delete id="delete">

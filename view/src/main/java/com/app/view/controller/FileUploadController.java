@@ -33,10 +33,10 @@ public class FileUploadController {
 	 * @param httpSession
 	 * @return
 	 */
-	@PostMapping("/image")
-	public String newsCategoryEditPost(@RequestParam MultipartFile[] imageFile,HttpServletRequest request) {
+	@PostMapping(value = "/image" , produces = "multipart/form-data;charset=UTF-8") 
+	public String newsCategoryEditPost(@RequestParam("file") MultipartFile file,HttpServletRequest request) {
 		String path = "";
-		for (MultipartFile file : imageFile) {
+//		for (MultipartFile file : imageFile) {
 			if (file.isEmpty()) {
 				System.out.println("文件未上传");
 			} else {
@@ -44,10 +44,10 @@ public class FileUploadController {
 				Date date = new java.util.Date();
 				String strDate = sdf.format(date);
 				String fileName = strDate + file.getOriginalFilename().substring(
-						        file.getOriginalFilename().indexOf("."),
-								file.getOriginalFilename().length());
+						         file.getOriginalFilename().indexOf("."),
+								 file.getOriginalFilename().length());
 				String realPath = request.getSession().getServletContext().getRealPath("/upload/image");
-				System.out.println("realPath : "+realPath);
+//				System.out.println("realPath : "+realPath);
 				try {
 					FileUtils.copyInputStreamToFile(file.getInputStream(),new File(realPath, fileName));
 					path = "/upload/image/"+fileName;
@@ -56,8 +56,8 @@ public class FileUploadController {
 					e.printStackTrace();
 				}
 			}
-		}
-		
+//		}
+		System.out.println(path);
 		return path;
 	}
 }
