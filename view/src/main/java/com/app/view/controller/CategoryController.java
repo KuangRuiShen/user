@@ -36,7 +36,6 @@ public class CategoryController {
 	
 	@PostMapping("add")
 	public JsonResult<?> add(@RequestBody Category c){
-		
           return JsonResult.buildSuccessResult();
 	}
 
