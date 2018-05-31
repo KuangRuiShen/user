@@ -14,4 +14,10 @@ import com.app.view.pojo.Category;
 public interface CategoryMapper {
 	
 	List<Category> list(@Param("name") String name);
+
+	void add(Category c);
+
+	void update(Category c);
+
+	void delete(List<String> ids);
 }

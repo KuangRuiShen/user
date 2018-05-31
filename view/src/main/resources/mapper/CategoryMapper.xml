@@ -9,8 +9,33 @@
 		 		name like CONCAT('%', #{name}, '%')
 		 	</if>	 
 		 </where>	 
-		  order by  CONVERT(px,SIGNED)
+		  order by  CONVERT(px,SIGNED)	  
 	</select>
 	
+	<insert id="add" parameterType="com.app.view.pojo.Category">
+		INSERT INTO LY_XTGL_YHZ (id,name,remark,px,imgurl) VALUES (
+		#{id,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR},
+		#{px,jdbcType=INTEGER},
+		#{remark,jdbcType=VARCHAR},
+		#{imgurl,jdbcType=VARCHAR}
+		)
+	</insert>
 	
+	<update id="update" parameterType="com.app.view.pojo.Category">
+		UPDATE category SET
+		name=#{name,jdbcType=VARCHAR},
+		PX=#{px,jdbcType=INTEGER},
+		remark=#{remark,jdbcType=VARCHAR}
+		imgurl=#{imgurl,jdbcType=VARCHAR}
+		WHERE yhzbh = #{yhzbh}
+	</update>
+	
+	<delete id="delete">
+	   DELETE FROM category WHERE id IN
+		<foreach collection="list" item="id"  open="(" separator=","
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
 </mapper>
