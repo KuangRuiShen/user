@@ -1,6 +1,7 @@
 package com.app.view.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.app.view.pojo.Category;
 
@@ -13,5 +14,7 @@ public interface CategoryService {
 	void update(Category c);
 
 	void delete(List<String> ids);
+
+	List<Map<String, String>> all();
 
 }

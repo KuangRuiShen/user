@@ -9,6 +9,7 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +26,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileUploadController {
 
 	
+	@Value("${realpath}")
+	private String realpath;
 	/**
 	 * 文章分类新增、修改提交
 	 * @param model
@@ -46,11 +49,11 @@ public class FileUploadController {
 				String fileName = strDate + file.getOriginalFilename().substring(
 						         file.getOriginalFilename().indexOf("."),
 								 file.getOriginalFilename().length());
-				String realPath = request.getSession().getServletContext().getRealPath("/upload/image");
+//				String realPath = request.getSession().getServletContext().getRealPath("/upload/img");
 //				System.out.println("realPath : "+realPath);
 				try {
-					FileUtils.copyInputStreamToFile(file.getInputStream(),new File(realPath, fileName));
-					path = "/upload/image/"+fileName;
+					FileUtils.copyInputStreamToFile(file.getInputStream(),new File("E:/file/upload/img/", fileName));
+					path = "/upload/img/"+fileName;
 //					newsCategory.setImage("/userfiles/"+fileName);
 				} catch (IOException e) {
 					e.printStackTrace();

@@ -11,55 +11,41 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.view.pojo.Category;
-import com.app.view.service.CategoryService;
+import com.app.view.pojo.Video;
+import com.app.view.service.VideoService;
 import com.app.view.util.JsonResult;
 import com.app.view.util.ResultCode;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 @RestController
-@RequestMapping("category")
-public class CategoryController {
+@RequestMapping("video")
+public class VideoController {
 	
 	@Autowired
-	private CategoryService categoryService;
+	private VideoService videoServce;
 	
 	@GetMapping("list")
-	public JsonResult<?> list(Integer page,Integer pageSize,String name){		
+	public JsonResult<?> list(Integer page,Integer pageSize,String name,String cid){		
 		if(page == null || page < 1 )
 			page = 1;
 		if(pageSize == null || pageSize <10)
-		  pageSize = JsonResult.PAGESIZR;	
-//		  PageHelper.startPage(page, pageSize);
-		try {
-			  List<Category> list = categoryService.list(name);
-	          PageInfo<Category> pageInfo = new PageInfo<Category>(list);
-	          return JsonResult.buildSuccessResult(list,pageInfo.getTotal());
-		} catch (Exception e) {
-			e.printStackTrace();
-			return JsonResult.buildExceptionResult("查询失败,请联系管理员!");
-		}
-      	
+		   pageSize = JsonResult.PAGESIZR;	
+		  PageHelper.startPage(page, pageSize);
+      	  List<Video> list = videoServce.list(name,cid);
+          PageInfo<Video> pageInfo = new PageInfo<Video>(list);
+          return JsonResult.buildSuccessResult(list,pageInfo.getTotal());
 	}
 	
-	@GetMapping("all")
-	public JsonResult<?> all(){		
-		try {
-		    return JsonResult.buildSuccessResult(categoryService.all());
-		} catch (Exception e) {
-			e.printStackTrace();
-			return JsonResult.buildExceptionResult("查询失败,请联系管理员!");
-		}
-      
-	}
-	
+
+
 	@PostMapping("add")
-	public JsonResult<?> add(@RequestBody Category c,BindingResult bindingResult){
+	public JsonResult<?> add(@RequestBody Video v,BindingResult bindingResult){
 		try {		
 			if(bindingResult.hasErrors()){
 				return JsonResult.buildFailuredResult(ResultCode.PARAMS_ERROR, bindingResult.getFieldError().getDefaultMessage());
 			}	   	
-			categoryService.add(c);
+			videoServce.add(v);
         	return JsonResult.buildSuccessResult();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -68,15 +54,15 @@ public class CategoryController {
 	}
 	
 	@PostMapping("update")
-	public JsonResult<?> update(@RequestBody Category c,BindingResult bindingResult){
+	public JsonResult<?> update(@RequestBody Video v,BindingResult bindingResult){
 		try {		
 			if(bindingResult.hasErrors()){
 				return JsonResult.buildFailuredResult(ResultCode.PARAMS_ERROR, bindingResult.getFieldError().getDefaultMessage());
 			}	
-			if(StringUtils.isBlank(c.getId())){
+			if(StringUtils.isBlank(v.getId())){
 				return JsonResult.buildExceptionResult("id不能为空");
 			}
-			categoryService.update(c);
+			videoServce.update(v);
         	return JsonResult.buildSuccessResult();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -91,12 +77,14 @@ public class CategoryController {
 			if(ids.isEmpty()){
 				return JsonResult.buildExceptionResult("参数不能为空");
 			}
-			categoryService.delete(ids);
+			videoServce.delete(ids);
         	return JsonResult.buildSuccessResult();
 		} catch (Exception e) {
 			e.printStackTrace();
-			return JsonResult.buildExceptionResult("删除用户分组异常,请联系管理员!");
+			return JsonResult.buildExceptionResult("删除异常,请联系管理员!");
 		}
 	}
+
+	
 
 }

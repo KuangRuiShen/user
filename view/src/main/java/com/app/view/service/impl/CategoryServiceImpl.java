@@ -1,6 +1,7 @@
 package com.app.view.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,12 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public void delete(List<String> ids) {
 		categoryMapper.delete(ids);
+	}
+
+	@Override
+	public List<Map<String, String>> all() {
+		// TODO Auto-generated method stub
+		return categoryMapper. all();
 	}
 	
 }
