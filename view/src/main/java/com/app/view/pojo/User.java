@@ -19,6 +19,9 @@ public class User {
 	@NotNull(message="密码不能为空")
 	private String password;
 	
+	//旧密码
+	private String lastpassword;
+	
 	private String role_id;
 	
 	private String creat_time;
@@ -70,6 +73,14 @@ public class User {
 
 	public void setCreat_time(String creat_time) {
 		this.creat_time = creat_time;
+	}
+
+	public String getLastpassword() {
+		return lastpassword;
+	}
+
+	public void setLastpassword(String lastpassword) {
+		this.lastpassword = lastpassword;
 	}
 	
 	

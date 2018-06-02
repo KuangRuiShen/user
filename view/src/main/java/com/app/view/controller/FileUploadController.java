@@ -10,7 +10,6 @@ import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +28,7 @@ import com.app.view.service.VideoService;
 @RequestMapping("upload")
 public class FileUploadController {
 
-	final static String url ="http://127.0.0.1/";
+//	final static String url ="http://127.0.0.1/";
 	final static String realpath ="c:/file/";
 	
 	@Autowired

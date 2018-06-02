@@ -83,15 +83,7 @@
 		</foreach>
 	</select>
 	
-	<select id="findVideo" resultType="java.lang.Integer">
-	 select count(v.id) from  
- 	video v left join  category  c  on v.cid = c.id
- 	where c.id in 
-		<foreach collection="list" item="id"  open="(" separator=","
-			close=")">
-			#{id}
-		</foreach>
-	</select>
+
 	
 	<insert id="addrelation" parameterType="com.app.view.pojo.Video">
 		INSERT INTO 

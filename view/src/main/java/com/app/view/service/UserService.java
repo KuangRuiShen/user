@@ -15,4 +15,8 @@ public interface UserService {
 
 	void add(User u);
 
+	User findById(String id);
+
+	void updatePassword(User u);
+
 }

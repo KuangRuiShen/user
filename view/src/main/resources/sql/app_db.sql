@@ -98,3 +98,6 @@ CREATE TABLE `video_img` (
   `vid` varchar(32) NOT NULL,
   `imgurl` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `app_db`.`login_user` (`id`, `username`, `password`, `remark`) VALUES ('25', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'dfsfw32');
+

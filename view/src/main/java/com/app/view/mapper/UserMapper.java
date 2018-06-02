@@ -3,6 +3,8 @@ package com.app.view.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.app.view.pojo.User;
 
@@ -17,7 +19,11 @@ public interface UserMapper {
 	List<User> find(@Param("username") String username);
 
 	Integer add(User u);
+
+	@Select("select * from login_user where id = #{id}")
+	User findById(@Param("id") String id);
+
+	@Update("update login_user set password=#{password}  where id = #{id}" )
+	void updatePassword(User u);
 	
-
-
 }

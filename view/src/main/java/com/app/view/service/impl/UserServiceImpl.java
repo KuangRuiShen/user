@@ -24,7 +24,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> find(String username) {
-		// TODO Auto-generated method stub
 		return  userMapper.find(username);
 	}
 
@@ -37,6 +36,17 @@ public class UserServiceImpl implements UserService {
 		u.setCreat_time(MyUtils.getPreTime());
 		userMapper.add(u);
 //		return 1;
+	}
+
+	@Override
+	public User findById(String id) {
+		return 	userMapper.findById(id);
+	}
+
+	@Override
+	public void updatePassword(User u) {
+		u.setPassword(MD5.enc(u.getPassword()));	
+		userMapper.updatePassword(u);	
 	}
 
 }
