@@ -16,5 +16,7 @@ public interface CategoryService {
 	void delete(List<String> ids);
 
 	List<Map<String, String>> all();
+	
+	int findVideo(List<String> ids);
 
 }

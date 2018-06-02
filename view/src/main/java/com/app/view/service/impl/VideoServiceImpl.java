@@ -1,5 +1,6 @@
 package com.app.view.service.impl;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,19 @@ public class VideoServiceImpl implements VideoService {
 //		folder.delete();
 		 videoMapper.deleteImg(ids);
 		
+	}
+
+	@Override
+	public void addrelation(Video v) {
+		 videoMapper.deleteImg(Arrays.asList(v.getId()));
+		 if(!v.getImgs().isEmpty()){
+			 videoMapper.addrelation(v);	 
+		 }
+	}
+
+	@Override
+	public void saveVideourl(String vid, String path) {
+		videoMapper.saveVideourl(vid,path);	 	
 	}
 
 

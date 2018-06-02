@@ -7,16 +7,20 @@
 		<result property="name" column="name" />
 		<result property="remark" column="remark" />
 		<result property="px" column="px" />
+		<result property="imgurl" column="imgurl" />
 		<result property="videourl" column="videourl" />
 		<result property="cid" column="cid" />
+		<result property="cname" column="cname" />	
+		<result property="watch" column="watch" />
 		<collection property="imgs" ofType="java.lang.String">
-			<id property="imgurl" column="imgurl" />
+			<id  column="img" />
 		</collection>
 	</resultMap>
 
   <select id="list" resultMap="baseMap">
-		select v.id,v.name,v.remark,v.px,v.videourl,v.cid,
-		vi.imgurl from video v
+		select v.id,v.name,v.remark,v.px,v.videourl,v.cid,v.imgurl,
+		c.name as cname,v.watch,
+		vi.imgurl as img from video v
         left join video_img vi on vi.vid = v.id
         left join category c on c.id = v.cid
 		 <where>
@@ -31,11 +35,13 @@
 	</select>
 	
 	<insert id="add" parameterType="com.app.view.pojo.Video">
-		INSERT INTO video (id,name,remark,cid,px) VALUES (
+		INSERT INTO video (id,name,remark,cid,imgurl,watch,px) VALUES (
 		#{id,jdbcType=VARCHAR},
 		#{name,jdbcType=VARCHAR},	
 		#{remark,jdbcType=VARCHAR},	 
 		#{cid,jdbcType=VARCHAR},	 
+		#{imgurl,jdbcType=VARCHAR},	 
+		 #{watch,jdbcType=INTEGER},
 		 #{px,jdbcType=INTEGER}
 		)
 	</insert>
@@ -44,7 +50,9 @@
 		UPDATE video SET
 		name=#{name,jdbcType=VARCHAR},
 		PX=#{px,jdbcType=INTEGER},
+		watch=#{watch,jdbcType=INTEGER},	 
 		cid=#{cid,jdbcType=VARCHAR},	 
+		imgurl=#{imgurl,jdbcType=VARCHAR},	 
 		remark=#{remark,jdbcType=VARCHAR}
 		WHERE id = #{id}
 	</update>
@@ -56,6 +64,8 @@
 			#{id}
 		</foreach>
 	</delete>
+	
+	
 	
 		<delete id="deleteImg">
 	   DELETE FROM video_img WHERE vid IN
@@ -72,6 +82,25 @@
 			#{id}
 		</foreach>
 	</select>
+	
+	<select id="findVideo" resultType="java.lang.Integer">
+	 select count(v.id) from  
+ 	video v left join  category  c  on v.cid = c.id
+ 	where c.id in 
+		<foreach collection="list" item="id"  open="(" separator=","
+			close=")">
+			#{id}
+		</foreach>
+	</select>
+	
+	<insert id="addrelation" parameterType="com.app.view.pojo.Video">
+		INSERT INTO 
+		video_img(vid,imgurl) 
+		VALUES
+		<foreach collection="imgs" item="img"  open=""  separator="," close="">
+			(#{id},#{img})
+		</foreach>
+	</insert>
 	
 	
 </mapper>

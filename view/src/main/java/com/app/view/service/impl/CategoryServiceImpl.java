@@ -43,5 +43,10 @@ public class CategoryServiceImpl implements CategoryService {
 		// TODO Auto-generated method stub
 		return categoryMapper. all();
 	}
+
+	@Override
+	public int findVideo(List<String> ids) {
+		return categoryMapper.findVideo(ids);
+	}
 	
 }

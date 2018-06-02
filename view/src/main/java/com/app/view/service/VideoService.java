@@ -14,4 +14,8 @@ public interface VideoService {
 
 	void delete(List<String> ids);
 
+	void addrelation(Video v);
+
+	void saveVideourl(String vid, String path);
+
 }

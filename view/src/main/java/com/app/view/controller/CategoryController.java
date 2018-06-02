@@ -91,6 +91,9 @@ public class CategoryController {
 			if(ids.isEmpty()){
 				return JsonResult.buildExceptionResult("参数不能为空");
 			}
+			if(categoryService.findVideo(ids) > 0){
+				return JsonResult.buildExceptionResult("选择分类已经有视频，不能删除");
+			}
 			categoryService.delete(ids);
         	return JsonResult.buildSuccessResult();
 		} catch (Exception e) {

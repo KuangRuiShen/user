@@ -25,4 +25,6 @@ public interface CategoryMapper {
 
 	@Select("select id as `key` , name as `value` from category  order by  CONVERT(px,SIGNED)	  ")
 	List<Map<String, String>> all();
+
+	int findVideo(List<String> ids);
 }

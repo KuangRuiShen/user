@@ -10,8 +10,8 @@ spring :
          
   http:
     multipart:
-     maxFileSize: 10Mb
-     maxRequestSize: 100Mb 
+     maxFileSize: 100000Mb
+     maxRequestSize: 100000Mb 
 
 #mybatis配置
 mybatis: 

@@ -86,5 +86,16 @@ public class VideoController {
 	}
 
 	
+	@PostMapping("addrelation")
+	public JsonResult<?> addrelation(@RequestBody Video v){
+		try {		
+			videoServce.addrelation(v);
+        	return JsonResult.buildSuccessResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return JsonResult.buildExceptionResult("添加失败,请联系管理员!");
+		}
+	}
+	
 
 }

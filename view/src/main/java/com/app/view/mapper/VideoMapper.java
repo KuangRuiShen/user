@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 
 import com.app.view.pojo.Video;
 
@@ -21,5 +22,10 @@ public interface VideoMapper {
 	void deleteImg(List<String> ids);
 
 	List<Map<String, String>> findimgs(List<String> ids);
+	//添加关系表
+	void addrelation(Video v);
+
+	@Update("update video set videourl=#{path} where id =#{id}")
+	void saveVideourl(@Param("id") String vid,@Param("path") String path);
 
 }
