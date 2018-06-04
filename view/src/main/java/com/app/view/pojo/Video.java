@@ -14,6 +14,8 @@ public class Video {
 	
 	private String cname;
 	
+	private String quality;
+	
 	private String remark;
 	
 	private String imgurl;
@@ -108,5 +110,15 @@ public class Video {
 	public void setImgurl(String imgurl) {
 		this.imgurl = imgurl;
 	}
+
+	public String getQuality() {
+		return quality;
+	}
+
+	public void setQuality(String quality) {
+		this.quality = quality;
+	}
+	
+	
 	
 }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.view.mapper.CommentMapper">
+			
+			<select id="list" resultType="com.app.view.pojo.Comment" >
+			 select id, username, remark,role,imgurl from comment
+			 <where>
+			 	<if test="username !=null and username != '' ">
+			 		username like CONCAT('%', #{username}, '%')
+			 	</if>	 
+			 	 	<if test="role !=null and role != '' ">
+			 		and role like CONCAT('%', #{role}, '%')
+			 	</if>	 
+			 </where>	 
+	</select>
+		
+		
+		<insert id="add" parameterType="com.app.view.pojo.Comment" 
+		useGeneratedKeys="true"
+      keyProperty="id" >  
+	    insert into comment (id, username, remark,role,imgurl)  
+	    values (#{id,jdbcType=INTEGER},
+		#{username,jdbcType=VARCHAR},
+		 #{remark,jdbcType=VARCHAR},
+		 #{role,jdbcType=VARCHAR} ,
+		 #{imgurl,jdbcType=VARCHAR})
+	 </insert> 
+	 
+	 		<update id="update" parameterType="com.app.view.pojo.Comment">
+		UPDATE comment SET
+		username=#{username,jdbcType=VARCHAR},
+		remark=#{remark,jdbcType=VARCHAR},
+		role=#{role,jdbcType=VARCHAR},
+		imgurl= #{imgurl,jdbcType=VARCHAR}
+		WHERE id = #{id}
+	</update>
+	
+	<delete id="delete">
+	   DELETE FROM comment WHERE id IN
+		<foreach collection="list" item="id"  open="(" separator=","
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
+	 
+	  
+</mapper>

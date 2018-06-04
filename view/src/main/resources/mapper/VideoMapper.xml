@@ -12,13 +12,14 @@
 		<result property="cid" column="cid" />
 		<result property="cname" column="cname" />	
 		<result property="watch" column="watch" />
+		<result property="quality" column="quality" />
 		<collection property="imgs" ofType="java.lang.String">
 			<id  column="img" />
 		</collection>
 	</resultMap>
 
   <select id="list" resultMap="baseMap">
-		select v.id,v.name,v.remark,v.px,v.videourl,v.cid,v.imgurl,
+		select v.id,v.name,v.remark,v.px,v.videourl,v.cid,v.imgurl,v.quality,
 		c.name as cname,v.watch,
 		vi.imgurl as img from video v
         left join video_img vi on vi.vid = v.id
@@ -35,12 +36,13 @@
 	</select>
 	
 	<insert id="add" parameterType="com.app.view.pojo.Video">
-		INSERT INTO video (id,name,remark,cid,imgurl,watch,px) VALUES (
+		INSERT INTO video (id,name,remark,cid,imgurl,quality,watch,px) VALUES (
 		#{id,jdbcType=VARCHAR},
 		#{name,jdbcType=VARCHAR},	
 		#{remark,jdbcType=VARCHAR},	 
 		#{cid,jdbcType=VARCHAR},	 
 		#{imgurl,jdbcType=VARCHAR},	 
+		#{quality,jdbcType=VARCHAR},
 		 #{watch,jdbcType=INTEGER},
 		 #{px,jdbcType=INTEGER}
 		)
@@ -53,6 +55,7 @@
 		watch=#{watch,jdbcType=INTEGER},	 
 		cid=#{cid,jdbcType=VARCHAR},	 
 		imgurl=#{imgurl,jdbcType=VARCHAR},	 
+		quality=#{quality,jdbcType=VARCHAR},
 		remark=#{remark,jdbcType=VARCHAR}
 		WHERE id = #{id}
 	</update>

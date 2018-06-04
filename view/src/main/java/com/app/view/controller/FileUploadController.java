@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,8 +29,14 @@ import com.app.view.service.VideoService;
 @RequestMapping("upload")
 public class FileUploadController {
 
-//	final static String url ="http://127.0.0.1/";
-	final static String realpath ="c:/file/";
+//    final static String ip ="127.0.0.1";
+//	final static String realpath ="c:/file/";
+	
+	@Value("${ip}")
+	private String ip;
+	
+	@Value("${realpath}")
+	private String realpath;
 	
 	@Autowired
 	private VideoService videoService;
@@ -46,7 +53,6 @@ public class FileUploadController {
 	@PostMapping(value = "/image" , produces = "multipart/form-data	;charset=UTF-8") 
 	public String image(@RequestParam MultipartFile file,HttpServletRequest request) {
 		String path = "";
-		String ip = getRemortIP(request);
 			if (file.isEmpty()) {
 				System.out.println("文件未上传");
 			} else {
@@ -73,7 +79,6 @@ public class FileUploadController {
 	@PostMapping(value = "/video" , produces = "multipart/form-data	;charset=UTF-8") 
 	public String video(@RequestParam MultipartFile file,HttpServletRequest request,@RequestParam String vid) {
 		String path = "";
-		String ip = getRemortIP(request);
 			if (file.isEmpty()) {
 				System.out.println("文件未上传");
 			} else {
@@ -96,10 +101,10 @@ public class FileUploadController {
 	}
 	
 	
-	public String getRemortIP(HttpServletRequest request) { 
-		  if (request.getHeader("x-forwarded-for") == null) { 
-		   return request.getRemoteAddr(); 
-		  } 
-		  return request.getHeader("x-forwarded-for"); 
-		 }
+//	public String getRemortIP(HttpServletRequest request) { 
+//		  if (request.getHeader("x-forwarded-for") == null) { 
+//		   return request.getRemoteAddr(); 
+//		  } 
+//		  return request.getHeader("x-forwarded-for"); 
+//		 }
 }

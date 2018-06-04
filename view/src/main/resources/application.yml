@@ -26,7 +26,8 @@ pagehelper:
   params: count=countSql    
   
  #存放路径
-realpath: /usr/local/file
+realpath: c:/file/
+ip: 101.132.170.212
          
 server : 
   port : 7001 

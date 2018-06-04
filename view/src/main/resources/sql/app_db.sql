@@ -85,6 +85,7 @@ CREATE TABLE `video` (
   `px` int(5) DEFAULT '1',
   `imgurl` varchar(100) DEFAULT NULL,
   `videourl` varchar(100) DEFAULT NULL,
+   `quality` varchar(100) DEFAULT NULL,
   `cid` varchar(32) DEFAULT NULL,
   `watch` int(2) DEFAULT '1',
   PRIMARY KEY (`id`,`name`)
@@ -100,4 +101,18 @@ CREATE TABLE `video_img` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `app_db`.`login_user` (`id`, `username`, `password`, `remark`) VALUES ('25', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'dfsfw32');
+
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE `comment` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `remark` varchar(500) DEFAULT NULL,
+  `role` varchar(50) DEFAULT NULL,
+  `imgurl` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+
+
+
 
