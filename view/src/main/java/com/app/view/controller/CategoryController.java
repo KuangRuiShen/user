@@ -15,6 +15,7 @@ import com.app.view.pojo.Category;
 import com.app.view.service.CategoryService;
 import com.app.view.util.JsonResult;
 import com.app.view.util.ResultCode;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 @RestController
@@ -29,9 +30,9 @@ public class CategoryController {
 		if(page == null || page < 1 )
 			page = 1;
 		if(pageSize == null || pageSize <10)
-		  pageSize = JsonResult.PAGESIZR;	
-//		  PageHelper.startPage(page, pageSize);
+		  pageSize = JsonResult.PAGESIZR;			 
 		try {
+			  PageHelper.startPage(page, pageSize);
 			  List<Category> list = categoryService.list(name);
 	          PageInfo<Category> pageInfo = new PageInfo<Category>(list);
 	          return JsonResult.buildSuccessResult(list,pageInfo.getTotal());

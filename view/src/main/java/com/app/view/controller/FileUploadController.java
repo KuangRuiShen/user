@@ -2,9 +2,12 @@
 package com.app.view.controller;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.app.view.service.VideoService;
+import com.app.view.util.MyFileUtil;
 
 /**
  * @author krs
@@ -76,35 +80,94 @@ public class FileUploadController {
 		return path;
 	}
 	
-	@PostMapping(value = "/video" , produces = "multipart/form-data	;charset=UTF-8") 
-	public String video(@RequestParam MultipartFile file,HttpServletRequest request,@RequestParam String vid) {
-		String path = "";
-			if (file.isEmpty()) {
-				System.out.println("文件未上传");
-			} else {
+	@PostMapping(value = "/video" ) 
+	public void video(MultipartFile file,HttpServletRequest request, 
+			@RequestParam Map<String,Object> param) {
+			Map<String,Object> result = new HashMap<>();
+			result.put("code", 201);
+//			System.out.println(param.toString());
+			Integer chunks = Integer.parseInt(param.get("chuckSize").toString()) ;		
+			String fileName = param.get("fileName").toString();
+			String id = param.get("vid").toString();
+			if(chunks > 1){				
+							
+			    Integer chucknum =Integer.parseInt(param.get("chucknum").toString());						
+//				System.out.println(id+"________"+chucknum);			
+             
+				String tmppath = realpath+"/upload/video/tmp/"+id+"/";//缓存的文件
+//	           File parentFileDir = new File(tmppath);  
+//	           if (!parentFileDir.exists()) {  
+//	               parentFileDir.mkdirs();  
+//	           }            
+         try {
+        	 //判断文件是否存在
+        	 File f = new File(tmppath + id+"_"+chucknum+".part");
+        	 if(!f.exists()){
+        		 FileUtils.copyInputStreamToFile(file.getInputStream(), new File(tmppath + id+"_"+chucknum+".part"));
+        	 }       		
+			} catch (IOException e) {
+				e.printStackTrace();
+			} 
+         
+
+			// 是否全部上传完成  
+            // 所有分片都存在才说明整个文件上传完成  
+            boolean uploadDone = true;  
+            for (int i = 0; i < chunks; i++) {  
+                File partFile = new File(tmppath + id + "_" + i + ".part");  
+                if (!partFile.exists()) {  
+                    uploadDone = false;  
+                }  
+            }  
+            
+            // 所有分片文件都上传完成  
+            // 将所有分片文件合并到一个文件中  
+            if (uploadDone) {           	
+             try {
+    			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");			
+    			Date date = new Date();
+    			String strDate = sdf.format(date);
+    			String newFilename = strDate + new Random().nextInt(1000)+ fileName.substring(fileName.lastIndexOf("."));
+    			String path = realpath+"/upload/video/"+newFilename;
+                // 得到 destTempFile 就是最终的文件  
+                File destTempFile = new File(path);  
+	                for (int i = 0; i < chunks; i++) {                  
+	                	File partFile = new File(tmppath + id + "_" + i + ".part");  
+	                    FileOutputStream destTempfos = new FileOutputStream(destTempFile, true);  
+	                    //遍历"所有分片文件"到"最终文件"中  
+	                    FileUtils.copyFile(partFile, destTempfos);         
+						destTempfos.close();
+	                }	
+	                MyFileUtil.delFolder(tmppath);
+	              //保存
+	                videoService.saveVideourl(id, path);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}  
+            
+            }  					
+				
+			}else{
+				try {					
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 				Date date = new java.util.Date();
 				String strDate = sdf.format(date);
-				String fileName = strDate + new Random().nextInt(1000)
-						        + file.getOriginalFilename().substring(
-						         file.getOriginalFilename().lastIndexOf("."),
-								 file.getOriginalFilename().length());
-				try {
+				    fileName = strDate + new Random().nextInt(1000)+fileName.substring(fileName.lastIndexOf("."));					    
 					FileUtils.copyInputStreamToFile(file.getInputStream(),new File(realpath+"upload/video/", fileName));
-					path = "http://"+ip+"/upload/video/"+fileName;
-					videoService.saveVideourl(vid,path);
+					
+					String path = "http://"+ip+"/upload/video/"+fileName;
+					//保存
+					videoService.saveVideourl(id, path);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
-		return path;
+			System.out.println(result.toString());
+//		return result;
 	}
 	
 	
-//	public String getRemortIP(HttpServletRequest request) { 
-//		  if (request.getHeader("x-forwarded-for") == null) { 
-//		   return request.getRemoteAddr(); 
-//		  } 
-//		  return request.getHeader("x-forwarded-for"); 
-//		 }
+	
+	
 }
