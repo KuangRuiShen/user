@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.view.mapper.StarMapper">
+	
+	<select id="list" resultType="com.app.view.pojo.Star" >
+		 select id,name,remark,px,imgurl from star
+		 <where>
+		 	<if test="name !=null and name != '' ">
+		 		name like CONCAT('%', #{name}, '%')
+		 	</if>	 
+		 </where>	 
+		  order by  CONVERT(px,SIGNED)	  
+	</select>
+	
+	<insert id="add" parameterType="com.app.view.pojo.Star">
+		INSERT INTO star (id,name,remark,imgurl,px) VALUES (
+		#{id,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR},	
+		#{remark,jdbcType=VARCHAR},	 
+		#{imgurl,jdbcType=VARCHAR},
+		 #{px,jdbcType=INTEGER}
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.app.view.pojo.Star">
+		UPDATE star SET
+		name=#{name,jdbcType=VARCHAR},
+		PX=#{px,jdbcType=INTEGER},
+		remark=#{remark,jdbcType=VARCHAR},
+		imgurl=#{imgurl,jdbcType=VARCHAR}
+		WHERE id = #{id}
+	</update>
+	
+	<delete id="delete">
+	   DELETE FROM star WHERE id IN
+		<foreach collection="list" item="id"  open="(" separator=","
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
+	
+		<select id="findVideo" resultType="java.lang.Integer">
+	 select count(v.id) from  
+ 	video v left join  star  s  on v.sid = s.id
+ 	where s.id in 
+		<foreach collection="list" item="id"  open="(" separator=","
+			close=")">
+			#{id}
+		</foreach>
+	</select>
+</mapper>

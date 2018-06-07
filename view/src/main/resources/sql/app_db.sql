@@ -85,9 +85,10 @@ CREATE TABLE `video` (
   `px` int(5) DEFAULT '1',
   `imgurl` varchar(100) DEFAULT NULL,
   `videourl` varchar(100) DEFAULT NULL,
-   `quality` varchar(100) DEFAULT NULL,
+  `quality` varchar(100) DEFAULT NULL,
   `cid` varchar(32) DEFAULT NULL,
   `watch` int(2) DEFAULT '1',
+  `sid` int(5) DEFAULT NULL COMMENT '明星',
   PRIMARY KEY (`id`,`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -112,7 +113,31 @@ CREATE TABLE `comment` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `star`;
+CREATE TABLE `star` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL,
+  `remark` varchar(100) DEFAULT NULL,
+  `imgurl` varchar(100) DEFAULT NULL,
+  `px` int(5) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `code`;
+CREATE TABLE `code` (
+  `id` int(5) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `type` varchar(100) NOT NULL DEFAULT '',
+  `code_id` int(5) NOT NULL,
+  PRIMARY KEY (`id`,`name`,`type`,`code_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of code
+-- ----------------------------
+INSERT INTO `code` VALUES ('1', '主页', 'page', '1');
+INSERT INTO `code` VALUES ('2', 'vip', 'page', '2');
+INSERT INTO `code` VALUES ('3', '试看区', 'page', '3');
 
 
 
