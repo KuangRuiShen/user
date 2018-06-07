@@ -15,13 +15,16 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.app.view.pojo.Video;
 import com.app.view.service.VideoService;
+import com.app.view.util.JsonResult;
 import com.app.view.util.MyFileUtil;
 
 /**
@@ -128,9 +131,8 @@ public class FileUploadController {
     			Date date = new Date();
     			String strDate = sdf.format(date);
     			String newFilename = strDate + new Random().nextInt(1000)+ fileName.substring(fileName.lastIndexOf("."));
-    			String path = realpath+"/upload/video/"+newFilename;
                 // 得到 destTempFile 就是最终的文件  
-                File destTempFile = new File(path);  
+                File destTempFile = new File(realpath+"/upload/video/"+newFilename);  
 	                for (int i = 0; i < chunks; i++) {                  
 	                	File partFile = new File(tmppath + id + "_" + i + ".part");  
 	                    FileOutputStream destTempfos = new FileOutputStream(destTempFile, true);  
@@ -140,7 +142,7 @@ public class FileUploadController {
 	                }	
 	                MyFileUtil.delFolder(tmppath);
 	              //保存
-	                videoService.saveVideourl(id, path);
+	                videoService.saveVideourl(id, "http://"+ip+"/upload/video/"+newFilename);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -167,6 +169,24 @@ public class FileUploadController {
 //		return result;
 	}
 	
+	
+	@GetMapping("/file") 
+	public void delete(String id) {
+		//删除目录下的文件
+		 MyFileUtil.delFolder(realpath+"/upload/video/tmp/"+id+"/");
+	}
+	
+	@GetMapping("/videurl") 
+	public JsonResult<?> geturl(String id) {
+		 try {
+			 	Video v = videoService.findbyId(id);
+			    return JsonResult.buildSuccessResult(v.getVideourl());
+			} catch (Exception e) {
+				e.printStackTrace();
+				return JsonResult.buildExceptionResult("查询失败,请联系管理员!");
+			}
+	      
+	}
 	
 	
 	

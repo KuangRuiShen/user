@@ -18,4 +18,6 @@ public interface VideoService {
 
 	void saveVideourl(String vid, String path);
 
+	Video findbyId(String id);
+
 }

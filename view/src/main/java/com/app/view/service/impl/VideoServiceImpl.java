@@ -57,6 +57,11 @@ public class VideoServiceImpl implements VideoService {
 		videoMapper.saveVideourl(vid,path);	 	
 	}
 
+	@Override
+	public Video findbyId(String id) {
+		return videoMapper.findbyId(id);
+	}
+
 
 
 }

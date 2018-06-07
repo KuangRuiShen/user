@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.app.view.pojo.Video;
@@ -27,5 +28,8 @@ public interface VideoMapper {
 
 	@Update("update video set videourl=#{path} where id =#{id}")
 	void saveVideourl(@Param("id") String vid,@Param("path") String path);
+
+	@Select("select * from video where id =#{id}")
+	Video findbyId(String id);
 
 }
