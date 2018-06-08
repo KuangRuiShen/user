@@ -3,21 +3,26 @@
 <mapper namespace="com.app.view.mapper.CategoryMapper">
 	
 	<select id="list" resultType="com.app.view.pojo.Category" >
-		 select id,name,remark,px,imgurl from category
+		 select c.id,c.name,c.remark,c.px,c.imgurl,c.type,t.name as typeText from category c
+		 left join code t on t.code_id =c.type 	 
 		 <where>
 		 	<if test="name !=null and name != '' ">
-		 		name like CONCAT('%', #{name}, '%')
+		 		c.name like CONCAT('%', #{name}, '%')
+		 	</if>	
+		 	<if test="type !=null and type != '' ">
+		 		and c.type =#{type}
 		 	</if>	 
 		 </where>	 
-		  order by  CONVERT(px,SIGNED)	  
+		  order by  CONVERT(c.px,SIGNED)	  
 	</select>
 	
 	<insert id="add" parameterType="com.app.view.pojo.Category">
-		INSERT INTO category (id,name,remark,imgurl,px) VALUES (
+		INSERT INTO category (id,name,remark,imgurl,type,px) VALUES (
 		#{id,jdbcType=VARCHAR},
 		#{name,jdbcType=VARCHAR},	
 		#{remark,jdbcType=VARCHAR},	 
 		#{imgurl,jdbcType=VARCHAR},
+		#{type,jdbcType=VARCHAR},
 		 #{px,jdbcType=INTEGER}
 		)
 	</insert>
@@ -27,7 +32,8 @@
 		name=#{name,jdbcType=VARCHAR},
 		PX=#{px,jdbcType=INTEGER},
 		remark=#{remark,jdbcType=VARCHAR},
-		imgurl=#{imgurl,jdbcType=VARCHAR}
+		imgurl=#{imgurl,jdbcType=VARCHAR},
+		type=#{type,jdbcType=VARCHAR}
 		WHERE id = #{id}
 	</update>
 	
@@ -40,8 +46,8 @@
 	</delete>
 	
 		<select id="findVideo" resultType="java.lang.Integer">
-	 select count(v.id) from  
- 	video v left join  category  c  on v.cid = c.id
+	select count(m.vid) from  
+ 	video_img m left join  category  c  on m.vid = c.id
  	where c.id in 
 		<foreach collection="list" item="id"  open="(" separator=","
 			close=")">

@@ -26,14 +26,17 @@ public class CategoryController {
 	private CategoryService categoryService;
 	
 	@GetMapping("list")
-	public JsonResult<?> list(Integer page,Integer pageSize,String name){		
+	public JsonResult<?> list(Integer page,Integer pageSize,String name,String type){		
 		if(page == null || page < 1 )
 			page = 1;
 		if(pageSize == null || pageSize <10)
 		  pageSize = JsonResult.PAGESIZR;			 
 		try {
 			  PageHelper.startPage(page, pageSize);
-			  List<Category> list = categoryService.list(name);
+			  Category c = new Category();
+			  c.setName(name);
+			  c.setType(type);
+			  List<Category> list = categoryService.list(c);
 	          PageInfo<Category> pageInfo = new PageInfo<Category>(list);
 	          return JsonResult.buildSuccessResult(list,pageInfo.getTotal());
 		} catch (Exception e) {

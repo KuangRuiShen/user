@@ -18,8 +18,8 @@ public class CategoryServiceImpl implements CategoryService {
 	private CategoryMapper categoryMapper;
 	
 	@Override
-	public List<Category> list(String name) {
-		return categoryMapper.list(name);
+	public List<Category> list(Category c) {
+		return categoryMapper.list(c);
 	}
 
 	@Override

@@ -15,6 +15,10 @@ public class Category {
 	private String imgurl;
 	
 	private Integer px;
+	
+	private String type;
+	
+	private String typeText;
 
 	public String getId() {
 		return id;
@@ -55,6 +59,24 @@ public class Category {
 	public void setPx(Integer px) {
 		this.px = px;
 	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getTypeText() {
+		return typeText;
+	}
+
+	public void setTypeText(String typeText) {
+		this.typeText = typeText;
+	}
+	
+	
 	
 	
 

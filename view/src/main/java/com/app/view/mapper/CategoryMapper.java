@@ -3,7 +3,6 @@ package com.app.view.mapper;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.app.view.pojo.Category;
@@ -11,7 +10,7 @@ import com.app.view.pojo.Category;
 
 public interface CategoryMapper {
 	
-	List<Category> list(@Param("name") String name);
+	List<Category> list(Category c);
 
 	void add(Category c);
 

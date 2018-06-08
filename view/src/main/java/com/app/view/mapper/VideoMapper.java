@@ -32,4 +32,9 @@ public interface VideoMapper {
 	@Select("select * from video where id =#{id}")
 	Video findbyId(String id);
 
+	void addcid(Video v);
+	
+	//删除类型
+	void deletecid(List<String> ids);
+
 }

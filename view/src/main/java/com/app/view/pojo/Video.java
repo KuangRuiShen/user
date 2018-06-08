@@ -12,7 +12,9 @@ public class Video {
 	@NotNull(message="视频名不能为空")
 	private String name;
 	
-	private String cname;
+	private String sid;//明星
+	
+	private String sname;//名称
 	
 	private String quality;
 	
@@ -22,8 +24,9 @@ public class Video {
 	
 	private String videourl;
 	
-	@NotNull(message="类型不能为空")
-	private String cid;
+	private List<String> cids =new ArrayList<>();
+	
+	private List<Category> categorys =new ArrayList<>();
 	
 	private Integer px;
 	
@@ -63,12 +66,14 @@ public class Video {
 		this.videourl = videourl;
 	}
 
-	public String getCid() {
-		return cid;
+
+
+	public List<String> getCids() {
+		return cids;
 	}
 
-	public void setCid(String cid) {
-		this.cid = cid;
+	public void setCids(List<String> cids) {
+		this.cids = cids;
 	}
 
 	public Integer getPx() {
@@ -95,14 +100,6 @@ public class Video {
 		this.watch = watch;
 	}
 
-	public String getCname() {
-		return cname;
-	}
-
-	public void setCname(String cname) {
-		this.cname = cname;
-	}
-
 	public String getImgurl() {
 		return imgurl;
 	}
@@ -118,6 +115,31 @@ public class Video {
 	public void setQuality(String quality) {
 		this.quality = quality;
 	}
+
+	public String getSid() {
+		return sid;
+	}
+
+	public void setSid(String sid) {
+		this.sid = sid;
+	}
+
+	public String getSname() {
+		return sname;
+	}
+
+	public void setSname(String sname) {
+		this.sname = sname;
+	}
+
+	public List<Category> getCategorys() {
+		return categorys;
+	}
+
+	public void setCategorys(List<Category> categorys) {
+		this.categorys = categorys;
+	}
+	
 	
 	
 	

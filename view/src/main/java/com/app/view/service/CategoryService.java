@@ -7,7 +7,7 @@ import com.app.view.pojo.Category;
 
 public interface CategoryService {
 
-	List<Category> list(String string);
+	List<Category> list(Category c);
 
 	void add(Category c);
 

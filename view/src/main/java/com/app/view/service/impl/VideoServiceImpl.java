@@ -26,20 +26,29 @@ public class VideoServiceImpl implements VideoService {
 	public void add(Video v) {
 		 v.setId(MyUtils.getUUID());
 		 videoMapper.add(v);
+		 if(!v.getCids().isEmpty()){
+			 videoMapper.addcid(v);
+		 }
+		
 	}
 
 	@Override
-	public void update(Video v) {
+	public void update(Video v) {	
 		 videoMapper.update(v);
+		 videoMapper.deletecid(Arrays.asList(v.getId()));
+		 if(!v.getCids().isEmpty()){
+			 videoMapper.addcid(v);
+		 }
 	}
 
 	@Override
 	public void delete(List<String> ids) {
-		 videoMapper.delete(ids);
+		 videoMapper.delete(ids);		
 		 //删除图片
 //		List<Map<String,String>> imgs = videoMapper.findimgs(ids);
 //		File folder = new File("files");
 //		folder.delete();
+		 videoMapper.deletecid(ids);
 		 videoMapper.deleteImg(ids);
 		
 	}

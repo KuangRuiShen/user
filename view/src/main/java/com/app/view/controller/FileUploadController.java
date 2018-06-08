@@ -126,20 +126,20 @@ public class FileUploadController {
             // 所有分片文件都上传完成  
             // 将所有分片文件合并到一个文件中  
             if (uploadDone) {           	
-             try {
-    			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");			
-    			Date date = new Date();
-    			String strDate = sdf.format(date);
-    			String newFilename = strDate + new Random().nextInt(1000)+ fileName.substring(fileName.lastIndexOf("."));
-                // 得到 destTempFile 就是最终的文件  
-                File destTempFile = new File(realpath+"/upload/video/"+newFilename);  
+             try {    					
+					String newFilename = id + fileName.substring(fileName.lastIndexOf("."));
+		            // 得到 destTempFile 就是最终的文件  
+		            File destTempFile = new File(realpath+"/upload/video/"+newFilename);
+		            if(!destTempFile.exists()){
+		            	destTempFile.delete();
+		            }
+                	FileOutputStream destTempfos = new FileOutputStream(destTempFile, true);
 	                for (int i = 0; i < chunks; i++) {                  
-	                	File partFile = new File(tmppath + id + "_" + i + ".part");  
-	                    FileOutputStream destTempfos = new FileOutputStream(destTempFile, true);  
+	                	File partFile = new File(tmppath + id + "_" + i + ".part");                       
 	                    //遍历"所有分片文件"到"最终文件"中  
 	                    FileUtils.copyFile(partFile, destTempfos);         
-						destTempfos.close();
 	                }	
+	            	destTempfos.close();
 	                MyFileUtil.delFolder(tmppath);
 	              //保存
 	                videoService.saveVideourl(id, "http://"+ip+"/upload/video/"+newFilename);
@@ -152,11 +152,8 @@ public class FileUploadController {
 				
 			}else{
 				try {					
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-				Date date = new java.util.Date();
-				String strDate = sdf.format(date);
-				    fileName = strDate + new Random().nextInt(1000)+fileName.substring(fileName.lastIndexOf("."));					    
-					FileUtils.copyInputStreamToFile(file.getInputStream(),new File(realpath+"upload/video/", fileName));
+				fileName = id + fileName.substring(fileName.lastIndexOf("."));				    
+				FileUtils.copyInputStreamToFile(file.getInputStream(),new File(realpath+"upload/video/", fileName));
 					
 					String path = "http://"+ip+"/upload/video/"+fileName;
 					//保存

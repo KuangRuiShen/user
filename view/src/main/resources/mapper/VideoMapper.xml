@@ -9,21 +9,36 @@
 		<result property="px" column="px" />
 		<result property="imgurl" column="imgurl" />
 		<result property="videourl" column="videourl" />
-		<result property="cid" column="cid" />
-		<result property="cname" column="cname" />	
+		<result property="sid" column="sid" />
+		<result property="sname" column="sname" />
 		<result property="watch" column="watch" />
 		<result property="quality" column="quality" />
 		<collection property="imgs" ofType="java.lang.String">
 			<id  column="img" />
 		</collection>
+		<collection property="cids" ofType="java.lang.String">
+			<id  column="cid" />
+		</collection>
+		<collection property="categorys" ofType="com.app.view.pojo.Category">
+				<id property="id" column="cid" />
+				<result property="name" column="cname" />
+				<result property="type" column="type" />
+				<result property="typeText" column="typeText" />
+		</collection>
+		
 	</resultMap>
 
   <select id="list" resultMap="baseMap">
-		select v.id,v.name,v.remark,v.px,v.videourl,v.cid,v.imgurl,v.quality,
-		c.name as cname,v.watch,
-		vi.imgurl as img from video v
+		select v.id,v.name,v.remark,v.px,v.videourl,v.imgurl,v.quality,
+		v.watch,s.id,s.name as sname,
+		vi.imgurl as img,s.id as sid,s.name AS sname,
+	     c.id as cid, c.name as cname,c.type,t.name as typeText
+		 from video v
         left join video_img vi on vi.vid = v.id
-        left join category c on c.id = v.cid
+        left join star s on s.id = v.sid
+        left join video_cid m on m.vid =v.id
+		left join category c on c.id = m.cid
+		left join code t on t.code_id =c.type and t.type='page'
 		 <where>
 		 	<if test="name !=null and name != '' ">
 		 		v.name like CONCAT('%', #{name}, '%')
@@ -32,21 +47,38 @@
 		 		v.cid =#{cid}
 		 	</if>
 		 </where>	 
-		  order by CONVERT(c.px,SIGNED)	,CONVERT(v.px,SIGNED)	  
+		  order by CONVERT (c.px, SIGNED),CONVERT(v.px,SIGNED)	  
 	</select>
 	
 	<insert id="add" parameterType="com.app.view.pojo.Video">
-		INSERT INTO video (id,name,remark,cid,imgurl,quality,watch,px) VALUES (
+		INSERT INTO video (id,name,remark,imgurl,quality,watch,px,sid) VALUES (
 		#{id,jdbcType=VARCHAR},
 		#{name,jdbcType=VARCHAR},	
-		#{remark,jdbcType=VARCHAR},	 
-		#{cid,jdbcType=VARCHAR},	 
+		#{remark,jdbcType=VARCHAR},	  
 		#{imgurl,jdbcType=VARCHAR},	 
 		#{quality,jdbcType=VARCHAR},
 		 #{watch,jdbcType=INTEGER},
-		 #{px,jdbcType=INTEGER}
+		 #{px,jdbcType=INTEGER},
+		 #{sid,jdbcType=VARCHAR}
 		)
 	</insert>
+	
+	<insert id="addcid" parameterType="com.app.view.pojo.Video">
+		INSERT INTO video_cid(vid,cid) VALUES
+		<foreach collection="cids" item="cid" open=""  separator="," close="">
+		(#{id},#{cid})
+		</foreach>
+	</insert>
+	
+		<delete id="deletecid">
+	   DELETE FROM video_cid WHERE vid IN
+		<foreach collection="list" item="id"  open="(" separator=","
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
+	
+	
 	
 	<update id="update" parameterType="com.app.view.pojo.Category">
 		UPDATE video SET
@@ -56,7 +88,8 @@
 		cid=#{cid,jdbcType=VARCHAR},	 
 		imgurl=#{imgurl,jdbcType=VARCHAR},	 
 		quality=#{quality,jdbcType=VARCHAR},
-		remark=#{remark,jdbcType=VARCHAR}
+		remark=#{remark,jdbcType=VARCHAR},
+		sid=#{sid,jdbcType=VARCHAR}
 		WHERE id = #{id}
 	</update>
 	
