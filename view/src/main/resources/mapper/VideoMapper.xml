@@ -43,8 +43,11 @@
 		 	<if test="name !=null and name != '' ">
 		 		v.name like CONCAT('%', #{name}, '%')
 		 	</if>	 
-		 		<if test="cid !=null and cid != '' ">
-		 		v.cid =#{cid}
+		 	<if test="cid !=null and cid != '' ">
+		 		and c.id =#{cid}
+		 	</if>
+		 	<if test="sid !=null and sid != '' ">
+		 		and v.sid =#{sid}
 		 	</if>
 		 </where>	 
 		  order by CONVERT (c.px, SIGNED),CONVERT(v.px,SIGNED)	  
@@ -83,9 +86,8 @@
 	<update id="update" parameterType="com.app.view.pojo.Category">
 		UPDATE video SET
 		name=#{name,jdbcType=VARCHAR},
-		PX=#{px,jdbcType=INTEGER},
+		px=#{px,jdbcType=INTEGER},
 		watch=#{watch,jdbcType=INTEGER},	 
-		cid=#{cid,jdbcType=VARCHAR},	 
 		imgurl=#{imgurl,jdbcType=VARCHAR},	 
 		quality=#{quality,jdbcType=VARCHAR},
 		remark=#{remark,jdbcType=VARCHAR},

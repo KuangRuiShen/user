@@ -13,5 +13,7 @@ public interface CommentService {
 	void add(Comment c);
 
 	List<Comment> list(Comment c);
+
+	List<Comment> query(Integer num);
 	
 }

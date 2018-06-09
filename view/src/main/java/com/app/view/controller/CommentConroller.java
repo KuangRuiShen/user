@@ -41,8 +41,18 @@ public class CommentConroller {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return JsonResult.buildExceptionResult("查询失败,请联系管理员!");
-		}
-      	
+		}	
+	}
+	
+	@GetMapping("find")
+	public JsonResult<?> find(Integer num){		
+		try{
+		List<Comment> datas = commentService.query(num);
+	         return JsonResult.buildSuccessResult(datas);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return JsonResult.buildExceptionResult("查询失败,请联系管理员!");
+		}	
 	}
 	
 	@PostMapping("add")

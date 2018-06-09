@@ -18,8 +18,8 @@ public class VideoServiceImpl implements VideoService {
 	private VideoMapper videoMapper;
 	
 	@Override
-	public List<Video> list(String name,String cid) {
-		return videoMapper.list(name,cid);
+	public List<Video> list(String name,String cid,String sid) {
+		return videoMapper.list(name,cid,sid);
 	}
 
 	@Override

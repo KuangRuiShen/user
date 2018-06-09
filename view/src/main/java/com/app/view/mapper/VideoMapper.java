@@ -12,7 +12,7 @@ import com.app.view.pojo.Video;
 
 public interface VideoMapper {
 
-	List<Video> list(@Param("name") String name,@Param("cid")  String cid);
+	List<Video> list(@Param("name") String name,@Param("cid")  String cid, @Param("sid")String sid);
 
 	void add(Video v);
 

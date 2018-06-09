@@ -9,7 +9,7 @@
 			 		username like CONCAT('%', #{username}, '%')
 			 	</if>	 
 			 	 	<if test="role !=null and role != '' ">
-			 		and role like CONCAT('%', #{role}, '%')
+			 		and role =#{role}
 			 	</if>	 
 			 </where>	 
 	</select>

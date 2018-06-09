@@ -47,7 +47,7 @@
 	
 		<select id="findVideo" resultType="java.lang.Integer">
 	select count(m.vid) from  
- 	video_img m left join  category  c  on m.vid = c.id
+ 	video_cid m left join  category  c  on m.cid = c.id
  	where c.id in 
 		<foreach collection="list" item="id"  open="(" separator=","
 			close=")">

@@ -6,7 +6,7 @@ import com.app.view.pojo.Video;
 
 public interface VideoService {
 
-	List<Video> list(String name, String cid);
+	List<Video> list(String name, String cid, String sid);
 
 	void add(Video v);
 

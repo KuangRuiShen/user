@@ -26,13 +26,13 @@ public class VideoController {
 	private VideoService videoServce;
 	
 	@GetMapping("list")
-	public JsonResult<?> list(Integer page,Integer pageSize,String name,String cid){		
+	public JsonResult<?> list(Integer page,Integer pageSize,String name,String cid,String sid){		
 		if(page == null || page < 1 )
 			page = 1;
 		if(pageSize == null || pageSize <10)
 		   pageSize = JsonResult.PAGESIZR;	
 		  PageHelper.startPage(page, pageSize);
-      	  List<Video> list = videoServce.list(name,cid);
+      	  List<Video> list = videoServce.list(name,cid,sid);
           PageInfo<Video> pageInfo = new PageInfo<Video>(list);
           return JsonResult.buildSuccessResult(list,pageInfo.getTotal());
 	}
