@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50639
 File Encoding         : 65001
 
-Date: 2018-06-09 00:07:46
+Date: 2018-06-11 14:58:14
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -51,6 +51,9 @@ CREATE TABLE `code` (
 INSERT INTO `code` VALUES ('1', '主页', 'page', '1');
 INSERT INTO `code` VALUES ('2', 'vip', 'page', '2');
 INSERT INTO `code` VALUES ('3', '试看区', 'page', '3');
+INSERT INTO `code` VALUES ('4', '等级一', 'level', '1');
+INSERT INTO `code` VALUES ('5', '等级二', 'level', '2');
+INSERT INTO `code` VALUES ('6', '等级三', 'level', '3');
 
 -- ----------------------------
 -- Table structure for comment
@@ -63,7 +66,7 @@ CREATE TABLE `comment` (
   `role` varchar(50) DEFAULT NULL,
   `imgurl` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comment
@@ -125,7 +128,7 @@ CREATE TABLE `star` (
   `imgurl` varchar(100) DEFAULT NULL,
   `px` int(5) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of star
@@ -163,6 +166,7 @@ CREATE TABLE `video` (
   `quality` varchar(100) DEFAULT NULL,
   `watch` int(2) DEFAULT '1',
   `sid` varchar(32) DEFAULT NULL COMMENT '明星',
+  `level` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`,`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -182,8 +186,6 @@ CREATE TABLE `video_cid` (
 -- ----------------------------
 -- Records of video_cid
 -- ----------------------------
-INSERT INTO `video_cid` VALUES ('78be2cfdec734ccda8e70bca6ffb4656', '37560a8921d244139c6a0a1c9cdd1e5e');
-INSERT INTO `video_cid` VALUES ('78be2cfdec734ccda8e70bca6ffb4656', 'fa0f74643494436c9c5d241e472397bd');
 
 -- ----------------------------
 -- Table structure for video_img
