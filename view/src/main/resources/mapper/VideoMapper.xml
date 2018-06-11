@@ -13,6 +13,8 @@
 		<result property="sname" column="sname" />
 		<result property="watch" column="watch" />
 		<result property="quality" column="quality" />
+		<result property="level" column="level" />
+		<result property="levelText" column="levelText" />
 		<collection property="imgs" ofType="java.lang.String">
 			<id  column="img" />
 		</collection>
@@ -30,7 +32,7 @@
 
   <select id="list" resultMap="baseMap">
 		select v.id,v.name,v.remark,v.px,v.videourl,v.imgurl,v.quality,
-		v.watch,s.id,s.name as sname,
+		v.watch,s.id,s.name as sname,v.level,l.name as levelText,
 		vi.imgurl as img,s.id as sid,s.name AS sname,
 	     c.id as cid, c.name as cname,c.type,t.name as typeText
 		 from video v
@@ -39,6 +41,7 @@
         left join video_cid m on m.vid =v.id
 		left join category c on c.id = m.cid
 		left join code t on t.code_id =c.type and t.type='page'
+		left join code l on l.code_id =v.level and l.type='level'
 		 <where>
 		 	<if test="name !=null and name != '' ">
 		 		v.name like CONCAT('%', #{name}, '%')
@@ -49,20 +52,27 @@
 		 	<if test="sid !=null and sid != '' ">
 		 		and v.sid =#{sid}
 		 	</if>
+		 	<if test="level !=null and level != '' ">
+		 		and v.level =#{level}
+		 	</if>
+		 	<if test="type !=null and type != '' ">
+		 		and c.type =#{type}
+		 	</if>
 		 </where>	 
 		  order by CONVERT (c.px, SIGNED),CONVERT(v.px,SIGNED)	  
 	</select>
 	
 	<insert id="add" parameterType="com.app.view.pojo.Video">
-		INSERT INTO video (id,name,remark,imgurl,quality,watch,px,sid) VALUES (
+		INSERT INTO video (id,name,remark,imgurl,quality,watch,px,sid,level) VALUES (
 		#{id,jdbcType=VARCHAR},
 		#{name,jdbcType=VARCHAR},	
 		#{remark,jdbcType=VARCHAR},	  
 		#{imgurl,jdbcType=VARCHAR},	 
 		#{quality,jdbcType=VARCHAR},
-		 #{watch,jdbcType=INTEGER},
-		 #{px,jdbcType=INTEGER},
-		 #{sid,jdbcType=VARCHAR}
+		#{watch,jdbcType=INTEGER},
+		#{px,jdbcType=INTEGER},
+		#{sid,jdbcType=VARCHAR},
+		#{level,jdbcType=VARCHAR}
 		)
 	</insert>
 	
@@ -91,7 +101,8 @@
 		imgurl=#{imgurl,jdbcType=VARCHAR},	 
 		quality=#{quality,jdbcType=VARCHAR},
 		remark=#{remark,jdbcType=VARCHAR},
-		sid=#{sid,jdbcType=VARCHAR}
+		sid=#{sid,jdbcType=VARCHAR},
+		level=#{level,jdbcType=VARCHAR}
 		WHERE id = #{id}
 	</update>
 	

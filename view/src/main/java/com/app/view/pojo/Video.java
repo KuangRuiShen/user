@@ -32,6 +32,10 @@ public class Video {
 	
 	private Integer watch;
 	
+	private String level;
+	
+	private String levelText;
+	
 	private List<String> imgs = new ArrayList<String>();
 
 	public String getId() {
@@ -139,8 +143,22 @@ public class Video {
 	public void setCategorys(List<Category> categorys) {
 		this.categorys = categorys;
 	}
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
+	}
+
+	public String getLevelText() {
+		return levelText;
+	}
+
+	public void setLevelText(String levelText) {
+		this.levelText = levelText;
+	}
 	
-	
-	
-	
+		
 }

@@ -1,6 +1,8 @@
 package com.app.view.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.view.pojo.Category;
 import com.app.view.service.CategoryService;
+import com.app.view.service.CodeService;
 import com.app.view.util.JsonResult;
 import com.app.view.util.ResultCode;
 import com.github.pagehelper.PageHelper;
@@ -24,6 +27,9 @@ public class CategoryController {
 	
 	@Autowired
 	private CategoryService categoryService;
+	
+	@Autowired
+	private CodeService codeService;
 	
 	@GetMapping("list")
 	public JsonResult<?> list(Integer page,Integer pageSize,String name,String type){		
@@ -49,12 +55,16 @@ public class CategoryController {
 	@GetMapping("all")
 	public JsonResult<?> all(){		
 		try {
-		    return JsonResult.buildSuccessResult(categoryService.all());
+			Map<String,Object> datas = new HashMap<>();
+			List<Map<String, String>> categorys = categoryService.all();
+			datas.put("categorys", categorys);
+			datas.put("types", codeService.list("page"));
+			datas.put("levels", codeService.list("level"));
+		    return JsonResult.buildSuccessResult(datas);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return JsonResult.buildExceptionResult("查询失败,请联系管理员!");
-		}
-      
+		}  
 	}
 	
 	@PostMapping("add")

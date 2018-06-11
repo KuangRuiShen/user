@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.view.entry.VideoCondtion;
 import com.app.view.pojo.Video;
 import com.app.view.service.VideoService;
 import com.app.view.util.JsonResult;
@@ -26,13 +27,19 @@ public class VideoController {
 	private VideoService videoServce;
 	
 	@GetMapping("list")
-	public JsonResult<?> list(Integer page,Integer pageSize,String name,String cid,String sid){		
+	public JsonResult<?> list(Integer page,Integer pageSize,String name,String cid,String sid,String level,String type){		
 		if(page == null || page < 1 )
 			page = 1;
 		if(pageSize == null || pageSize <10)
 		   pageSize = JsonResult.PAGESIZR;	
+			VideoCondtion vc = new VideoCondtion();
+			vc.setCid(cid);
+			vc.setName(name);
+			vc.setSid(sid);
+			vc.setLevel(level);
+			vc.setType(type);
 		  PageHelper.startPage(page, pageSize);
-      	  List<Video> list = videoServce.list(name,cid,sid);
+      	  List<Video> list = videoServce.list(vc);
           PageInfo<Video> pageInfo = new PageInfo<Video>(list);
           return JsonResult.buildSuccessResult(list,pageInfo.getTotal());
 	}

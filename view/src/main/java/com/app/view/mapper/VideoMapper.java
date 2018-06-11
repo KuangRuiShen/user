@@ -7,12 +7,13 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.app.view.entry.VideoCondtion;
 import com.app.view.pojo.Video;
 
 
 public interface VideoMapper {
 
-	List<Video> list(@Param("name") String name,@Param("cid")  String cid, @Param("sid")String sid);
+	List<Video> list(VideoCondtion vc);
 
 	void add(Video v);
 
@@ -36,5 +37,6 @@ public interface VideoMapper {
 	
 	//删除类型
 	void deletecid(List<String> ids);
+
 
 }

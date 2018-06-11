@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.app.view.entry.VideoCondtion;
 import com.app.view.mapper.VideoMapper;
 import com.app.view.pojo.Video;
 import com.app.view.service.VideoService;
@@ -18,8 +19,8 @@ public class VideoServiceImpl implements VideoService {
 	private VideoMapper videoMapper;
 	
 	@Override
-	public List<Video> list(String name,String cid,String sid) {
-		return videoMapper.list(name,cid,sid);
+	public List<Video> list(VideoCondtion vc) {
+		return videoMapper.list(vc);
 	}
 
 	@Override

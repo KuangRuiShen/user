@@ -2,11 +2,10 @@ package com.app.view.service;
 
 import java.util.List;
 
+import com.app.view.entry.VideoCondtion;
 import com.app.view.pojo.Video;
 
 public interface VideoService {
-
-	List<Video> list(String name, String cid, String sid);
 
 	void add(Video v);
 
@@ -19,5 +18,7 @@ public interface VideoService {
 	void saveVideourl(String vid, String path);
 
 	Video findbyId(String id);
+
+	List<Video> list(VideoCondtion vc);
 
 }

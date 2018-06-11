@@ -4,7 +4,7 @@
 	
 	<select id="list" resultType="com.app.view.pojo.Category" >
 		 select c.id,c.name,c.remark,c.px,c.imgurl,c.type,t.name as typeText from category c
-		 left join code t on t.code_id =c.type 	 
+		 left join code t on t.code_id =c.type and t.type='page' 	 
 		 <where>
 		 	<if test="name !=null and name != '' ">
 		 		c.name like CONCAT('%', #{name}, '%')
