@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50639
 File Encoding         : 65001
 
-Date: 2018-06-11 14:58:14
+Date: 2018-06-12 22:44:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -38,22 +38,23 @@ CREATE TABLE `category` (
 -- ----------------------------
 DROP TABLE IF EXISTS `code`;
 CREATE TABLE `code` (
-  `id` int(5) NOT NULL,
   `name` varchar(100) NOT NULL,
   `type` varchar(100) NOT NULL DEFAULT '',
   `code_id` int(5) NOT NULL,
-  PRIMARY KEY (`id`,`name`,`type`,`code_id`)
+  PRIMARY KEY (`name`,`type`,`code_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of code
 -- ----------------------------
-INSERT INTO `code` VALUES ('1', '主页', 'page', '1');
-INSERT INTO `code` VALUES ('2', 'vip', 'page', '2');
-INSERT INTO `code` VALUES ('3', '试看区', 'page', '3');
-INSERT INTO `code` VALUES ('4', '等级一', 'level', '1');
-INSERT INTO `code` VALUES ('5', '等级二', 'level', '2');
-INSERT INTO `code` VALUES ('6', '等级三', 'level', '3');
+INSERT INTO `code` VALUES ('vip', 'page', '2');
+INSERT INTO `code` VALUES ('主页', 'page', '1');
+INSERT INTO `code` VALUES ('普通用户', 'level', '0');
+INSERT INTO `code` VALUES ('等级一', 'level', '1');
+INSERT INTO `code` VALUES ('等级三', 'level', '3');
+INSERT INTO `code` VALUES ('等级二', 'level', '2');
+INSERT INTO `code` VALUES ('管理员', 'level', '100');
+INSERT INTO `code` VALUES ('试看区', 'page', '3');
 
 -- ----------------------------
 -- Table structure for comment
@@ -90,17 +91,23 @@ CREATE TABLE `login_user` (
 INSERT INTO `login_user` VALUES ('25', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'dfsfw32');
 
 -- ----------------------------
--- Table structure for moneylog
+-- Table structure for order_info
 -- ----------------------------
-DROP TABLE IF EXISTS `moneylog`;
-CREATE TABLE `moneylog` (
+DROP TABLE IF EXISTS `order_info`;
+CREATE TABLE `order_info` (
+  `total_fee` int(20) DEFAULT NULL,
+  `trade_no` varchar(20) NOT NULL,
+  `body` varchar(255) DEFAULT NULL,
+  `trade_type` varchar(16) DEFAULT NULL,
   `user_id` varchar(32) NOT NULL,
-  `money` decimal(10,0) DEFAULT NULL,
-  `time` varchar(20) DEFAULT NULL
+  `result` varchar(2) NOT NULL,
+  `start_time` varchar(20) DEFAULT NULL,
+  `end_time` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`trade_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of moneylog
+-- Records of order_info
 -- ----------------------------
 
 -- ----------------------------
@@ -128,7 +135,7 @@ CREATE TABLE `star` (
   `imgurl` varchar(100) DEFAULT NULL,
   `px` int(5) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of star
@@ -140,38 +147,15 @@ CREATE TABLE `star` (
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` varchar(32) NOT NULL,
-  `name` varchar(50) DEFAULT NULL,
-  `creat_time` varchar(20) DEFAULT NULL,
-  `username` varchar(32) NOT NULL,
-  `password` varchar(32) NOT NULL,
+  `recharge_time` datetime DEFAULT NULL,
+  `valid_time` datetime DEFAULT NULL,
   `role_id` varchar(32) NOT NULL,
+  `invite_id` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
--- ----------------------------
-
--- ----------------------------
--- Table structure for video
--- ----------------------------
-DROP TABLE IF EXISTS `video`;
-CREATE TABLE `video` (
-  `id` varchar(32) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `remark` longtext,
-  `px` int(5) DEFAULT '1',
-  `imgurl` varchar(100) DEFAULT NULL,
-  `videourl` varchar(100) DEFAULT NULL,
-  `quality` varchar(100) DEFAULT NULL,
-  `watch` int(2) DEFAULT '1',
-  `sid` varchar(32) DEFAULT NULL COMMENT '明星',
-  `level` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`id`,`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of video
 -- ----------------------------
 
 -- ----------------------------

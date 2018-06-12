@@ -1,7 +1,5 @@
 package com.app.view.service;
 
-import java.util.List;
-
 import com.app.view.pojo.User;
 
 /**
@@ -10,10 +8,6 @@ import com.app.view.pojo.User;
  * @describe
  */
 public interface UserService {
-
-	List<User> find(String username);
-
-	void add(User u);
 
 	User findById(String id);
 

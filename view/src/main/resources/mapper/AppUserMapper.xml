@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.view.mapper.AppUserMapper">
+
+	<select id="find" resultType="com.app.view.pojo.AppUser">
+		select  u.id,u.valid_time,u.recharge_time,u.invite_id,u.role_id,c.name as roleText,
+		IFNULL((select sum(total_fee) from order_info where user_id = u.id and result = '1'),0) money
+		from user u left join code c on c.code_id = u.role_id  and c.type='level'
+ 		<where>
+ 			<if test="id !=null and id != '' ">
+		 		u.id like CONCAT('%', #{u.id}, '%')
+		 	</if>	
+		 	<if test="invite_id !=null and invite_id != '' ">
+		 		and u.invite_id =#{invite_id}
+		 	</if>	
+ 		</where>
+ 		order by u.recharge_time desc
+	</select>
+	
+	<insert id="add" parameterType="com.app.view.pojo.AppUser" >
+		  <trim>
+			  INSERT INTO USER (id,valid_time,recharge_time,
+			  <if test="invite_id != null and invite_id !='' ">
+			  invite_id,
+			  </if>	  
+			  role_id) 
+			  VALUES(#{id},#{valid_time},#{recharge_time},
+			    <if test="invite_id != null and invite_id !='' ">
+			  #{invite_id}, 
+			  </if>	  
+			  #{role_id})  
+		  </trim>
+	</insert>
+	
+	<update id="update" parameterType="com.app.view.pojo.AppUser">
+	    UPDATE USER SET		
+		valid_time=#{valid_time},
+		recharge_time=#{recharge_time},
+		role_id=#{role_id}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<select id="findById" parameterType="java.lang.String" resultType="com.app.view.pojo.AppUser">
+		select  u.id,u.valid_time,u.recharge_time,u.invite_id,u.role_id,c.name as roleText
+ 		from user u left join code c on c.code_id = u.role_id  and c.type='level'
+ 		where u.id = #{id}
+	</select>
+	
+	
+	<select id="getMange" resultType="java.util.Map">
+	select *,IFNULL((select sum(total_fee) from user m left join order_info o on m.id = o.user_id 
+	where m.invite_id = u.id and o.result = '1'),0) as total,
+	(select count(m.id) from user m where m.invite_id = u.id) as people
+	from user u
+	 where u.invite_id is null
+	</select>
+	
+	<select id="log" resultType="java.util.Map">
+	select * from order_info where user_id =#{uid}
+	 <if test="result != null and result !='' ">
+			and result = #{result} 
+		 </if>	  
+	</select>
+	
+	
+	
+	
+</mapper>
