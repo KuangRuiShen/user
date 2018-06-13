@@ -28,14 +28,16 @@ public class PayController {
 		System.out.println("___________sucess______________");
 		System.out.println(param.toString());		
 		System.out.println("___________end______________");
+//		 payService.changeUser();
 		 return JsonResult.buildSuccessResult(param);
 	}
+	
 	
 	
 	@PostMapping("add")
 	public  JsonResult<?> add(@RequestBody PayMent pm)  {
 		try {
-				payService.add(pm);
+			  payService.add(pm);
 	         return JsonResult.buildSuccessResult();
 		} catch (Exception e) {
 			e.printStackTrace();

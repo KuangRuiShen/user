@@ -11,4 +11,6 @@ public interface PayService {
 
 	void add(PayMent pm);
 
+	void changeUser();
+
 }

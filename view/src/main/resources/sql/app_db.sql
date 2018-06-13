@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50639
 File Encoding         : 65001
 
-Date: 2018-06-12 22:44:13
+Date: 2018-06-13 20:51:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -151,12 +151,16 @@ CREATE TABLE `user` (
   `valid_time` datetime DEFAULT NULL,
   `role_id` varchar(32) NOT NULL,
   `invite_id` varchar(32) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
+INSERT INTO `user` VALUES ('5673409fbd4a45d187ebd27b6f86bdf1', '2018-06-13 20:32:27', '2018-06-14 20:32:27', '100', null, '2018-06-13 20:32:27');
+INSERT INTO `user` VALUES ('7336df85761d4a8785d5cb28450de7e7', '2018-06-13 09:23:31', '2018-06-14 09:23:31', '100', null, null);
+INSERT INTO `user` VALUES ('7929e800985c4d749c75212af0188300', '2018-06-13 20:45:34', '2018-06-14 20:45:34', '0', '5673409fbd4a45d187ebd27b6f86bdf1', '2018-06-13 20:45:34');
 
 -- ----------------------------
 -- Table structure for video_cid

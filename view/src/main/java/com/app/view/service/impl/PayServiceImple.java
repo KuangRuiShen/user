@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.app.view.entry.PayMent;
 import com.app.view.mapper.PayMapper;
+import com.app.view.service.AppUserService;
 import com.app.view.service.PayService;
 import com.app.view.util.MyUtils;
 
@@ -21,12 +22,23 @@ public class PayServiceImple implements PayService {
 	@Autowired
 	private PayMapper payMapper;
 	
+	@Autowired
+	private AppUserService appUserService;
+	
 	
 	@Override
 	public void add(PayMent pm) {
 		pm.setStart_time(MyUtils.dateToString(new Date()));
 		pm.setResult("0");
 		payMapper.add(pm);		
+	}
+
+
+	@Override
+	public void changeUser() {
+		
+		appUserService.update("ddd");
+		payMapper.changePay("id");		
 	}
 
 }

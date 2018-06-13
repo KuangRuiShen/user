@@ -3,15 +3,18 @@
 <mapper namespace="com.app.view.mapper.AppUserMapper">
 
 	<select id="find" resultType="com.app.view.pojo.AppUser">
-		select  u.id,u.valid_time,u.recharge_time,u.invite_id,u.role_id,c.name as roleText,
+		select  u.id,u.valid_time,u.recharge_time,u.invite_id,u.role_id,c.name as roleText,u.create_time,
 		IFNULL((select sum(total_fee) from order_info where user_id = u.id and result = '1'),0) money
 		from user u left join code c on c.code_id = u.role_id  and c.type='level'
  		<where>
  			<if test="id !=null and id != '' ">
-		 		u.id like CONCAT('%', #{u.id}, '%')
+		 		( u.id like CONCAT('%', #{id}, '%') or u.invite_id like CONCAT('%', #{id}, '%') )
 		 	</if>	
 		 	<if test="invite_id !=null and invite_id != '' ">
 		 		and u.invite_id =#{invite_id}
+		 	</if>	
+		 	<if test=" bTime !=null and eTime != null ">
+		 	  and u.recharge_time between #{bTime} and #{eTime}
 		 	</if>	
  		</where>
  		order by u.recharge_time desc
@@ -23,12 +26,12 @@
 			  <if test="invite_id != null and invite_id !='' ">
 			  invite_id,
 			  </if>	  
-			  role_id) 
+			  role_id,create_time) 
 			  VALUES(#{id},#{valid_time},#{recharge_time},
 			    <if test="invite_id != null and invite_id !='' ">
 			  #{invite_id}, 
 			  </if>	  
-			  #{role_id})  
+			  #{role_id},now())  
 		  </trim>
 	</insert>
 	
@@ -42,7 +45,7 @@
 	
 	
 	<select id="findById" parameterType="java.lang.String" resultType="com.app.view.pojo.AppUser">
-		select  u.id,u.valid_time,u.recharge_time,u.invite_id,u.role_id,c.name as roleText
+		select  u.id,u.valid_time,u.recharge_time,u.invite_id,u.role_id,c.name as roleText,u.create_time
  		from user u left join code c on c.code_id = u.role_id  and c.type='level'
  		where u.id = #{id}
 	</select>

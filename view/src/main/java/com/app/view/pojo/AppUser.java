@@ -26,6 +26,12 @@ public class AppUser {
 	private String roleText;
 	
 	private Integer money;
+	
+	private Date create_time;
+	
+	private String bTime;
+	
+	private String eTime;
 
 	public String getId() {
 		return id;
@@ -52,6 +58,18 @@ public class AppUser {
 			return MyUtils.dateToString(recharge_time);
 		}
 		return "";
+	}
+	
+
+	public String getCreate_time() {
+		if(create_time !=null ){
+			return MyUtils.dateToString(create_time);
+		}
+		return "";
+	}
+
+	public void setCreate_time(Date create_time) {
+		this.create_time = create_time;
 	}
 
 	public void setRecharge_time(Date recharge_time) {
@@ -89,6 +107,23 @@ public class AppUser {
 	public void setMoney(Integer money) {
 		this.money = money;
 	}
+
+	public String getbTime() {
+		return bTime;
+	}
+
+	public void setbTime(String bTime) {
+		this.bTime = bTime;
+	}
+
+	public String geteTime() {
+		return eTime;
+	}
+
+	public void seteTime(String eTime) {
+		this.eTime = eTime;
+	}
+
 
 	
 	

@@ -53,7 +53,7 @@ public class UserController {
 	}
 	
 	@GetMapping("list")
-	public JsonResult<?> list(Integer page,Integer pageSize,String name,String invite_id){
+	public JsonResult<?> list(Integer page,Integer pageSize,String name,String invite_id,String bTime,String eTime){
 		if(page == null || page < 1 )
 			page = 1;
 		if(pageSize == null || pageSize <10)
@@ -62,6 +62,8 @@ public class UserController {
 				AppUser a = new AppUser();
 				a.setId(name);
 				a.setInvite_id(invite_id);
+				a.setbTime(bTime);
+				a.seteTime(eTime);
 			  PageHelper.startPage(page, pageSize);
 	          PageInfo<AppUser> pageInfo = new PageInfo<AppUser>(appUserService.find(a));
 	          return JsonResult.buildSuccessResult(pageInfo.getList(),pageInfo.getTotal());
