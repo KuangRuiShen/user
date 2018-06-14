@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50639
 File Encoding         : 65001
 
-Date: 2018-06-13 20:51:18
+Date: 2018-06-14 14:58:07
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -103,12 +103,14 @@ CREATE TABLE `order_info` (
   `result` varchar(2) NOT NULL,
   `start_time` varchar(20) DEFAULT NULL,
   `end_time` varchar(20) DEFAULT NULL,
+  `out_trade_no` varchar(32) DEFAULT NULL COMMENT '交易单号',
   PRIMARY KEY (`trade_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of order_info
 -- ----------------------------
+INSERT INTO `order_info` VALUES ('1', '1528957604243', 'VIP充值', 'WX', '7929e800985c4d749c75212af0188300', '0', '2018-06-14 14:26:44', null, null);
 
 -- ----------------------------
 -- Table structure for role

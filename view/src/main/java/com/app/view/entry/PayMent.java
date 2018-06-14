@@ -13,15 +13,16 @@ public class PayMent {
 	//金额
 	private Integer total_fee;
 	
-	//订单号
+	//订单号(客户支付的订单号)
 	private String trade_no;
+	
 	//支付方式
 	private String trade_type;
 	
 	private String body;
 	
-	//商户订单
-//	private String out_trade_no;
+	//商户订单(客户订单编号)
+	private String out_trade_no;
 	
 	private String result;
 	
@@ -30,6 +31,8 @@ public class PayMent {
 	private String end_time;
 	
 	private String user_id;
+	
+	private String redirect_url;
 	
 
 	public String getMch_id() {
@@ -64,13 +67,6 @@ public class PayMent {
 		this.trade_no = trade_no;
 	}
 
-//	public String getOut_trade_no() {
-//		return out_trade_no;
-//	}
-//
-//	public void setOut_trade_no(String out_trade_no) {
-//		this.out_trade_no = out_trade_no;
-//	}
 
 	public String getTrade_type() {
 		return trade_type;
@@ -119,8 +115,22 @@ public class PayMent {
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
-	
-	
+
+	public String getOut_trade_no() {
+		return out_trade_no;
+	}
+
+	public void setOut_trade_no(String out_trade_no) {
+		this.out_trade_no = out_trade_no;
+	}
+
+	public String getRedirect_url() {
+		return redirect_url;
+	}
+
+	public void setRedirect_url(String redirect_url) {
+		this.redirect_url = redirect_url;
+	}
 	
 	
 }

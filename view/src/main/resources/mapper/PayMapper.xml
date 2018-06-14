@@ -30,12 +30,6 @@
 	</insert>
 
 
-	<update id="update" parameterType="com.app.view.entry.PayMent">
-		UPDATE order_info SET
-		end_time=#{end_time},
-		result=#{result},
-		WHERE trade_no = #{trade_no}
-	</update>
-	
+
 	
 </mapper>

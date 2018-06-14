@@ -13,7 +13,7 @@ public class PayDemo {
 		params.put("out_trade_no",System.currentTimeMillis()+"");//商户订单
 		params.put("body", "vip");//商品
 		params.put("total_fee", "1");//总价
-		params.put("spbill_create_ip", "192.168.1.1");//客户端ip
+		params.put("spbill_create_ip", "101.132.170.212");//客户端ip
 		params.put("notify_url", "http://101.132.170.212/api/pay/result");//服务器通知地址
 		params.put("redirect_url", "http://www.baidu.com");//前端跳转地址
 		params.put("trade_type", "WX");//支付方式

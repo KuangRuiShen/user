@@ -11,6 +11,8 @@ public interface PayService {
 
 	void add(PayMent pm);
 
-	void changeUser();
+	void changeUser(PayMent pm);
+
+	String getPayUrl(PayMent pm);
 
 }
