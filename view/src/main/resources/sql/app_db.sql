@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50639
 File Encoding         : 65001
 
-Date: 2018-06-14 14:58:07
+Date: 2018-06-14 18:31:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -96,21 +96,20 @@ INSERT INTO `login_user` VALUES ('25', 'admin', '21232f297a57a5a743894a0e4a801fc
 DROP TABLE IF EXISTS `order_info`;
 CREATE TABLE `order_info` (
   `total_fee` int(20) DEFAULT NULL,
-  `trade_no` varchar(20) NOT NULL,
+  `trade_no` varchar(20) DEFAULT NULL,
   `body` varchar(255) DEFAULT NULL,
   `trade_type` varchar(16) DEFAULT NULL,
   `user_id` varchar(32) NOT NULL,
   `result` varchar(2) NOT NULL,
   `start_time` varchar(20) DEFAULT NULL,
   `end_time` varchar(20) DEFAULT NULL,
-  `out_trade_no` varchar(32) DEFAULT NULL COMMENT '交易单号',
-  PRIMARY KEY (`trade_no`)
+  `out_trade_no` varchar(32) NOT NULL COMMENT '交易单号',
+  PRIMARY KEY (`out_trade_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of order_info
 -- ----------------------------
-INSERT INTO `order_info` VALUES ('1', '1528957604243', 'VIP充值', 'WX', '7929e800985c4d749c75212af0188300', '0', '2018-06-14 14:26:44', null, null);
 
 -- ----------------------------
 -- Table structure for role
