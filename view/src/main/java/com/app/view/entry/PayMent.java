@@ -21,7 +21,7 @@ public class PayMent {
 	
 	private String body;
 	
-	//商户订单(客户订单编号)
+	//商户订单(自己生成)
 	private String out_trade_no;
 	
 	private String result;
@@ -33,6 +33,8 @@ public class PayMent {
 	private String user_id;
 	
 	private String redirect_url;
+	
+	private String ip;
 	
 
 	public String getMch_id() {
@@ -131,6 +133,16 @@ public class PayMent {
 	public void setRedirect_url(String redirect_url) {
 		this.redirect_url = redirect_url;
 	}
+
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+	
+	
 	
 	
 }

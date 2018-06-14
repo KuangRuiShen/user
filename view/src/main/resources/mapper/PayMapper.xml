@@ -4,7 +4,7 @@
 	
 	<insert id="add" parameterType="com.app.view.entry.PayMent" >
 		  <trim>
-			  INSERT INTO order_info (result,total_fee,trade_no,
+			  INSERT INTO order_info (result,total_fee,out_trade_no,
 			  <if test="body != null and body !='' ">
 			  body,
 			  </if>	
@@ -15,7 +15,7 @@
 			  start_time,
 			  </if>	 
 			  user_id) 
-			  VALUES(#{result},#{total_fee},#{trade_no},
+			  VALUES(#{result},#{total_fee},#{out_trade_no},
 			   <if test="body != null and body !='' ">
 			  #{body},
 			  </if>	

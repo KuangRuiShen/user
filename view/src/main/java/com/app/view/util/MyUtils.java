@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -54,7 +56,7 @@ public class MyUtils {
 	public static String mYdateFrom(String d ){
 		Date date1 = null;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-		if(StringUtils.isBlank(d) || d.length() != 12){
+		if(StringUtils.isBlank(d) || d.length() != 14){
 			return d;
 		}else{
 			try {
@@ -122,6 +124,25 @@ public class MyUtils {
 			e.printStackTrace();
 		}					
 		return result;
+	}
+	
+	/**
+	 * 获取当前登录ip
+	 * @param request
+	 * @return
+	 */
+	public static String getRemoteHost(HttpServletRequest request){
+	    String ip = request.getHeader("x-forwarded-for");
+	    if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)){
+	        ip = request.getHeader("Proxy-Client-IP");
+	    }
+	    if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)){
+	        ip = request.getHeader("WL-Proxy-Client-IP");
+	    }
+	    if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)){
+	        ip = request.getRemoteAddr();
+	    }
+	    return ip.equals("0:0:0:0:0:0:0:1")?"127.0.0.1":ip;
 	}
 
 	

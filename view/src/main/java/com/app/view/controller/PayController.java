@@ -38,8 +38,7 @@ public class PayController {
 	
 	
 	@PostMapping("result")
-	public void doPost(HttpServletRequest request, HttpServletResponse response)  {
-
+	public String doPost(HttpServletRequest request, HttpServletResponse response)  {
 //		System.out.println(param);		
 //		 payService.changeUser();
 //		  JsonResult.buildSuccessResult(param);s
@@ -79,14 +78,16 @@ public class PayController {
 		            }
 		            
 //		            System.err.println(builder.toString());
-		            response.getWriter().write("success");
-					response.getWriter().flush();
-					response.getWriter().close();
+//		            response.getWriter().write("success");
+//					response.getWriter().flush();
+		         
+//					response.getWriter().close();
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			 return "success";
 			
 	}
 	
@@ -105,7 +106,7 @@ public class PayController {
 //	}	
 	
 	@PostMapping("getPayUrl")
-	public  JsonResult<?> getPayUrl(@RequestBody PayMent pm)  {
+	public  JsonResult<?> getPayUrl(@RequestBody PayMent pm,HttpServletRequest request)  {
 		try {			
 			if(StringUtils.isBlank(pm.getUser_id())){
 				return JsonResult.buildFailuredResult(ResultCode.PARAMS_EMPTY,"用户id不能为空");
@@ -121,6 +122,8 @@ public class PayController {
 			if(StringUtils.isBlank(pm.getBody())){
 				pm.setBody("VIP充值");
 			}
+			
+			pm.setIp(MyUtils.getRemoteHost(request));
 			
 			if(StringUtils.isBlank(pm.getRedirect_url())){
 				pm.setRedirect_url("http://www.baidu.com");

@@ -16,10 +16,10 @@ public interface PayMapper {
 	void add(PayMent pm);
 
 	@Update(" update order_info set result='1',end_time = #{end_time},"
-			+ "out_trade_no=#{out_trade_no} where trade_no = #{trade_no}")
+			+ "trade_no=#{trade_no} where out_trade_no = #{out_trade_no}")
 	void changePay(PayMent pm);
 
-	@Select(" select * from order_info where trade_no where trade_no = #{trade_no} ")
-	PayMent findByTradeNo(@Param("trade_no")String trade_no);
+	@Select(" select * from order_info where out_trade_no = #{out_trade_no} ")
+	PayMent findByTradeNo(@Param("out_trade_no")String out_trade_no);
 
 }
