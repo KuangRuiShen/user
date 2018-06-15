@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.app.view.pojo.AppUser;
 
@@ -25,5 +27,10 @@ public interface AppUserMapper {
 	List<Map<String, String>> log(@Param("uid")String uid, @Param("result")String result);
 
 	List<Map<String, String>> getMange();
+
+	@Select(" select * from user where role_id > 0 and role_id <> 100 ")
+	List<AppUser> getMember();
+	@Update(" UPDATE user SET role_id=0 where id=#{id} ")
+	void changeRole(@Param("id") String id);
 
 }

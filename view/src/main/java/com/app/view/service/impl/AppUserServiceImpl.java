@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.app.view.config.HomeScheduler;
 import com.app.view.mapper.AppUserMapper;
 import com.app.view.pojo.AppUser;
 import com.app.view.service.AppUserService;
@@ -71,5 +72,15 @@ public class AppUserServiceImpl implements AppUserService {
 	@Override
 	public List<Map<String, String>> getMange() {
 		return appUserMapper.getMange();
+	}
+
+	@Override
+	public void getMember() {	
+		HomeScheduler.users = appUserMapper.getMember();
+	}
+
+	@Override
+	public void changeRole(String id) {
+		appUserMapper.changeRole(id);		
 	}
 }

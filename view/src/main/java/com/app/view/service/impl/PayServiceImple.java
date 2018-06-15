@@ -49,6 +49,8 @@ public class PayServiceImple implements PayService {
 			if( !payMent.getResult().equals("1") ){
 				payMapper.changePay(pm);
 				appUserService.update(payMent.getUser_id());
+				//刷新定时清理用户表数据
+				appUserService.getMange();
 			}
 		}
 		

@@ -13,7 +13,7 @@ public class AppUser {
 	
 	private String id;
 	
-	private Date valid_time;
+	public Date valid_time;
 	
 	//充值时间
 	private Date recharge_time;

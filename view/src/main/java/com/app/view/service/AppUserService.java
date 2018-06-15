@@ -25,5 +25,10 @@ public interface AppUserService {
 	List<Map<String, String>> log(String uid, String result);
 
 	List<Map<String, String>> getMange();
+	
+	//获取当前有效的会员
+	void getMember();
+	//修改用户角色为普通用户
+	void changeRole(String id);
 
 }
