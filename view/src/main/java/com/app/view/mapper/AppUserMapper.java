@@ -33,4 +33,7 @@ public interface AppUserMapper {
 	@Update(" UPDATE user SET role_id=0 where id=#{id} ")
 	void changeRole(@Param("id") String id);
 
+	@Update(" UPDATE user SET name=#{name},phone=#{phone} where id=#{id}  ")
+	void changeinfo(Map<String, String> param);
+
 }

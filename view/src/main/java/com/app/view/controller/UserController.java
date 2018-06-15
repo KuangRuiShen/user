@@ -40,12 +40,28 @@ public class UserController {
 	
 	//添加用户
 	@GetMapping("/add")
-	public JsonResult<?> addAppUser(String invite_id){		
+	public JsonResult<?> addAppUser(@RequestParam String invite_id){		
 		try {
 			AppUser u = new AppUser();
 			u.setInvite_id(invite_id);
+			AppUser app = appUserService.findById(invite_id);
+			if(app == null){
+				return JsonResult.buildFailuredResult(ResultCode.PARAMS_ERROR,"邀请id不存在");
+			}		
 			AppUser user = appUserService.add(u);
 			return JsonResult.buildSuccessResult(user);				
+		} catch (Exception e) {
+			e.printStackTrace();
+			return JsonResult.buildFailuredResult(ResultCode.SYS_ERROR,"系统异常");
+		}	
+	}
+	
+	//修改用户信息
+	@PostMapping("/changeinfo")
+	public JsonResult<?> changeinfo(@RequestBody Map<String,String> param){		
+		try {			
+		    appUserService.changeinfo(param);
+			return JsonResult.buildSuccessResult();				
 		} catch (Exception e) {
 			e.printStackTrace();
 			return JsonResult.buildFailuredResult(ResultCode.SYS_ERROR,"系统异常");

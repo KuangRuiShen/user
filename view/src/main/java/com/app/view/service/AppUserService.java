@@ -31,4 +31,6 @@ public interface AppUserService {
 	//修改用户角色为普通用户
 	void changeRole(String id);
 
+	void changeinfo(Map<String, String> param);
+
 }

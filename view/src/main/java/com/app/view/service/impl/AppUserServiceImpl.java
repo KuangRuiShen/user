@@ -83,4 +83,9 @@ public class AppUserServiceImpl implements AppUserService {
 	public void changeRole(String id) {
 		appUserMapper.changeRole(id);		
 	}
+
+	@Override
+	public void changeinfo(Map<String, String> param) {
+		appUserMapper.changeinfo(param);	
+	}
 }
