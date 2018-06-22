@@ -111,14 +111,17 @@ public class PayServiceImple implements PayService {
 				String user_id = payMent.getUser_id();
 				AppUser user = appUserMapper.findById(user_id);
 				String role_id = user.getRole_id();
+				int role =  Integer.parseInt(role_id);
+				//用户等级在1-3内 
+				if(0 < role  || role < 3){			
 				Setmeal s= setmealMapper.findByRole(role_id);
 				//套餐1			
 				Date d = new Date();
 				user.setRecharge_time(d);
 				if(StringUtils.isNotBlank(role_id)){
-					int role = Integer.parseInt(role_id)+1;
-					if(role < 100){
-						user.setRole_id(role+"");
+					int newrole = Integer.parseInt(role_id)+1;
+					if(newrole < 100){
+						user.setRole_id(newrole+"");
 					}	
 					Date valid_time = null; 
 					if(s.getOne() == pm.getTotal_fee()){
@@ -131,6 +134,13 @@ public class PayServiceImple implements PayService {
 					user.setValid_time(valid_time);
 					appUserMapper.update(user);
 				}
+				
+			}else{
+				Date d = new Date();
+				user.setRecharge_time(d);
+				user.setValid_time(MyUtils.RechargeDate(d, "1"));
+				appUserMapper.update(user);	
+			}
 				
 				//刷新定时清理用户表数据
 				appUserService.getMange();
