@@ -14,11 +14,13 @@ import com.app.view.entry.Setmeal;
  */
 public interface SetmealMapper {
 
-	List<Setmeal> list();
+	List<Setmeal> list(Setmeal sm);
 
 	@Delete(" delete from code_meal where code_id =#{id}")
 	void delete(@Param("id") String id);
 
 	void add(Setmeal sm);
+
+	Setmeal findByRole(@Param("id")String role_id);
 
 }

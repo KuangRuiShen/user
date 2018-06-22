@@ -11,7 +11,7 @@ import com.app.view.entry.Setmeal;
  */
 public interface SetmealService {
 
-	List<Setmeal> list();
+	List<Setmeal> list(Setmeal sm);
 
 	void edit(Setmeal sm);
 

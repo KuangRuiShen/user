@@ -2,9 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.app.view.mapper.AppUserMapper">
 
-	<select id="find" resultType="com.app.view.pojo.AppUser">
+<resultMap id="baseMap" type="com.app.view.pojo.AppUser">
+		<id property="id" column="id" />
+		<result property="valid_time" column="valid_time" />
+		<result property="recharge_time" column="recharge_time" />
+		<result property="invite_id" column="invite_id" />
+		<result property="role_id" column="role_id" />
+		<result property="roleText" column="roleText" />
+		<result property="money" column="money" />
+		<result property="create_time" column="create_time" />
+	</resultMap>
+	
+	
+	<select id="find" resultMap="baseMap">
 		select  u.id,u.valid_time,u.recharge_time,u.invite_id,u.role_id,c.name as roleText,u.create_time,
-		IFNULL((select sum(total_fee) from order_info where user_id = u.id and result = '1'),0) money
+		IFNULL((select sum(m.total_fee) from user_order a  left join menoy_info m on a.out_trade_no = m.out_trade_no where a.user_id =u.id),0) money
 		from user u left join code c on c.code_id = u.role_id  and c.type='level'
  		<where>
  			<if test="id !=null and id != '' ">
@@ -15,7 +27,11 @@
 		 	</if>	
 		 	<if test=" bTime !=null and eTime != null ">
 		 	  and u.recharge_time between #{bTime} and #{eTime}
-		 	</if>	
+		 	</if>
+		 	<if test=" bTime !=null and eTime != null ">
+		 	  and u.recharge_time between #{bTime} and #{eTime}
+		 	</if>
+		 		 		
  		</where>
  		order by u.recharge_time desc
 	</select>
@@ -52,18 +68,27 @@
 	
 	
 	<select id="getMange" resultType="java.util.Map">
-	select *,IFNULL((select sum(total_fee) from user m left join order_info o on m.id = o.user_id 
-	where m.invite_id = u.id and o.result = '1'),0) as total,
+	select *,IFNULL((select sum(m.total_fee) from user_order a  left join menoy_info m on a.out_trade_no = m.out_trade_no 
+	left join user  on 	user.id = a.user_id WHERE 	user.invite_id = u.id),0) as total,
 	(select count(m.id) from user m where m.invite_id = u.id) as people
-	from user u
-	 where u.invite_id is null
+	from user u where u.invite_id is null
 	</select>
 	
 	<select id="log" resultType="java.util.Map">
-	select * from order_info where user_id =#{uid}
-	 <if test="result != null and result !='' ">
-			and result = #{result} 
-		 </if>	  
+	select a.out_trade_no ,a.start_time,a.total_fee,a.body,a.trade_type,m.total_fee as act_fee,m.payment_time,trade_no
+	 from user_order a  left join menoy_info m on a.out_trade_no = m.out_trade_no 
+	 where a.user_id =#{uid} order by payment_time desc  
+	</select>
+	
+	<select id="order" resultType="java.util.Map">
+	select a.out_trade_no ,a.start_time,a.total_fee,a.body,a.trade_type,m.total_fee as act_fee,m.payment_time,trade_no
+	 from user_order a  left join menoy_info m on a.out_trade_no = m.out_trade_no 
+	 <where> 
+	 	<if test=" name !=null and name != '' ">
+		 	 m.trade_no like CONCAT('%', #{name}, '%') 
+		 </if>
+	 </where>
+	 	
 	</select>
 	
 	

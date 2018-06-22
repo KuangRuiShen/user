@@ -50,18 +50,18 @@ public class AppUserServiceImpl implements AppUserService {
 
 	@Override
 	public void update(String id) {
-		AppUser user = appUserMapper.findById(id);
-		String role_id = user.getRole_id();
-		Date d = new Date();
-		user.setRecharge_time(d);
-		if(StringUtils.isNotBlank(role_id)){
-			int role = Integer.parseInt(role_id)+1;
-			if(role < 100){
-				user.setRole_id(role+"");
-			}		
-			user.setValid_time(MyUtils.RechargeDate(d, role+""));	
-			appUserMapper.update(user);
-		}	
+//		AppUser user = appUserMapper.findById(id);
+//		String role_id = user.getRole_id();
+//		Date d = new Date();
+//		user.setRecharge_time(d);
+//		if(StringUtils.isNotBlank(role_id)){
+//			int role = Integer.parseInt(role_id)+1;
+//			if(role < 100){
+//				user.setRole_id(role+"");
+//			}		
+//			user.setValid_time(MyUtils.RechargeDate(d, role+""));	
+//			appUserMapper.update(user);
+//		}	
 	}
 
 	@Override
@@ -87,5 +87,11 @@ public class AppUserServiceImpl implements AppUserService {
 	@Override
 	public void changeinfo(Map<String, String> param) {
 		appUserMapper.changeinfo(param);	
+	}
+
+	@Override
+	public List<Map<String, String>> order(String name) {
+	
+		return appUserMapper.order(name);
 	}
 }

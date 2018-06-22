@@ -171,6 +171,23 @@ public class UserController {
 	}
 	
 	
+	@GetMapping("order")
+	public JsonResult<?> order(Integer page,Integer pageSize,String name){
+		if(page == null || page < 1 )
+			page = 1;
+		if(pageSize == null || pageSize <10)
+		  pageSize = JsonResult.PAGESIZR;	
+		try {
+			
+			  PageHelper.startPage(page, pageSize);
+	          PageInfo<Map<String,String>> pageInfo = new PageInfo<Map<String,String>>(appUserService.order(name));
+	          return JsonResult.buildSuccessResult(pageInfo.getList(),pageInfo.getTotal());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return JsonResult.buildFailuredResult(ResultCode.SYS_ERROR,"系统异常");
+		}	
+	}
+	
 		
 	
 }

@@ -80,16 +80,16 @@ public class MyUtils {
 		Calendar cal = Calendar.getInstance();
 		switch (type) {
 		case "1":
-			cal.add(Calendar.DAY_OF_YEAR, 1);
-			break;
-		case "2":
 			cal.add(Calendar.MONTH, 1);
 			break;
-		case "3":
+		case "2":
 			cal.add(Calendar.YEAR, 1);
 			break;
+		case "3":
+			cal.add(Calendar.YEAR, 10);
+			break;
 		default:// day
-			cal.add(Calendar.DAY_OF_YEAR, 1);
+			cal.add(Calendar.MONTH, 1);
 		}
 		return cal.getTime();		
 	}

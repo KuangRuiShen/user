@@ -1,6 +1,7 @@
 package com.app.view.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 import com.app.view.util.MyUtils;
 
@@ -32,6 +33,9 @@ public class AppUser {
 	private String bTime;
 	
 	private String eTime;
+	
+	private String out_trade_no;
+	private List<String> trades;
 
 	public String getId() {
 		return id;
@@ -123,6 +127,24 @@ public class AppUser {
 	public void seteTime(String eTime) {
 		this.eTime = eTime;
 	}
+
+	public String getOut_trade_no() {
+		return out_trade_no;
+	}
+
+	public void setOut_trade_no(String out_trade_no) {
+		this.out_trade_no = out_trade_no;
+	}
+
+	public List<String> getTrades() {
+		return trades;
+	}
+
+	public void setTrades(List<String> trades) {
+		this.trades = trades;
+	}
+	
+	
 
 
 	

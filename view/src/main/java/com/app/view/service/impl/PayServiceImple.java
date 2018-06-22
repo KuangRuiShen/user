@@ -4,13 +4,16 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.view.entry.PayInfo;
 import com.app.view.entry.PayMent;
+import com.app.view.entry.Setmeal;
 import com.app.view.mapper.AppUserMapper;
 import com.app.view.mapper.PayMapper;
+import com.app.view.mapper.SetmealMapper;
 import com.app.view.pojo.AppUser;
 import com.app.view.service.AppUserService;
 import com.app.view.service.PayService;
@@ -35,6 +38,9 @@ public class PayServiceImple implements PayService {
 	@Autowired
 	private AppUserMapper appUserMapper;
 	
+	
+	@Autowired
+	private SetmealMapper setmealMapper;
 	
 	@Override
 	public void add(PayMent pm) {
@@ -105,6 +111,26 @@ public class PayServiceImple implements PayService {
 				String user_id = payMent.getUser_id();
 				AppUser user = appUserMapper.findById(user_id);
 				String role_id = user.getRole_id();
+				Setmeal s= setmealMapper.findByRole(role_id);
+				//套餐1			
+				Date d = new Date();
+				user.setRecharge_time(d);
+				if(StringUtils.isNotBlank(role_id)){
+					int role = Integer.parseInt(role_id)+1;
+					if(role < 100){
+						user.setRole_id(role+"");
+					}	
+					Date valid_time = null; 
+					if(s.getOne() == pm.getTotal_fee()){
+						valid_time = MyUtils.RechargeDate(d, "1");
+					}else if(s.getTwo() == pm.getTotal_fee()){
+						valid_time =MyUtils.RechargeDate(d, "2");
+					}else if(s.getThree() == pm.getTotal_fee()){
+						valid_time = MyUtils.RechargeDate(d, "3");
+					}					
+					user.setValid_time(valid_time);
+					appUserMapper.update(user);
+				}
 				
 				//刷新定时清理用户表数据
 				appUserService.getMange();

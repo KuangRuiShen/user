@@ -33,4 +33,6 @@ public interface AppUserService {
 
 	void changeinfo(Map<String, String> param);
 
+	List<Map<String,String>> order(String name);
+
 }

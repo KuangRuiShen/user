@@ -36,4 +36,7 @@ public interface AppUserMapper {
 	@Update(" UPDATE user SET name=#{name},phone=#{phone} where id=#{id}  ")
 	void changeinfo(Map<String, String> param);
 
+	//查询所有订单
+	List<Map<String, String>> order(@Param("name")String name);
+
 }

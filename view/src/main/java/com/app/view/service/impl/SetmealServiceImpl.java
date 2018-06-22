@@ -16,14 +16,15 @@ public class SetmealServiceImpl implements SetmealService {
 	private SetmealMapper setmealMapper;
 	
 	@Override
-	public List<Setmeal> list() {
-		return setmealMapper.list();
-	}
-
-	@Override
 	public void edit(Setmeal sm) {
 		setmealMapper.delete(sm.getId());
 		setmealMapper.add(sm);
 	}
+
+	@Override
+	public List<Setmeal> list(Setmeal sm) {
+		return setmealMapper.list(sm);
+	}
+
 
 }
