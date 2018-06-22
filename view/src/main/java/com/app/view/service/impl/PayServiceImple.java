@@ -138,6 +138,10 @@ public class PayServiceImple implements PayService {
 			}else{
 				Date d = new Date();
 				user.setRecharge_time(d);
+				int newrole = Integer.parseInt(role_id)+1;
+				if(newrole < 100){
+					user.setRole_id(newrole+"");
+				}	
 				user.setValid_time(MyUtils.RechargeDate(d, "1"));
 				appUserMapper.update(user);	
 			}
