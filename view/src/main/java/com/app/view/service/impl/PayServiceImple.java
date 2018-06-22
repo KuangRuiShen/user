@@ -113,7 +113,7 @@ public class PayServiceImple implements PayService {
 				String role_id = user.getRole_id();
 				int role =  Integer.parseInt(role_id);
 				//用户等级在1-3内 
-				if(0 < role  || role < 3){			
+				if(0 < role  && role < 4){			
 				Setmeal s= setmealMapper.findByRole(role_id);
 				//套餐1			
 				Date d = new Date();
