@@ -1,5 +1,6 @@
 package com.app.view.service;
 
+import com.app.view.entry.PayInfo;
 import com.app.view.entry.PayMent;
 
 /**
@@ -11,7 +12,7 @@ public interface PayService {
 
 	void add(PayMent pm);
 
-	void changeUser(PayMent pm);
+	void changeUser(PayInfo pm);
 
 	String getPayUrl(PayMent pm);
 

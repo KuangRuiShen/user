@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.app.view.entry.PayInfo;
 import com.app.view.entry.PayMent;
 
 /**
@@ -19,7 +20,10 @@ public interface PayMapper {
 			+ "trade_no=#{trade_no} where out_trade_no = #{out_trade_no}")
 	void changePay(PayMent pm);
 
-	@Select(" select * from order_info where out_trade_no = #{out_trade_no} ")
+	@Select(" select * from user_order where out_trade_no = #{out_trade_no} ")
 	PayMent findByTradeNo(@Param("out_trade_no")String out_trade_no);
+
+	
+	void saveMoneyInfo(PayInfo pm);
 
 }

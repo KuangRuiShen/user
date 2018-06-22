@@ -7,8 +7,11 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.app.view.entry.PayInfo;
 import com.app.view.entry.PayMent;
+import com.app.view.mapper.AppUserMapper;
 import com.app.view.mapper.PayMapper;
+import com.app.view.pojo.AppUser;
 import com.app.view.service.AppUserService;
 import com.app.view.service.PayService;
 import com.app.view.util.MyUtils;
@@ -29,32 +32,34 @@ public class PayServiceImple implements PayService {
 	@Autowired
 	private AppUserService appUserService;
 	
+	@Autowired
+	private AppUserMapper appUserMapper;
+	
 	
 	@Override
 	public void add(PayMent pm) {
 		pm.setStart_time(MyUtils.dateToString(new Date()));
-		pm.setResult("0");
 		payMapper.add(pm);		
 	}
 
 
-	@Override
-	public void changeUser(PayMent pm) {		
-		String out_trade_no = pm.getOut_trade_no();
-		PayMent payMent = payMapper.findByTradeNo(out_trade_no);
-//		appUserService.update("ddd");
-		if(payMent!=null){
-			pm.setEnd_time(MyUtils.mYdateFrom(pm.getEnd_time()));		
-			//修改
-			if( !payMent.getResult().equals("1") ){
-				payMapper.changePay(pm);
-				appUserService.update(payMent.getUser_id());
-				//刷新定时清理用户表数据
-				appUserService.getMange();
-			}
-		}
-		
-	}
+//	@Override
+//	public void changeUser(PayMent pm) {		
+//		String out_trade_no = pm.getOut_trade_no();
+//		PayMent payMent = payMapper.findByTradeNo(out_trade_no);
+////		appUserService.update("ddd");
+//		if(payMent!=null){
+////			pm.setEnd_time(MyUtils.mYdateFrom(pm.getEnd_time()));		
+//			//修改
+//	
+////				payMapper.changePay(pm);
+////				appUserService.update(payMent.getUser_id());
+////				//刷新定时清理用户表数据
+////				appUserService.getMange();
+//			
+//		}
+//		
+//	}
 
 
 	@Override
@@ -84,6 +89,28 @@ public class PayServiceImple implements PayService {
 		String signRecieve = MD5.sign(preStr, "&key=" + key, "utf-8");
 		String httUrl = "http://weixin.vvjvv.cn/platform/pay/unifiedorder/video?sign=" + signRecieve + "&" + preStr;	
 		return httUrl;
+	}
+
+
+	@Override
+	public void changeUser(PayInfo pm) {
+		//保存订单
+		pm.setPayment_time(MyUtils.mYdateFrom(pm.getPayment_time()));
+		payMapper.saveMoneyInfo(pm);
+		
+		//获取用户id
+		PayMent payMent = payMapper.findByTradeNo(pm.getOut_trade_no());
+		if(payMent!=null){
+			  //修改
+				String user_id = payMent.getUser_id();
+				AppUser user = appUserMapper.findById(user_id);
+				String role_id = user.getRole_id();
+				
+				//刷新定时清理用户表数据
+				appUserService.getMange();
+			
+		}
+		
 	}
 
 }

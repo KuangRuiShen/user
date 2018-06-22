@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50639
 File Encoding         : 65001
 
-Date: 2018-06-14 18:31:08
+Date: 2018-06-15 17:52:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -153,15 +153,40 @@ CREATE TABLE `user` (
   `role_id` varchar(32) NOT NULL,
   `invite_id` varchar(32) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `phone` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('5673409fbd4a45d187ebd27b6f86bdf1', '2018-06-13 20:32:27', '2018-06-14 20:32:27', '100', null, '2018-06-13 20:32:27');
-INSERT INTO `user` VALUES ('7336df85761d4a8785d5cb28450de7e7', '2018-06-13 09:23:31', '2018-06-14 09:23:31', '100', null, null);
-INSERT INTO `user` VALUES ('7929e800985c4d749c75212af0188300', '2018-06-13 20:45:34', '2018-06-14 20:45:34', '0', '5673409fbd4a45d187ebd27b6f86bdf1', '2018-06-13 20:45:34');
+INSERT INTO `user` VALUES ('1', '2018-06-13 20:45:34', '2018-06-14 20:45:34', '100', null, '2018-06-13 20:45:34', '你好', '18102546454456712');
+INSERT INTO `user` VALUES ('5673409fbd4a45d187ebd27b6f86bdf1', '2018-06-13 20:32:27', '2018-06-14 20:32:27', '100', null, '2018-06-13 20:32:27', null, null);
+INSERT INTO `user` VALUES ('7336df85761d4a8785d5cb28450de7e7', '2018-06-13 09:23:31', '2018-06-14 09:23:31', '100', null, null, null, null);
+INSERT INTO `user` VALUES ('7929e800985c4d749c75212af0188300', '2018-06-13 20:45:34', '2018-06-14 20:45:34', '1', '5673409fbd4a45d187ebd27b6f86bdf1', '2018-06-13 20:45:34', null, null);
+
+-- ----------------------------
+-- Table structure for video
+-- ----------------------------
+DROP TABLE IF EXISTS `video`;
+CREATE TABLE `video` (
+  `id` varchar(32) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `remark` longtext,
+  `px` int(5) DEFAULT '1',
+  `imgurl` varchar(100) DEFAULT NULL,
+  `videourl` varchar(100) DEFAULT NULL,
+  `quality` varchar(100) DEFAULT NULL,
+  `watch` int(2) DEFAULT '1',
+  `sid` varchar(32) DEFAULT NULL COMMENT '明星',
+  `level` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`id`,`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of video
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for video_cid

@@ -27,12 +27,13 @@ public class VideoController {
 	private VideoService videoServce;
 	
 	@GetMapping("list")
-	public JsonResult<?> list(Integer page,Integer pageSize,String name,String cid,String sid,String level,String type){		
+	public JsonResult<?> list(String user_id,Integer page,Integer pageSize,String name,String cid,String sid,String level,String type){		
 		if(page == null || page < 1 )
 			page = 1;
 		if(pageSize == null || pageSize <10)
 		   pageSize = JsonResult.PAGESIZR;	
 			VideoCondtion vc = new VideoCondtion();
+			vc.setUser_id(user_id);
 			vc.setCid(cid);
 			vc.setName(name);
 			vc.setSid(sid);

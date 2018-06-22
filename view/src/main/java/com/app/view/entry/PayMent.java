@@ -5,9 +5,9 @@ package com.app.view.entry;
 public class PayMent {
 	
 	//商户号-由平台分配(12字符)
-	private String mch_id;
+//	private String mch_id;
 	
-	//格式为 yyyyMMddHHmmss
+	//格式为 yyyyMMddHHmmss  --实际支付时间
 	private String payment_time;
 	
 	//金额
@@ -24,11 +24,7 @@ public class PayMent {
 	//商户订单(自己生成)
 	private String out_trade_no;
 	
-	private String result;
-	
 	private String start_time;
-	
-	private String end_time;
 	
 	private String user_id;
 	
@@ -36,14 +32,6 @@ public class PayMent {
 	
 	private String ip;
 	
-
-	public String getMch_id() {
-		return mch_id;
-	}
-
-	public void setMch_id(String mch_id) {
-		this.mch_id = mch_id;
-	}
 
 	public String getPayment_time() {
 		return payment_time;
@@ -86,29 +74,6 @@ public class PayMent {
 		this.body = body;
 	}
 
-	public String getResult() {
-		return result;
-	}
-
-	public void setResult(String result) {
-		this.result = result;
-	}
-
-	public String getStart_time() {
-		return start_time;
-	}
-
-	public void setStart_time(String start_time) {
-		this.start_time = start_time;
-	}
-
-	public String getEnd_time() {
-		return end_time;
-	}
-
-	public void setEnd_time(String end_time) {
-		this.end_time = end_time;
-	}
 
 	public String getUser_id() {
 		return user_id;
@@ -141,8 +106,18 @@ public class PayMent {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
+
+	public String getStart_time() {
+		return start_time;
+	}
+
+	public void setStart_time(String start_time) {
+		this.start_time = start_time;
+	}
+
+
 	
-	
+
 	
 	
 }

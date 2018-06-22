@@ -58,6 +58,9 @@
 		 	<if test="type !=null and type != '' ">
 		 		and c.type =#{type}
 		 	</if>
+		 	<if test="user_id !=null and user_id != '' ">
+		 		and v.level = (select role_id from user where id = #{user_id})
+		 	</if>
 		 </where>	 
 		  order by CONVERT (c.px, SIGNED),CONVERT(v.px,SIGNED)	  
 	</select>

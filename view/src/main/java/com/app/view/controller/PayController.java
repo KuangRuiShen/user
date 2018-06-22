@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.view.entry.PayInfo;
 import com.app.view.entry.PayMent;
 import com.app.view.service.PayService;
 import com.app.view.util.JsonResult;
@@ -39,9 +40,6 @@ public class PayController {
 	
 	@PostMapping("result")
 	public String doPost(HttpServletRequest request, HttpServletResponse response)  {
-//		System.out.println(param);		
-//		 payService.changeUser();
-//		  JsonResult.buildSuccessResult(param);s
 		 InputStreamReader inputStreamReader = null;
 			try {
 				inputStreamReader = new InputStreamReader(request.getInputStream(),"UTF-8");
@@ -69,11 +67,13 @@ public class PayController {
 		            System.out.println("trade_no:"+trade_no);
 		            System.out.println("total_fee:"+total_fee);
 		            if(StringUtils.isNoneBlank(trade_no)){
-		            	PayMent pm = new PayMent();
+		            	PayInfo pm = new PayInfo();
+		            	pm.setMch_id(mch_id);
 		            	pm.setTrade_no(trade_no);
 		            	pm.setOut_trade_no(out_trade_no);
 		            	pm.setTotal_fee(Integer.parseInt(total_fee));
-		            	pm.setEnd_time(payment_time);
+		            	pm.setPayment_time(payment_time);
+//		            	pm.setEnd_time(payment_time);
 		            	payService.changeUser(pm);
 		            }
 		            

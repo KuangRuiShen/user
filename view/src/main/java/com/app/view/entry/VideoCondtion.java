@@ -6,6 +6,8 @@ package com.app.view.entry;
  */
 public class VideoCondtion {
 	
+	private String user_id;
+	
 	private String name;//名称
 	
 	private String type;//首页类型，首页，vip,试看区
@@ -47,7 +49,12 @@ public class VideoCondtion {
 	public void setSid(String sid) {
 		this.sid = sid;
 	}
-	
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
 	
 	
 

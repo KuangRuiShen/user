@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.view.mapper.SetmealMapper">
+
+	
+		<select id="list" resultType="com.app.view.entry.Setmeal">
+			select c.code_id as id,c.name,
+			IFNULL(m.one,0) one,
+			IFNULL(m.two,0) two,
+			IFNULL(m.three,0) three
+			from code c left join code_meal m on m.code_id = c.code_id
+			where c.type='level' and c.code_id not in ('0','100')				
+		</select>
+		
+		<insert id="add" parameterType="com.app.view.entry.Setmeal">
+		INSERT INTO code_meal (id,one,two,three)
+			  VALUES(#{id,jdbcType=VARCHAR},
+			  #{one,jdbcType=INTEGER},
+			  #{two,jdbcType=INTEGER}, 
+			  #{three,jdbcType=INTEGER}
+			  )		
+		</insert>
+
+</mapper>

@@ -56,6 +56,20 @@ public class UserController {
 		}	
 	}
 	
+	//添加用户
+	@GetMapping("/addmaster")
+	public JsonResult<?> addmaster(){		
+		try {	
+			AppUser user = appUserService.add(new AppUser());
+			return JsonResult.buildSuccessResult(user);				
+		} catch (Exception e) {
+			e.printStackTrace();
+			return JsonResult.buildFailuredResult(ResultCode.SYS_ERROR,"系统异常");
+		}	
+	}
+	
+	
+	
 	//修改用户信息
 	@PostMapping("/changeinfo")
 	public JsonResult<?> changeinfo(@RequestBody Map<String,String> param){		
