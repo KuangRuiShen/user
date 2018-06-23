@@ -18,6 +18,10 @@ public class VideoCondtion {
 	
 	private String level;//会员等级
 	
+	private Integer page;
+	
+	private Integer pageSize;
+	
 	public String getName() {	
 		return name;
 	}
@@ -54,6 +58,18 @@ public class VideoCondtion {
 	}
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
+	}
+	public Integer getPage() {
+		return page;
+	}
+	public void setPage(Integer page) {
+		this.page = page;
+	}
+	public Integer getPageSize() {
+		return pageSize;
+	}
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
 	}
 	
 	

@@ -38,5 +38,7 @@ public interface VideoMapper {
 	//删除类型
 	void deletecid(List<String> ids);
 
+	int count(VideoCondtion vc);
+
 
 }

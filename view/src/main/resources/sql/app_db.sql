@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 101.132.170.212
+Source Server         : localhost
 Source Server Version : 50560
-Source Host           : 101.132.170.212:3306
+Source Host           : localhost:3306
 Source Database       : app_db
 
 Target Server Type    : MYSQL
 Target Server Version : 50560
 File Encoding         : 65001
 
-Date: 2018-06-22 21:27:28
+Date: 2018-06-23 10:27:06
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -158,12 +158,25 @@ CREATE TABLE `menoy_info` (
   `trade_no` varchar(20) DEFAULT NULL,
   `mch_id` varchar(16) DEFAULT NULL,
   `payment_time` varchar(20) DEFAULT NULL,
-  `out_trade_no` varchar(32) NOT NULL COMMENT '交易单号',
-  PRIMARY KEY (`out_trade_no`)
+  `out_trade_no` varchar(32) NOT NULL COMMENT '交易单号'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of menoy_info
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for moneylog
+-- ----------------------------
+DROP TABLE IF EXISTS `moneylog`;
+CREATE TABLE `moneylog` (
+  `user_id` varchar(32) NOT NULL,
+  `money` decimal(10,0) DEFAULT NULL,
+  `time` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of moneylog
 -- ----------------------------
 
 -- ----------------------------

@@ -16,9 +16,8 @@ public interface PayMapper {
 
 	void add(PayMent pm);
 
-	@Update(" update order_info set result='1',end_time = #{end_time},"
-			+ "trade_no=#{trade_no} where out_trade_no = #{out_trade_no}")
-	void changePay(PayMent pm);
+	@Update(" update user_order set result='1' where out_trade_no = #{out_trade_no}")
+	void changePay(PayInfo pm);
 
 	@Select(" select * from user_order where out_trade_no = #{out_trade_no} ")
 	PayMent findByTradeNo(@Param("out_trade_no")String out_trade_no);

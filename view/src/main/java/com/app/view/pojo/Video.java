@@ -31,6 +31,8 @@ public class Video {
 	private Integer px;
 	
 	private Integer watch;
+	//时长
+	private Integer time;
 	
 	private String level;
 	
@@ -158,6 +160,14 @@ public class Video {
 
 	public void setLevelText(String levelText) {
 		this.levelText = levelText;
+	}
+
+	public Integer getTime() {
+		return time;
+	}
+
+	public void setTime(Integer time) {
+		this.time = time;
 	}
 	
 		

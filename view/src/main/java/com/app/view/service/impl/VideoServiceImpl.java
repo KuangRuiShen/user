@@ -22,6 +22,11 @@ public class VideoServiceImpl implements VideoService {
 	public List<Video> list(VideoCondtion vc) {
 		return videoMapper.list(vc);
 	}
+	
+	@Override
+	public int count(VideoCondtion vc) {
+		return videoMapper.count(vc);
+	}
 
 	@Override
 	public void add(Video v) {
@@ -51,8 +56,9 @@ public class VideoServiceImpl implements VideoService {
 //		folder.delete();
 		 videoMapper.deletecid(ids);
 		 videoMapper.deleteImg(ids);
-		
 	}
+	
+
 
 	@Override
 	public void addrelation(Video v) {
@@ -71,6 +77,8 @@ public class VideoServiceImpl implements VideoService {
 	public Video findbyId(String id) {
 		return videoMapper.findbyId(id);
 	}
+
+
 
 
 

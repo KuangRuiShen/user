@@ -20,5 +20,8 @@ public interface VideoService {
 	Video findbyId(String id);
 
 	List<Video> list(VideoCondtion vc);
+	
+	int count(VideoCondtion vc);
+
 
 }

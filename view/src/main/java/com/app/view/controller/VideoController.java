@@ -16,8 +16,6 @@ import com.app.view.pojo.Video;
 import com.app.view.service.VideoService;
 import com.app.view.util.JsonResult;
 import com.app.view.util.ResultCode;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 
 @RestController
 @RequestMapping("video")
@@ -39,10 +37,12 @@ public class VideoController {
 			vc.setSid(sid);
 			vc.setLevel(level);
 			vc.setType(type);
-		  PageHelper.startPage(page, pageSize);
+			vc.setPage(page);
+			vc.setPageSize(pageSize);
       	  List<Video> list = videoServce.list(vc);
-          PageInfo<Video> pageInfo = new PageInfo<Video>(list);
-          return JsonResult.buildSuccessResult(list,pageInfo.getTotal());
+      	   int total = 	videoServce.count(vc);
+      	   int end = total < (page * pageSize) ? total:page * pageSize;
+          return JsonResult.buildSuccessResult( list.subList(page-1,    end),total);
 	}
 	
 

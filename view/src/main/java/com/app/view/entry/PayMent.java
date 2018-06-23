@@ -32,6 +32,8 @@ public class PayMent {
 	
 	private String ip;
 	
+	private String result;
+	
 
 	public String getPayment_time() {
 		return payment_time;
@@ -114,6 +116,16 @@ public class PayMent {
 	public void setStart_time(String start_time) {
 		this.start_time = start_time;
 	}
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
+	
+	
 
 
 	
