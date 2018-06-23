@@ -132,7 +132,9 @@ public class PayServiceImple implements PayService {
 							valid_time =MyUtils.RechargeDate(d, "2");
 						}else if(s.getThree() == pm.getTotal_fee()){
 							valid_time = MyUtils.RechargeDate(d, "3");
-						}					
+						}	else{
+							valid_time = MyUtils.RechargeDate(d, "1");
+						}
 						user.setValid_time(valid_time);
 						appUserMapper.update(user);
 					}
