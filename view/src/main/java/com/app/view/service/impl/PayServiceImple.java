@@ -2,6 +2,7 @@ package com.app.view.service.impl;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -103,6 +104,7 @@ public class PayServiceImple implements PayService {
 	public void changeUser(PayInfo pm) {
 		//保存订单
 		pm.setPayment_time(MyUtils.mYdateFrom(pm.getPayment_time()));
+		pm.setEnd_time(MyUtils.dateToString(new Date()));
 		payMapper.saveMoneyInfo(pm);
 		
 		//获取用户id
@@ -113,42 +115,55 @@ public class PayServiceImple implements PayService {
 					String user_id = payMent.getUser_id();
 					AppUser user = appUserMapper.findById(user_id);
 					String role_id = user.getRole_id();
-					int role =  Integer.parseInt(role_id);
+//					int role =  Integer.parseInt(role_id);
 					//用户等级在1-3内 
-					if(0 < role  && role < 4){			
-					Setmeal s= setmealMapper.findByRole(role_id);
+							
+					List<Setmeal> datas= setmealMapper.list(new Setmeal());
 					//套餐1			
-					Date d = new Date();
+				    Date d = new Date();
 					user.setRecharge_time(d);
 					if(StringUtils.isNotBlank(role_id)){
+						Date valid_time = d; 
 						int newrole = Integer.parseInt(role_id)+1;
-						if(newrole < 100){
-							user.setRole_id(newrole+"");
-						}	
-						Date valid_time = null; 
-						if(s.getOne() == pm.getTotal_fee()){
-							valid_time = MyUtils.RechargeDate(d, "1");
-						}else if(s.getTwo() == pm.getTotal_fee()){
-							valid_time =MyUtils.RechargeDate(d, "2");
-						}else if(s.getThree() == pm.getTotal_fee()){
-							valid_time = MyUtils.RechargeDate(d, "3");
+						if(newrole > 5){
+							user.setRole_id(role_id);						
 						}	else{
-							valid_time = MyUtils.RechargeDate(d, "1");
+							user.setRole_id(newrole+"");		
 						}
+						
+						if(newrole != 1){
+							valid_time = MyUtils.StringToDate(user.getValid_time());
+						}
+					
+						for(Setmeal s : datas){
+							if(s.getOne() == pm.getTotal_fee()){
+								valid_time = MyUtils.RechargeDate(valid_time, s.getId());
+								break;
+							}
+						}
+//						if(s.getOne() == pm.getTotal_fee()){
+//							valid_time = MyUtils.RechargeDate(d, "1");
+//						}else if(s.getTwo() == pm.getTotal_fee()){
+//							valid_time =MyUtils.RechargeDate(d, "2");
+//						}else if(s.getThree() == pm.getTotal_fee()){
+//							valid_time = MyUtils.RechargeDate(d, "3");
+//						}	else{
+//							valid_time = MyUtils.RechargeDate(d, "1");
+//						}
 						user.setValid_time(valid_time);
 						appUserMapper.update(user);
 					}
 					
-				}else{
-					Date d = new Date();
-					user.setRecharge_time(d);
-					int newrole = Integer.parseInt(role_id)+1;
-					if(newrole < 100){
-						user.setRole_id(newrole+"");
-					}	
-					user.setValid_time(MyUtils.RechargeDate(d, "1"));
-					appUserMapper.update(user);	
-				}
+//				}else{
+//					Date d = new Date();
+//					user.setRecharge_time(d);
+//					int newrole = Integer.parseInt(role_id)+1;
+//					if(newrole < 100){
+//						user.setRole_id(newrole+"");
+//					}	
+//					user.setValid_time(MyUtils.RechargeDate(d, "1"));
+//					appUserMapper.update(user);	
+//				}
 					//修改订单成功
 					payMapper.changePay(pm);
 					

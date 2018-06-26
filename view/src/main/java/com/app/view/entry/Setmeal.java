@@ -11,6 +11,8 @@ public class Setmeal {
 	private Integer two;
 	
 	private Integer three;
+	
+	private String text;
 
 	public String getId() {
 		return id;
@@ -51,6 +53,13 @@ public class Setmeal {
 	public void setThree(Integer three) {
 		this.three = three;
 	}
-			
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}		
 
 }

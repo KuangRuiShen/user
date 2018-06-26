@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50560
 File Encoding         : 65001
 
-Date: 2018-06-23 10:27:06
+Date: 2018-06-26 22:33:31
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -71,6 +71,8 @@ INSERT INTO `code` VALUES ('普通用户', 'level', '0');
 INSERT INTO `code` VALUES ('等级一', 'level', '1');
 INSERT INTO `code` VALUES ('等级三', 'level', '3');
 INSERT INTO `code` VALUES ('等级二', 'level', '2');
+INSERT INTO `code` VALUES ('等级五', 'level', '5');
+INSERT INTO `code` VALUES ('等级四', 'level', '4');
 INSERT INTO `code` VALUES ('管理员', 'level', '100');
 INSERT INTO `code` VALUES ('试看区', 'page', '3');
 
@@ -82,12 +84,36 @@ CREATE TABLE `code_meal` (
   `code_id` varchar(32) DEFAULT NULL,
   `one` int(5) DEFAULT NULL,
   `two` int(5) DEFAULT NULL,
-  `three` int(5) DEFAULT NULL
+  `three` int(5) DEFAULT NULL,
+  `text` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of code_meal
 -- ----------------------------
+INSERT INTO `code_meal` VALUES ('4', '5000', null, null, '年');
+INSERT INTO `code_meal` VALUES ('5', '6000', null, null, '永久');
+INSERT INTO `code_meal` VALUES ('3', '4000', null, null, '季');
+INSERT INTO `code_meal` VALUES ('2', '3000', null, null, '月');
+INSERT INTO `code_meal` VALUES ('1', '2000', null, null, '周');
+
+-- ----------------------------
+-- Table structure for code_text
+-- ----------------------------
+DROP TABLE IF EXISTS `code_text`;
+CREATE TABLE `code_text` (
+  `code_id` varchar(32) DEFAULT NULL,
+  `text` varchar(32) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of code_text
+-- ----------------------------
+INSERT INTO `code_text` VALUES ('1', '周');
+INSERT INTO `code_text` VALUES ('2', '月');
+INSERT INTO `code_text` VALUES ('3', '季');
+INSERT INTO `code_text` VALUES ('4', '年');
+INSERT INTO `code_text` VALUES ('5', '永久');
 
 -- ----------------------------
 -- Table structure for comment
@@ -158,7 +184,8 @@ CREATE TABLE `menoy_info` (
   `trade_no` varchar(20) DEFAULT NULL,
   `mch_id` varchar(16) DEFAULT NULL,
   `payment_time` varchar(20) DEFAULT NULL,
-  `out_trade_no` varchar(32) NOT NULL COMMENT '交易单号'
+  `out_trade_no` varchar(32) NOT NULL COMMENT '交易单号',
+  `end_time` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -381,13 +408,15 @@ CREATE TABLE `user_order` (
   `total_fee` int(10) NOT NULL,
   `body` varchar(255) DEFAULT NULL,
   `trade_type` varchar(10) NOT NULL,
-  `start_time` varchar(32) DEFAULT NULL
+  `start_time` varchar(32) DEFAULT NULL,
+  `result` varchar(10) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_order
 -- ----------------------------
-INSERT INTO `user_order` VALUES ('aaaaaaaaaaa', '1529660099929', '1', 'aaa', 'WX', '2018-06-22 17:34:59');
+INSERT INTO `user_order` VALUES ('aaaaaaaaaaa', '1529660099929', '1', 'aaa', 'WX', '2018-06-22 17:34:59', '0');
+INSERT INTO `user_order` VALUES ('7336df85761d4a8785d5cb28450de7e7', '1529721494979', '1', 'VIP充值', 'WX', '2018-06-23 10:38:14', '0');
 
 -- ----------------------------
 -- Table structure for video
@@ -403,6 +432,7 @@ CREATE TABLE `video` (
   `quality` varchar(100) DEFAULT NULL,
   `watch` int(2) DEFAULT '1',
   `sid` varchar(32) DEFAULT NULL COMMENT '明星',
+  `time` int(5) DEFAULT NULL,
   `level` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`,`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -410,29 +440,29 @@ CREATE TABLE `video` (
 -- ----------------------------
 -- Records of video
 -- ----------------------------
-INSERT INTO `video` VALUES ('1404a99af22f4d76b333b2da6de49cc9', '但丁篮球梦', '', '2', 'http://101.132.170.212/upload/img/2018060912560949.jpg', 'http://101.132.170.212/upload/video/1404a99af22f4d76b333b2da6de49cc9.mp4', '蓝光', '1', '3', '1');
-INSERT INTO `video` VALUES ('15cd4b4b696c40158aa17c0450349676', '詹姆斯(等级二视频)', '<p>詹姆斯(等级二视频)</p>', '1', 'http://101.132.170.212/upload/img/20180620122831856.png', 'http://101.132.170.212/upload/video/15cd4b4b696c40158aa17c0450349676.mp4', '蓝光', '1', '3', '2');
-INSERT INTO `video` VALUES ('233c3fe80418463a92d3708293378a61', '梅西阿根廷', '', '1', 'http://101.132.170.212/upload/img/20180620103526661.png', 'http://101.132.170.212/upload/video/233c3fe80418463a92d3708293378a61.mp4', '蓝光', '1', '17', '0');
-INSERT INTO `video` VALUES ('23e004e01d5442ff8fb696b17e927016', '詹姆斯（等级三视频）', '<p>詹姆斯（等级三视频）</p>', '1', 'http://101.132.170.212/upload/img/20180620123008832.png', 'http://101.132.170.212/upload/video/23e004e01d5442ff8fb696b17e927016.mp4', 'HD', '1', '3', '3');
-INSERT INTO `video` VALUES ('2c618e8597c344ecb9f36628750334f8', '小黄人（等级一视频）', '', '4', 'http://101.132.170.212/upload/img/20180620130528327.png', 'http://101.132.170.212/upload/video/2c618e8597c344ecb9f36628750334f8.mp4', '蓝光', '1', '20', '1');
-INSERT INTO `video` VALUES ('2fbbfbdfe01c424f840e822d7057dd29', '唐太宗登基', '', '1', 'http://101.132.170.212/upload/img/20180614102905990.png', 'http://101.132.170.212/upload/video/2fbbfbdfe01c424f840e822d7057dd29.mp4', 'HD', '1', '10', '1');
-INSERT INTO `video` VALUES ('4556319b99f44f81905f2780209ec459', '钢杆舞蹈', '<p>热舞明星<br></p>', '1', 'http://101.132.170.212/upload/img/20180609133252399.png', 'http://101.132.170.212/upload/video/4556319b99f44f81905f2780209ec459.mp4', '蓝光', '1', '8', '2');
-INSERT INTO `video` VALUES ('468c7195de8d4aa195e92311004121bd', 'papi酱', '<p>papi酱</p><p>papi酱</p><p>papi酱</p>', '2', 'http://101.132.170.212/upload/img/20180615080623427.png', 'http://101.132.170.212/upload/video/468c7195de8d4aa195e92311004121bd.mp4', 'HD', '1', '16', '3');
-INSERT INTO `video` VALUES ('490371dd8b3442efbac6ce7f9f9f0311', 'KD霸气广告', '', '2', 'http://101.132.170.212/upload/img/20180614103437884.png', 'http://101.132.170.212/upload/video/490371dd8b3442efbac6ce7f9f9f0311.mp4', 'HD', '1', '7', '1');
-INSERT INTO `video` VALUES ('6a4de0e725974b0ebaa79feb5df4a056', '民间翻纸', '<p>高手在民间<br></p>', '2', 'http://101.132.170.212/upload/img/20180615075353699.png', 'http://101.132.170.212/upload/video/6a4de0e725974b0ebaa79feb5df4a056.mp4', '蓝光', '1', '14', '2');
-INSERT INTO `video` VALUES ('6ac5e40009f647bea7fe6e29ca2be03c', '菲尔普斯夺冠', '', '3', 'http://101.132.170.212/upload/img/2018061410361534.png', 'http://101.132.170.212/upload/video/6ac5e40009f647bea7fe6e29ca2be03c.mp4', '蓝光', '1', '12', '1');
-INSERT INTO `video` VALUES ('6ba4b534d55a4b37ac3cb0a5a2855a51', 'C罗(等级二视频)', '<p>C罗(等级2视频)</p><p>C罗(等级2视频)</p>', '2', 'http://101.132.170.212/upload/img/20180620124920312.png', 'http://101.132.170.212/upload/video/6ba4b534d55a4b37ac3cb0a5a2855a51.mp4', '蓝光', '1', '18', '2');
-INSERT INTO `video` VALUES ('8173efc6f04040fe9fb1613a4912a023', '詹姆斯集锦', '', '1', 'http://101.132.170.212/upload/img/20180614132650749.png', 'http://101.132.170.212/upload/video/8173efc6f04040fe9fb1613a4912a023.mp4', 'HD', '1', '3', '1');
-INSERT INTO `video` VALUES ('8af0e438a4cf4173a14305d5dfd3745d', '梅西(等级三视频)', '<p>梅西(等级三视频)</p><p>梅西(等级三视频)</p>', '2', 'http://101.132.170.212/upload/img/2018062012531994.png', 'http://101.132.170.212/upload/video/8af0e438a4cf4173a14305d5dfd3745d.mp4', 'HD', '1', '17', '3');
-INSERT INTO `video` VALUES ('8bf3ffa4d43d447aa25808ea8c6bab56', '秦始皇', '', '1', 'http://101.132.170.212/upload/img/20180614103519882.png', 'http://101.132.170.212/upload/video/8bf3ffa4d43d447aa25808ea8c6bab56.mp4', '蓝光', '1', '11', '1');
-INSERT INTO `video` VALUES ('b14d55d79c1a45c38dc9ff2bf45ac504', 'C罗进球', '', '1', 'http://101.132.170.212/upload/img/20180620104104639.png', 'http://101.132.170.212/upload/video/b14d55d79c1a45c38dc9ff2bf45ac504.mp4', 'HD', '1', '18', '0');
-INSERT INTO `video` VALUES ('b3471ffb73e5435180b14cad87a0327e', 'C罗(等级三视频)', '<p>C罗(等级三视频)</p><p>C罗(等级三视频)</p>', '1', 'http://101.132.170.212/upload/img/20180620124618959.png', 'http://101.132.170.212/upload/video/b3471ffb73e5435180b14cad87a0327e.mp4', '蓝光', '1', '18', '3');
-INSERT INTO `video` VALUES ('b9463d336013458f8e5b711fb4589d89', '德鲁大叔打球', '', '3', 'http://101.132.170.212/upload/img/20180614103629396.png', 'http://101.132.170.212/upload/video/b9463d336013458f8e5b711fb4589d89.mp4', '蓝光', '1', '4', '1');
-INSERT INTO `video` VALUES ('c3f0c860cc8448cba32eb652a26f138c', '守门的猫', '<p>这只猫去世界杯肯定是最佳守门员<br></p>', '2', 'http://101.132.170.212/upload/img/20180615074802861.png', 'http://101.132.170.212/upload/video/c3f0c860cc8448cba32eb652a26f138c.mp4', '蓝光', '2', '13', '2');
-INSERT INTO `video` VALUES ('d020831260604f058508e51aff921aec', '梅西(等级二视频)', '<p>梅西(等级二视频)</p>', '3', 'http://101.132.170.212/upload/img/20180620125532249.png', 'http://101.132.170.212/upload/video/d020831260604f058508e51aff921aec.mp4', '蓝光', '1', '17', '2');
-INSERT INTO `video` VALUES ('da361b9f46d34fce8e22b87cd08821e4', '喜洋洋与灰太狼', '', '1', 'http://101.132.170.212/upload/img/20180620130924138.png', 'http://101.132.170.212/upload/video/da361b9f46d34fce8e22b87cd08821e4.mp4', '蓝光', '1', '21', '0');
-INSERT INTO `video` VALUES ('f93742c70a984d22a360508e585de221', '梅西(等级一视频)', '<p>梅西(等级一视频)</p>', '4', 'http://101.132.170.212/upload/img/20180620125709213.png', 'http://101.132.170.212/upload/video/f93742c70a984d22a360508e585de221.mp4', 'HD', '1', '17', '1');
-INSERT INTO `video` VALUES ('fbe6ac06932549f4bc7b780296640fb6', '内马尔进球', '', '1', 'http://101.132.170.212/upload/img/2018062010461266.png', 'http://101.132.170.212/upload/video/fbe6ac06932549f4bc7b780296640fb6.mp4', 'HD', '1', '19', '0');
+INSERT INTO `video` VALUES ('1404a99af22f4d76b333b2da6de49cc9', '但丁篮球梦', '', '2', 'http://101.132.170.212/upload/img/2018060912560949.jpg', 'http://101.132.170.212/upload/video/1404a99af22f4d76b333b2da6de49cc9.mp4', '蓝光', '1', '3', null, '1');
+INSERT INTO `video` VALUES ('15cd4b4b696c40158aa17c0450349676', '詹姆斯(等级二视频)', '', '1', 'http://101.132.170.212/upload/img/20180620122831856.png', 'http://101.132.170.212/upload/video/15cd4b4b696c40158aa17c0450349676.mp4', '蓝光', '1', '3', '100', '2');
+INSERT INTO `video` VALUES ('233c3fe80418463a92d3708293378a61', '梅西阿根廷', '', '1', 'http://101.132.170.212/upload/img/20180620103526661.png', 'http://101.132.170.212/upload/video/233c3fe80418463a92d3708293378a61.mp4', '蓝光', '1', '17', null, '0');
+INSERT INTO `video` VALUES ('23e004e01d5442ff8fb696b17e927016', '詹姆斯（等级三视频）', '<p>詹姆斯（等级三视频）</p>', '1', 'http://101.132.170.212/upload/img/20180620123008832.png', 'http://101.132.170.212/upload/video/23e004e01d5442ff8fb696b17e927016.mp4', 'HD', '1', '3', null, '3');
+INSERT INTO `video` VALUES ('2c618e8597c344ecb9f36628750334f8', '小黄人（等级一视频）', '', '4', 'http://101.132.170.212/upload/img/20180620130528327.png', 'http://101.132.170.212/upload/video/2c618e8597c344ecb9f36628750334f8.mp4', '蓝光', '1', '20', null, '1');
+INSERT INTO `video` VALUES ('2fbbfbdfe01c424f840e822d7057dd29', '唐太宗登基', '', '1', 'http://101.132.170.212/upload/img/20180614102905990.png', 'http://101.132.170.212/upload/video/2fbbfbdfe01c424f840e822d7057dd29.mp4', 'HD', '1', '10', null, '1');
+INSERT INTO `video` VALUES ('4556319b99f44f81905f2780209ec459', '钢杆舞蹈', '<p>热舞明星<br></p>', '1', 'http://101.132.170.212/upload/img/20180609133252399.png', 'http://101.132.170.212/upload/video/4556319b99f44f81905f2780209ec459.mp4', '蓝光', '1', '8', null, '2');
+INSERT INTO `video` VALUES ('468c7195de8d4aa195e92311004121bd', 'papi酱', '<p>papi酱</p><p>papi酱</p><p>papi酱</p>', '2', 'http://101.132.170.212/upload/img/20180615080623427.png', 'http://101.132.170.212/upload/video/468c7195de8d4aa195e92311004121bd.mp4', 'HD', '1', '16', null, '3');
+INSERT INTO `video` VALUES ('490371dd8b3442efbac6ce7f9f9f0311', 'KD霸气广告', '', '2', 'http://101.132.170.212/upload/img/20180614103437884.png', 'http://101.132.170.212/upload/video/490371dd8b3442efbac6ce7f9f9f0311.mp4', 'HD', '1', '7', null, '1');
+INSERT INTO `video` VALUES ('6a4de0e725974b0ebaa79feb5df4a056', '民间翻纸', '<p>高手在民间<br></p>', '2', 'http://101.132.170.212/upload/img/20180615075353699.png', 'http://101.132.170.212/upload/video/6a4de0e725974b0ebaa79feb5df4a056.mp4', '蓝光', '1', '14', null, '2');
+INSERT INTO `video` VALUES ('6ac5e40009f647bea7fe6e29ca2be03c', '菲尔普斯夺冠', '', '3', 'http://101.132.170.212/upload/img/2018061410361534.png', 'http://101.132.170.212/upload/video/6ac5e40009f647bea7fe6e29ca2be03c.mp4', '蓝光', '1', '12', null, '1');
+INSERT INTO `video` VALUES ('6ba4b534d55a4b37ac3cb0a5a2855a51', 'C罗(等级二视频)', '<p>C罗(等级2视频)</p><p>C罗(等级2视频)</p>', '2', 'http://101.132.170.212/upload/img/20180620124920312.png', 'http://101.132.170.212/upload/video/6ba4b534d55a4b37ac3cb0a5a2855a51.mp4', '蓝光', '1', '18', null, '2');
+INSERT INTO `video` VALUES ('8173efc6f04040fe9fb1613a4912a023', '詹姆斯集锦', '', '1', 'http://101.132.170.212/upload/img/20180614132650749.png', 'http://101.132.170.212/upload/video/8173efc6f04040fe9fb1613a4912a023.mp4', 'HD', '1', '3', null, '1');
+INSERT INTO `video` VALUES ('8af0e438a4cf4173a14305d5dfd3745d', '梅西(等级三视频)', '<p>梅西(等级三视频)</p><p>梅西(等级三视频)</p>', '2', 'http://101.132.170.212/upload/img/2018062012531994.png', 'http://101.132.170.212/upload/video/8af0e438a4cf4173a14305d5dfd3745d.mp4', 'HD', '1', '17', null, '3');
+INSERT INTO `video` VALUES ('8bf3ffa4d43d447aa25808ea8c6bab56', '秦始皇', '', '1', 'http://101.132.170.212/upload/img/20180614103519882.png', 'http://101.132.170.212/upload/video/8bf3ffa4d43d447aa25808ea8c6bab56.mp4', '蓝光', '1', '11', null, '1');
+INSERT INTO `video` VALUES ('b14d55d79c1a45c38dc9ff2bf45ac504', 'C罗进球', '', '1', 'http://101.132.170.212/upload/img/20180620104104639.png', 'http://101.132.170.212/upload/video/b14d55d79c1a45c38dc9ff2bf45ac504.mp4', 'HD', '1', '18', null, '0');
+INSERT INTO `video` VALUES ('b3471ffb73e5435180b14cad87a0327e', 'C罗(等级三视频)', '<p>C罗(等级三视频)</p><p>C罗(等级三视频)</p>', '1', 'http://101.132.170.212/upload/img/20180620124618959.png', 'http://101.132.170.212/upload/video/b3471ffb73e5435180b14cad87a0327e.mp4', '蓝光', '1', '18', null, '3');
+INSERT INTO `video` VALUES ('b9463d336013458f8e5b711fb4589d89', '德鲁大叔打球', '', '3', 'http://101.132.170.212/upload/img/20180614103629396.png', 'http://101.132.170.212/upload/video/b9463d336013458f8e5b711fb4589d89.mp4', '蓝光', '1', '4', null, '1');
+INSERT INTO `video` VALUES ('c3f0c860cc8448cba32eb652a26f138c', '守门的猫', '<p>这只猫去世界杯肯定是最佳守门员<br></p>', '2', 'http://101.132.170.212/upload/img/20180615074802861.png', 'http://101.132.170.212/upload/video/c3f0c860cc8448cba32eb652a26f138c.mp4', '蓝光', '2', '13', null, '2');
+INSERT INTO `video` VALUES ('d020831260604f058508e51aff921aec', '梅西(等级二视频)', '<p>梅西(等级二视频)</p>', '3', 'http://101.132.170.212/upload/img/20180620125532249.png', 'http://101.132.170.212/upload/video/d020831260604f058508e51aff921aec.mp4', '蓝光', '1', '17', null, '2');
+INSERT INTO `video` VALUES ('da361b9f46d34fce8e22b87cd08821e4', '喜洋洋与灰太狼', '', '1', 'http://101.132.170.212/upload/img/20180620130924138.png', 'http://101.132.170.212/upload/video/da361b9f46d34fce8e22b87cd08821e4.mp4', '蓝光', '1', '21', null, '0');
+INSERT INTO `video` VALUES ('f93742c70a984d22a360508e585de221', '梅西(等级一视频)', '<p>梅西(等级一视频)</p>', '4', 'http://101.132.170.212/upload/img/20180620125709213.png', 'http://101.132.170.212/upload/video/f93742c70a984d22a360508e585de221.mp4', 'HD', '1', '17', null, '1');
+INSERT INTO `video` VALUES ('fbe6ac06932549f4bc7b780296640fb6', '内马尔进球', '', '1', 'http://101.132.170.212/upload/img/2018062010461266.png', 'http://101.132.170.212/upload/video/fbe6ac06932549f4bc7b780296640fb6.mp4', 'HD', '1', '19', null, '0');
 
 -- ----------------------------
 -- Table structure for video_cid
@@ -464,7 +494,6 @@ INSERT INTO `video_cid` VALUES ('468c7195de8d4aa195e92311004121bd', 'f1dc41ce727
 INSERT INTO `video_cid` VALUES ('233c3fe80418463a92d3708293378a61', '7878c6031d60477095e12e7316fe842b');
 INSERT INTO `video_cid` VALUES ('b14d55d79c1a45c38dc9ff2bf45ac504', 'b633553aa32f46f4af7c9debf7ea1204');
 INSERT INTO `video_cid` VALUES ('fbe6ac06932549f4bc7b780296640fb6', 'f228ef13c5b648f495447e1f3fd51800');
-INSERT INTO `video_cid` VALUES ('15cd4b4b696c40158aa17c0450349676', '9db5b157ab4440ceab35543d4687bef4');
 INSERT INTO `video_cid` VALUES ('23e004e01d5442ff8fb696b17e927016', '9db5b157ab4440ceab35543d4687bef4');
 INSERT INTO `video_cid` VALUES ('b3471ffb73e5435180b14cad87a0327e', 'b633553aa32f46f4af7c9debf7ea1204');
 INSERT INTO `video_cid` VALUES ('b3471ffb73e5435180b14cad87a0327e', '7878c6031d60477095e12e7316fe842b');
@@ -480,6 +509,7 @@ INSERT INTO `video_cid` VALUES ('2c618e8597c344ecb9f36628750334f8', '7b51c9c02dc
 INSERT INTO `video_cid` VALUES ('2c618e8597c344ecb9f36628750334f8', 'a9a11b139af243779e8d49fe300e6db5');
 INSERT INTO `video_cid` VALUES ('da361b9f46d34fce8e22b87cd08821e4', 'a9a11b139af243779e8d49fe300e6db5');
 INSERT INTO `video_cid` VALUES ('da361b9f46d34fce8e22b87cd08821e4', '7b51c9c02dcb47478ec8df3b1e3c3f5b');
+INSERT INTO `video_cid` VALUES ('15cd4b4b696c40158aa17c0450349676', '9db5b157ab4440ceab35543d4687bef4');
 
 -- ----------------------------
 -- Table structure for video_img

@@ -47,6 +47,16 @@ public class MyUtils {
 		return sdf.format(d);
 	}
 	
+	public static Date StringToDate(String d ){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		try {
+			return  sdf.parse(d);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return new Date();
+	}
+	
 	/**
 	 * yyyyMMddHHmmss转字符
 	 * @describe 
@@ -80,16 +90,22 @@ public class MyUtils {
 		Calendar cal = Calendar.getInstance();
 		switch (type) {
 		case "1":
-			cal.add(Calendar.MONTH, 1);
+			cal.add(Calendar.DAY_OF_YEAR, 7);
 			break;
 		case "2":
-			cal.add(Calendar.YEAR, 1);
+			cal.add(Calendar.MONTH, 1);
 			break;
 		case "3":
-			cal.add(Calendar.YEAR, 10);
+			cal.add(Calendar.MONTH, 4);
+			break;
+		case "4":
+			cal.add(Calendar.YEAR, 1);
+			break;
+		case "5":
+			cal.add(Calendar.YEAR, 5);
 			break;
 		default:// day
-			cal.add(Calendar.MONTH, 1);
+			cal.add(Calendar.DAY_OF_YEAR, 1);
 		}
 		return cal.getTime();		
 	}

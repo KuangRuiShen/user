@@ -6,21 +6,19 @@
 		<select id="list" resultType="com.app.view.entry.Setmeal">
 			select c.code_id as id,c.name,
 			IFNULL(m.one,0) one,
-			IFNULL(m.two,0) two,
-			IFNULL(m.three,0) three
+			t.text
 			from code c left join code_meal m on m.code_id = c.code_id
+			left join code_text t on t.code_id = m.code_id
 			where c.type='level' and c.code_id not in ('0','100')	
 			<if test="id !=null and id != '' ">
-		 		and c.code_id =#{id}
+		 		and c.code_id  <![CDATA[ >=]]> #{id}
 		 	</if>	 
 		 	order by CONVERT(c.code_id,SIGNED)	 
 		</select>
 		
 		<select id="findByRole" resultType="com.app.view.entry.Setmeal">
 			select c.code_id as id,c.name,
-			IFNULL(m.one,0) one,
-			IFNULL(m.two,0) two,
-			IFNULL(m.three,0) three
+			IFNULL(m.one,0) one
 			from code c left join code_meal m on m.code_id = c.code_id
 			where c.type='level' and c.code_id not in ('0','100')	
 			<if test="id !=null and id != '' ">
@@ -29,11 +27,10 @@
 		</select>
 		
 		<insert id="add" parameterType="com.app.view.entry.Setmeal">
-		INSERT INTO code_meal (code_id,one,two,three)
+		INSERT INTO code_meal (code_id,one,text)
 			  VALUES(#{id,jdbcType=VARCHAR},
-			  #{one,jdbcType=INTEGER},
-			  #{two,jdbcType=INTEGER}, 
-			  #{three,jdbcType=INTEGER}
+			  #{one,jdbcType=INTEGER},	
+			  #{text,jdbcType=VARCHAR}
 			  )		
 		</insert>
 

@@ -7,6 +7,8 @@ public class PayInfo {
 	//格式为 yyyyMMddHHmmss  --实际支付时间
 	private String payment_time;
 	
+	private String end_time;//系统结束时间
+	
 	//金额
 	private Integer total_fee;
 	
@@ -56,6 +58,15 @@ public class PayInfo {
 	public void setMch_id(String mch_id) {
 		this.mch_id = mch_id;
 	}
+
+	public String getEnd_time() {
+		return end_time;
+	}
+
+	public void setEnd_time(String end_time) {
+		this.end_time = end_time;
+	}
+	
 	
 
 }

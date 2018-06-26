@@ -17,13 +17,15 @@ public class SetmealServiceImpl implements SetmealService {
 	
 	@Override
 	public void edit(Setmeal sm) {
-		setmealMapper.delete(sm.getId());
+		setmealMapper.delete(sm.getId());	
 		setmealMapper.add(sm);
 	}
 
 	@Override
 	public List<Setmeal> list(Setmeal sm) {
-		return setmealMapper.list(sm);
+		List<Setmeal> datas = setmealMapper.list(sm);
+//		datas.forEach(action);
+		return datas;
 	}
 
 

@@ -14,11 +14,12 @@
 	</insert>
 	
 	<insert id="saveMoneyInfo" parameterType="com.app.view.entry.PayInfo">
-	 INSERT INTO menoy_info (mch_id,out_trade_no,trade_no,payment_time,total_fee)
+	 INSERT INTO menoy_info (mch_id,out_trade_no,trade_no,payment_time,end_time,total_fee)
 			  VALUES(#{mch_id,jdbcType=VARCHAR},
 			  #{out_trade_no,jdbcType=VARCHAR},
 			  #{trade_no,jdbcType=VARCHAR}, 
 			  #{payment_time,jdbcType=VARCHAR},
+			   #{end_time,jdbcType=VARCHAR},
 			  #{total_fee,jdbcType=INTEGER})	
 	</insert>
 

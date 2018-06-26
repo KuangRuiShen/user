@@ -75,20 +75,23 @@
 	</select>
 	
 	<select id="log" resultType="java.util.Map">
-	select a.out_trade_no ,a.start_time,a.total_fee,a.body,a.trade_type,m.total_fee as act_fee,m.payment_time,trade_no
+	select a.out_trade_no ,a.start_time,a.total_fee,a.body,a.trade_type,m.total_fee as act_fee,m.payment_time,m.trade_no,m.end_time
 	 from user_order a  left join menoy_info m on a.out_trade_no = m.out_trade_no 
-	 where a.user_id =#{uid} order by payment_time desc  
+	 where a.user_id =#{uid}  
+	  order by m.trade_no desc,m.end_time desc  
 	</select>
 	
 	<select id="order" resultType="java.util.Map">
-	select a.out_trade_no ,a.start_time,a.total_fee,a.body,a.trade_type,m.total_fee as act_fee,m.payment_time,trade_no
+	select a.user_id,a.out_trade_no ,a.start_time,a.total_fee,a.body,a.trade_type,
+	 m.total_fee as act_fee,m.payment_time,m.trade_no,m.end_time
 	 from user_order a  left join menoy_info m on a.out_trade_no = m.out_trade_no 
 	 <where> 
 	 	<if test=" name !=null and name != '' ">
 		 	 m.trade_no like CONCAT('%', #{name}, '%') 
 		 </if>
+		  and m.trade_no is not null
 	 </where>
-	 	
+	 	  order by m.trade_no desc,m.end_time desc  
 	</select>
 	
 	

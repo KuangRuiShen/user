@@ -28,7 +28,7 @@ public interface AppUserMapper {
 
 	List<Map<String, String>> getMange();
 
-	@Select(" select * from user where role_id > 0 and role_id <> 100 ")
+	@Select(" select * from user where role_id > 0 and role_id not in ('100' ,'5') ")
 	List<AppUser> getMember();
 	@Update(" UPDATE user SET role_id=0 where id=#{id} ")
 	void changeRole(@Param("id") String id);
