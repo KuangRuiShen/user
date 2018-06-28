@@ -109,68 +109,51 @@ public class PayServiceImple implements PayService {
 		
 		//获取用户id
 		PayMent payMent = payMapper.findByTradeNo(pm.getOut_trade_no());
-		if(!payMent.getResult().equals("1")){
-			if(payMent!=null){
+		if(!payMent.getResult().equals("1") &&  payMent!=null){
 				  //修改
-					String user_id = payMent.getUser_id();
-					AppUser user = appUserMapper.findById(user_id);
-					String role_id = user.getRole_id();
-//					int role =  Integer.parseInt(role_id);
-					//用户等级在1-3内 
-							
-					List<Setmeal> datas= setmealMapper.list(new Setmeal());
+					AppUser user = appUserMapper.findById(payMent.getUser_id());					
+					String role_id = user.getRole_id();	
+					
 					//套餐1			
 				    Date d = new Date();
 					user.setRecharge_time(d);
 					if(StringUtils.isNotBlank(role_id)){
 						Date valid_time = d; 
-						int newrole = Integer.parseInt(role_id)+1;
-						if(newrole > 5){
-							user.setRole_id(role_id);						
-						}	else{
-							user.setRole_id(newrole+"");		
-						}
-						
-						if(newrole != 1){
+						int newrole = Integer.parseInt(role_id);
+				
+						//如果用户本身有等级
+						if(newrole > 0){
 							valid_time = MyUtils.StringToDate(user.getValid_time());
 						}
-					
+						//查询套餐
+						List<Setmeal> datas= setmealMapper.list(new Setmeal());				
 						for(Setmeal s : datas){
-							if(s.getOne() == pm.getTotal_fee()){
+							if(s.getOne() == pm.getTotal_fee() && !s.getId().equals(user.getRole_id())){
 								valid_time = MyUtils.RechargeDate(valid_time, s.getId());
+								user.setRole_id(s.getId());
 								break;
 							}
 						}
-//						if(s.getOne() == pm.getTotal_fee()){
-//							valid_time = MyUtils.RechargeDate(d, "1");
-//						}else if(s.getTwo() == pm.getTotal_fee()){
-//							valid_time =MyUtils.RechargeDate(d, "2");
-//						}else if(s.getThree() == pm.getTotal_fee()){
-//							valid_time = MyUtils.RechargeDate(d, "3");
-//						}	else{
-//							valid_time = MyUtils.RechargeDate(d, "1");
-//						}
+						//如果等级为5以上
+						if(newrole >= 5){
+							user.setRole_id(role_id);						
+						}					
 						user.setValid_time(valid_time);
+						//修改用户状态
 						appUserMapper.update(user);
 					}
 					
-//				}else{
-//					Date d = new Date();
-//					user.setRecharge_time(d);
-//					int newrole = Integer.parseInt(role_id)+1;
-//					if(newrole < 100){
-//						user.setRole_id(newrole+"");
-//					}	
-//					user.setValid_time(MyUtils.RechargeDate(d, "1"));
-//					appUserMapper.update(user);	
-//				}
 					//修改订单成功
 					payMapper.changePay(pm);
 					
 					//刷新定时清理用户表数据
-					appUserService.getMange();
+					appUserService.getMange();			
 				
-			}	
+		}else{
+			//修改充值时间
+			if(payMent !=null ){
+				appUserMapper.updateRecharge_time(payMent);
+			}		
 		}
 			
 	}

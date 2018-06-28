@@ -11,7 +11,7 @@
 			left join code_text t on t.code_id = m.code_id
 			where c.type='level' and c.code_id not in ('0','100')	
 			<if test="id !=null and id != '' ">
-		 		and c.code_id  <![CDATA[ >=]]> #{id}
+		 		and c.code_id  <![CDATA[ >]]> #{id}
 		 	</if>	 
 		 	order by CONVERT(c.code_id,SIGNED)	 
 		</select>

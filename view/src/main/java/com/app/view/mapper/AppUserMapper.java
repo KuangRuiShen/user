@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.app.view.entry.PayMent;
 import com.app.view.pojo.AppUser;
 
 /**
@@ -38,5 +39,8 @@ public interface AppUserMapper {
 
 	//查询所有订单
 	List<Map<String, String>> order(@Param("name")String name);
+	
+	@Update(" UPDATE USER SET recharge_time=now() WHERE id = #{user_id} ")
+	void updateRecharge_time(PayMent payMent);
 
 }
