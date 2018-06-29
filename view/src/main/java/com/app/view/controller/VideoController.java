@@ -40,9 +40,9 @@ public class VideoController {
 			vc.setPage(page);
 			vc.setPageSize(pageSize);
       	  List<Video> list = videoServce.list(vc);
-      	   int total = 	videoServce.count(vc);
-      	   int end = total < (page * pageSize) ? total:page * pageSize;
-          return JsonResult.buildSuccessResult( list.subList(page-1,    end),total);
+      	   int total = 	list.size();
+      	   int end = total < (page * pageSize) ? total :page * pageSize;
+          return JsonResult.buildSuccessResult(list.subList((page-1) * pageSize, end),total);
 	}
 	
 

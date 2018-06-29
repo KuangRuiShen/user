@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
+Source Server         : 101.132.170.212
 Source Server Version : 50560
-Source Host           : localhost:3306
+Source Host           : 101.132.170.212:3306
 Source Database       : app_db
 
 Target Server Type    : MYSQL
 Target Server Version : 50560
 File Encoding         : 65001
 
-Date: 2018-06-26 22:33:31
+Date: 2018-06-29 09:43:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -82,20 +82,17 @@ INSERT INTO `code` VALUES ('试看区', 'page', '3');
 DROP TABLE IF EXISTS `code_meal`;
 CREATE TABLE `code_meal` (
   `code_id` varchar(32) DEFAULT NULL,
-  `one` int(5) DEFAULT NULL,
-  `two` int(5) DEFAULT NULL,
-  `three` int(5) DEFAULT NULL,
-  `text` varchar(255) DEFAULT NULL
+  `one` int(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of code_meal
 -- ----------------------------
-INSERT INTO `code_meal` VALUES ('4', '5000', null, null, '年');
-INSERT INTO `code_meal` VALUES ('5', '6000', null, null, '永久');
-INSERT INTO `code_meal` VALUES ('3', '4000', null, null, '季');
-INSERT INTO `code_meal` VALUES ('2', '3000', null, null, '月');
-INSERT INTO `code_meal` VALUES ('1', '2000', null, null, '周');
+INSERT INTO `code_meal` VALUES ('1', '1');
+INSERT INTO `code_meal` VALUES ('4', '2');
+INSERT INTO `code_meal` VALUES ('5', '2');
+INSERT INTO `code_meal` VALUES ('2', '1');
+INSERT INTO `code_meal` VALUES ('3', '1');
 
 -- ----------------------------
 -- Table structure for code_text
@@ -184,120 +181,49 @@ CREATE TABLE `menoy_info` (
   `trade_no` varchar(20) DEFAULT NULL,
   `mch_id` varchar(16) DEFAULT NULL,
   `payment_time` varchar(20) DEFAULT NULL,
-  `out_trade_no` varchar(32) NOT NULL COMMENT '交易单号',
+  `out_trade_no` varchar(32) NOT NULL DEFAULT '' COMMENT '交易单号',
   `end_time` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of menoy_info
 -- ----------------------------
+INSERT INTO `menoy_info` VALUES ('1', '2018062202689936', 'gxtttooo', '2018-06-22 23:38:14', '1529681318761', '2018-06-22 23:38:14');
+INSERT INTO `menoy_info` VALUES ('1', '2018062202706211', 'gxtttooo', '2018-06-22 23:53:30', '1529681318761', '2018-06-22 23:53:30');
+INSERT INTO `menoy_info` VALUES ('1', '2018062302028652', 'gxtttooo', '2018-06-23 00:29:23', '1529681318761', '2018-06-23 00:29:23');
+INSERT INTO `menoy_info` VALUES ('1', '2018062302029237', 'gxtttooo', '2018-06-23 00:29:54', '1529681318761', '2018-06-23 00:29:54');
+INSERT INTO `menoy_info` VALUES ('1', '2018062302295764', 'gxtttooo', '2018-06-23 12:20:01', '1529681318761', '2018-06-23 12:20:01');
+INSERT INTO `menoy_info` VALUES ('1', '2018062302314234', 'gxtttooo', '2018-06-23 12:56:49', '1529729856699', '2018-06-23 12:56:49');
+INSERT INTO `menoy_info` VALUES ('1', '2018062302351111', 'gxtttooo', '2018-06-23 13:49:10', '1529732993230', '2018-06-23 13:50:05');
+INSERT INTO `menoy_info` VALUES ('1', '2018062602367274', 'gxtttooo', '2018-06-26 15:21:47', '1529997751589', '2018-06-26 15:22:48');
+INSERT INTO `menoy_info` VALUES ('1', '2018062602367467', 'gxtttooo', '2018-06-26 15:23:43', '1529997869199', '2018-06-26 15:24:43');
+INSERT INTO `menoy_info` VALUES ('1', '2018062602367872', 'gxtttooo', '2018-06-26 15:28:19', '1529998148121', '2018-06-26 15:29:20');
+INSERT INTO `menoy_info` VALUES ('1', '2018062602368106', 'gxtttooo', '2018-06-26 15:30:45', '1529998297355', '2018-06-26 15:31:46');
+INSERT INTO `menoy_info` VALUES ('1', '2018062602368293', 'gxtttooo', '2018-06-26 15:32:35', '1529998407309', '2018-06-26 15:33:35');
+INSERT INTO `menoy_info` VALUES ('1', '2018062602372856', 'gxtttooo', '2018-06-26 16:28:02', '1530001727652', '2018-06-26 16:29:03');
+INSERT INTO `menoy_info` VALUES ('1', '2018062800594823', 'gxtttooo', '2018-06-28 20:38:42', '1530189436168', '2018-06-28 20:38:50');
+INSERT INTO `menoy_info` VALUES ('1', '2018062800595473', 'gxtttooo', '2018-06-28 20:39:55', '1530189564996', '2018-06-28 20:40:02');
+INSERT INTO `menoy_info` VALUES ('1', '2018062800596082', 'gxtttooo', '2018-06-28 20:40:58', '1530189615699', '2018-06-28 20:41:05');
+INSERT INTO `menoy_info` VALUES ('1', '2018062800596584', 'gxtttooo', '2018-06-28 20:41:58', '1530189693402', '2018-06-28 20:42:05');
+INSERT INTO `menoy_info` VALUES ('1', '2018062800596975', 'gxtttooo', '2018-06-28 20:42:42', '1530189739105', '2018-06-28 20:42:49');
+INSERT INTO `menoy_info` VALUES ('2', '2018062800598023', 'gxtttooo', '2018-06-28 20:44:46', '1530189840949', '2018-06-28 20:44:53');
+INSERT INTO `menoy_info` VALUES ('2', '2018062800599481', 'gxtttooo', '2018-06-28 20:47:23', '1530190007715', '2018-06-28 20:47:31');
+INSERT INTO `menoy_info` VALUES ('2', '2018062900217250', 'gxtttooo', '2018-06-29 08:05:47', '1530230726544', '2018-06-29 08:05:55');
 
 -- ----------------------------
--- Table structure for moneylog
+-- Table structure for pay_info
 -- ----------------------------
-DROP TABLE IF EXISTS `moneylog`;
-CREATE TABLE `moneylog` (
-  `user_id` varchar(32) NOT NULL,
-  `money` decimal(10,0) DEFAULT NULL,
-  `time` varchar(20) DEFAULT NULL
+DROP TABLE IF EXISTS `pay_info`;
+CREATE TABLE `pay_info` (
+  `key` varchar(32) DEFAULT NULL,
+  `mch_id` varchar(255) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of moneylog
+-- Records of pay_info
 -- ----------------------------
-
--- ----------------------------
--- Table structure for order_info
--- ----------------------------
-DROP TABLE IF EXISTS `order_info`;
-CREATE TABLE `order_info` (
-  `total_fee` int(20) DEFAULT NULL,
-  `trade_no` varchar(20) DEFAULT NULL,
-  `body` varchar(255) DEFAULT NULL,
-  `trade_type` varchar(16) DEFAULT NULL,
-  `user_id` varchar(32) NOT NULL,
-  `result` varchar(2) NOT NULL,
-  `start_time` varchar(20) DEFAULT NULL,
-  `end_time` varchar(20) DEFAULT NULL,
-  `out_trade_no` varchar(32) NOT NULL COMMENT '交易单号',
-  PRIMARY KEY (`out_trade_no`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of order_info
--- ----------------------------
-INSERT INTO `order_info` VALUES ('1', '2018061402404023', 'VIP充值', 'WX', '7336df85761d4a8785d5cb28450de7e7', '1', '2018-06-14 17:26:01', '20180614172621', '1528968361324');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', '97dffec878cb4a7d9201ace8e1cee94b', '0', '2018-06-14 23:00:17', null, '1528988417589');
-INSERT INTO `order_info` VALUES ('1', '2018061502209681', 'VIP充值', 'WX', '9d5f2aca3d484fa7885a6bfcff9f253b', '1', '2018-06-15 10:07:46', '20180615100731', '1529028466386');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', '9d5f2aca3d484fa7885a6bfcff9f253b', '0', '2018-06-15 10:13:55', null, '1529028835761');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', '9d5f2aca3d484fa7885a6bfcff9f253b', '0', '2018-06-15 10:14:54', null, '1529028894261');
-INSERT INTO `order_info` VALUES ('1', '2018061502220921', 'VIP充值', 'WX', '9b9f17af190e4df19b1f77298129cd21', '1', '2018-06-15 10:38:06', '2018-06-15 10:40:24', '1529030286199');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', '9d5f2aca3d484fa7885a6bfcff9f253b', '0', '2018-06-15 10:49:29', null, '1529030969996');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', '9d5f2aca3d484fa7885a6bfcff9f253b', '0', '2018-06-15 10:50:37', null, '1529031037621');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', '9d5f2aca3d484fa7885a6bfcff9f253b', '0', '2018-06-15 10:51:00', null, '1529031060355');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'ALI', '9d5f2aca3d484fa7885a6bfcff9f253b', '0', '2018-06-15 10:51:05', null, '1529031065277');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', '4f52a4357f084e50ab4d6dcf7c8b3370', '0', '2018-06-15 11:17:04', null, '1529032624473');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', 'c816a4152cf74a3da26370b81e5c6483', '0', '2018-06-20 10:42:56', null, '1529462576324');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', 'c816a4152cf74a3da26370b81e5c6483', '0', '2018-06-20 10:43:19', null, '1529462599152');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', 'c816a4152cf74a3da26370b81e5c6483', '0', '2018-06-20 10:43:35', null, '1529462615246');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', 'c816a4152cf74a3da26370b81e5c6483', '0', '2018-06-20 10:44:03', null, '1529462643074');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', 'c816a4152cf74a3da26370b81e5c6483', '0', '2018-06-20 10:47:39', null, '1529462859636');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', 'c816a4152cf74a3da26370b81e5c6483', '0', '2018-06-20 10:48:27', null, '1529462907605');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', 'c816a4152cf74a3da26370b81e5c6483', '0', '2018-06-20 10:49:17', null, '1529462957793');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', 'c816a4152cf74a3da26370b81e5c6483', '0', '2018-06-20 10:51:07', null, '1529463067730');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', 'c816a4152cf74a3da26370b81e5c6483', '0', '2018-06-20 10:51:15', null, '1529463075418');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', 'c816a4152cf74a3da26370b81e5c6483', '0', '2018-06-20 10:51:19', null, '1529463079605');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', 'c816a4152cf74a3da26370b81e5c6483', '0', '2018-06-20 10:53:04', null, '1529463184777');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', 'c816a4152cf74a3da26370b81e5c6483', '0', '2018-06-20 10:53:09', null, '1529463189621');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', 'c816a4152cf74a3da26370b81e5c6483', '0', '2018-06-20 10:55:40', null, '1529463340371');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', 'c816a4152cf74a3da26370b81e5c6483', '0', '2018-06-20 10:55:45', null, '1529463345683');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', 'c816a4152cf74a3da26370b81e5c6483', '0', '2018-06-20 10:56:45', null, '1529463405496');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', 'c816a4152cf74a3da26370b81e5c6483', '0', '2018-06-20 10:56:49', null, '1529463409808');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', 'c816a4152cf74a3da26370b81e5c6483', '0', '2018-06-20 10:57:03', null, '1529463423043');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', 'c816a4152cf74a3da26370b81e5c6483', '0', '2018-06-20 10:57:24', null, '1529463444574');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', 'c816a4152cf74a3da26370b81e5c6483', '0', '2018-06-20 10:58:23', null, '1529463503871');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', 'c816a4152cf74a3da26370b81e5c6483', '0', '2018-06-20 11:01:02', null, '1529463662121');
-INSERT INTO `order_info` VALUES ('1', '2018062002267606', 'VIP充值', 'WX', 'f514003f73834951ba79068e41c0f6bd', '1', '2018-06-20 11:16:46', '2018-06-20 11:16:12', '1529464606699');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', 'f514003f73834951ba79068e41c0f6bd', '0', '2018-06-20 11:19:00', null, '1529464740949');
-INSERT INTO `order_info` VALUES ('1', '2018062002268610', 'VIP充值', 'ALI', 'f514003f73834951ba79068e41c0f6bd', '1', '2018-06-20 11:19:07', '2018-06-20 11:18:34', '1529464747777');
-INSERT INTO `order_info` VALUES ('1', '2018062002273794', 'VIP充值', 'WX', '9d2ba83fcc204e22ba922cbbb709ade8', '1', '2018-06-20 11:31:00', '2018-06-20 11:30:20', '1529465460480');
-INSERT INTO `order_info` VALUES ('1', '2018062002278256', 'VIP充值', 'WX', '9d2ba83fcc204e22ba922cbbb709ade8', '1', '2018-06-20 11:40:58', '2018-06-20 11:40:18', '1529466058527');
-INSERT INTO `order_info` VALUES ('1', '2018062002291882', 'VIP充值', 'ALI', 'dc01d5c5fe6643098f6cc0cae934d3c5', '1', '2018-06-20 12:10:57', '2018-06-20 12:10:34', '1529467857621');
-INSERT INTO `order_info` VALUES ('1', '2018062002293508', 'VIP充值', 'WX', 'dc01d5c5fe6643098f6cc0cae934d3c5', '1', '2018-06-20 12:14:23', '2018-06-20 12:13:43', '1529468063371');
-INSERT INTO `order_info` VALUES ('1', '2018062002293647', 'VIP充值', 'ALI', 'dc01d5c5fe6643098f6cc0cae934d3c5', '1', '2018-06-20 12:14:42', '2018-06-20 12:14:04', '1529468082293');
-INSERT INTO `order_info` VALUES ('1', '2018062002304053', 'VIP充值', 'WX', '7fcd282f73d74fe5a3d9b7570744cddf', '1', '2018-06-20 12:35:23', '2018-06-20 12:34:42', '1529469323668');
-INSERT INTO `order_info` VALUES ('1', '2018062002304221', 'VIP充值', 'ALI', '7fcd282f73d74fe5a3d9b7570744cddf', '1', '2018-06-20 12:35:41', '2018-06-20 12:35:02', '1529469341480');
-INSERT INTO `order_info` VALUES ('1', '2018062002334903', 'VIP充值', 'WX', '26cc9fa6d6ea4f4c9cc842553b109739', '1', '2018-06-20 13:22:36', '2018-06-20 13:22:09', '1529472156746');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'ALI', '26cc9fa6d6ea4f4c9cc842553b109739', '0', '2018-06-20 13:23:18', null, '1529472198793');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'ALI', '26cc9fa6d6ea4f4c9cc842553b109739', '0', '2018-06-20 13:48:38', null, '1529473718043');
-INSERT INTO `order_info` VALUES ('1', '2018062002353805', 'VIP充值', 'WX', '26cc9fa6d6ea4f4c9cc842553b109739', '1', '2018-06-20 13:49:05', '2018-06-20 13:48:30', '1529473745183');
-INSERT INTO `order_info` VALUES ('1', '2018062002354058', 'VIP充值', 'ALI', '26cc9fa6d6ea4f4c9cc842553b109739', '1', '2018-06-20 13:49:27', '2018-06-20 13:48:51', '1529473767746');
-INSERT INTO `order_info` VALUES ('1', '2018062002354296', 'VIP充值', 'WX', '26cc9fa6d6ea4f4c9cc842553b109739', '1', '2018-06-20 13:49:49', '2018-06-20 13:49:11', '1529473789527');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', '8d774bb85b644b998d8170f033ca96a5', '0', '2018-06-20 17:41:19', null, '1529487679746');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', '8d774bb85b644b998d8170f033ca96a5', '0', '2018-06-20 17:44:41', null, '1529487881605');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', '8d774bb85b644b998d8170f033ca96a5', '0', '2018-06-20 17:44:56', null, '1529487896340');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', '8d774bb85b644b998d8170f033ca96a5', '0', '2018-06-20 17:45:13', null, '1529487913324');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', '8d774bb85b644b998d8170f033ca96a5', '0', '2018-06-20 17:56:58', null, '1529488618652');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', '8d774bb85b644b998d8170f033ca96a5', '0', '2018-06-20 17:57:13', null, '1529488633261');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', '8d774bb85b644b998d8170f033ca96a5', '0', '2018-06-20 17:57:27', null, '1529488647074');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', '8d774bb85b644b998d8170f033ca96a5', '0', '2018-06-20 17:58:16', null, '1529488696293');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', '8d774bb85b644b998d8170f033ca96a5', '0', '2018-06-20 18:01:16', null, '1529488876433');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', '8d774bb85b644b998d8170f033ca96a5', '0', '2018-06-20 18:01:21', null, '1529488881589');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'ALI', 'b25e375e67b34bb188a0aa404a8e0425', '0', '2018-06-20 18:22:01', null, '1529490121136');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'ALI', '550b9ab3f89b428f9f4aa32c764609bb', '0', '2018-06-21 08:59:10', null, '1529542750386');
-INSERT INTO `order_info` VALUES ('1', '2018062102313428', 'VIP充值', 'WX', '550b9ab3f89b428f9f4aa32c764609bb', '1', '2018-06-21 09:02:04', '2018-06-21 09:01:31', '1529542924668');
-INSERT INTO `order_info` VALUES ('1', '2018062102313930', 'VIP充值', 'WX', '550b9ab3f89b428f9f4aa32c764609bb', '1', '2018-06-21 09:03:34', '2018-06-21 09:02:54', '1529543014074');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', '734ceddbf65348cbb8b0f6ceafd7558e', '0', '2018-06-21 11:40:53', null, '1529552453589');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'ALI', '734ceddbf65348cbb8b0f6ceafd7558e', '0', '2018-06-21 11:40:59', null, '1529552459261');
-INSERT INTO `order_info` VALUES ('1', '2018062102390463', 'VIP充值', 'WX', '734ceddbf65348cbb8b0f6ceafd7558e', '1', '2018-06-21 12:29:57', '2018-06-21 12:29:25', '1529555397761');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', 'b25e375e67b34bb188a0aa404a8e0425', '0', '2018-06-21 12:34:01', null, '1529555641761');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'ALI', 'b25e375e67b34bb188a0aa404a8e0425', '0', '2018-06-21 12:41:07', null, '1529556067089');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', '550b9ab3f89b428f9f4aa32c764609bb', '0', '2018-06-21 15:35:43', null, '1529566543277');
-INSERT INTO `order_info` VALUES ('1', '2018062102494692', 'VIP充值', 'WX', 'bc0de338f3124b98a6e3d7ae4e78f299', '1', '2018-06-21 15:36:29', '2018-06-21 15:35:52', '1529566589949');
-INSERT INTO `order_info` VALUES ('1', '2018062102496258', 'VIP充值', 'WX', 'bc0de338f3124b98a6e3d7ae4e78f299', '1', '2018-06-21 15:39:29', '2018-06-21 15:38:53', '1529566769996');
-INSERT INTO `order_info` VALUES ('1', '2018062102518733', 'VIP充值', 'ALI', 'b25e375e67b34bb188a0aa404a8e0425', '1', '2018-06-21 16:26:39', '2018-06-21 16:26:08', '1529569599027');
-INSERT INTO `order_info` VALUES ('1', '2018062102519150', 'VIP充值', 'WX', 'b25e375e67b34bb188a0aa404a8e0425', '1', '2018-06-21 16:27:36', '2018-06-21 16:26:53', '1529569656433');
-INSERT INTO `order_info` VALUES ('1', null, 'VIP充值', 'WX', '2027039e494b4b15b3e4885985104278', '0', '2018-06-21 19:50:36', null, '1529581836964');
+INSERT INTO `pay_info` VALUES ('cbd4f10f115673f0e76d223168bf99d3', 'gxtttooo', 'http://weixin.n1lm.cn/platform/pay/unifiedorder/video');
 
 -- ----------------------------
 -- Table structure for role
@@ -366,33 +292,42 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
+INSERT INTO `user` VALUES ('033a5ee5bd6543f6b1adf17f37772a67', '2018-06-28 11:15:44', '2018-06-29 11:15:44', '0', '3', '2018-06-28 11:15:44', null, null);
+INSERT INTO `user` VALUES ('09afd734ba89438eb7bdd0c339e01f74', '2018-06-29 08:05:55', '2019-06-29 08:05:55', '4', '3', '2018-06-28 22:16:14', null, null);
 INSERT INTO `user` VALUES ('1', '2018-06-15 10:08:10', '2018-06-16 10:08:10', '100', null, '2018-06-15 09:10:50', '陈国栋', '15622193100');
+INSERT INTO `user` VALUES ('15e414f8703944e88f3271bc822b74b2', '2018-06-28 20:42:49', '2018-07-05 20:42:49', '1', '3', '2018-06-28 17:50:50', null, null);
 INSERT INTO `user` VALUES ('2', '2018-06-15 10:08:10', '2018-06-16 10:08:10', '100', null, '2018-06-15 09:20:50', '张天梁', '15622193200');
-INSERT INTO `user` VALUES ('2027039e494b4b15b3e4885985104278', '2018-06-21 16:27:01', '2018-06-22 16:27:01', '0', '4', '2018-06-21 16:27:01', null, null);
+INSERT INTO `user` VALUES ('2027039e494b4b15b3e4885985104278', '2018-06-23 13:50:05', '2018-07-23 13:50:05', '3', '4', '2018-06-21 16:27:01', null, null);
 INSERT INTO `user` VALUES ('26cc9fa6d6ea4f4c9cc842553b109739', '2018-06-20 13:50:00', '2018-06-21 13:50:00', '0', '3', '2018-06-20 13:00:26', null, null);
 INSERT INTO `user` VALUES ('2b78b2b6455a4ea7bc703603fd985301', '2018-06-20 08:28:12', '2018-06-21 08:28:12', '0', '3', '2018-06-20 08:28:12', null, null);
 INSERT INTO `user` VALUES ('3', '2018-06-15 10:08:10', '2018-06-16 10:08:10', '100', null, '2018-06-15 09:30:50', '李嘉晨', '15622193300');
 INSERT INTO `user` VALUES ('306bd274a0c247f1a8af884fae8b608a', '2018-06-20 14:47:41', '2018-06-21 14:47:41', '0', '3', '2018-06-20 14:47:41', null, null);
 INSERT INTO `user` VALUES ('34311ede564941e494d8c6709ed21933', '2018-06-20 10:02:17', '2018-06-21 10:02:17', '0', '3', '2018-06-20 10:02:17', null, null);
+INSERT INTO `user` VALUES ('3e5b2d5dba8d4093a12d3a3974fb245d', '2018-06-26 16:29:03', '2018-07-26 16:29:03', '2', '4', '2018-06-26 15:33:13', null, null);
 INSERT INTO `user` VALUES ('4', '2018-06-15 10:08:10', '2018-06-16 10:08:10', '100', null, '2018-06-15 09:40:50', '大哥的测试号', '15622193400');
 INSERT INTO `user` VALUES ('4f52a4357f084e50ab4d6dcf7c8b3370', '2018-06-15 11:16:13', '2018-06-16 11:16:13', '0', '1', '2018-06-15 11:16:13', null, null);
+INSERT INTO `user` VALUES ('529c4a20b2de4c8e89f5a34aa132d8e4', '2018-06-28 20:47:31', '2023-06-28 20:47:31', '5', '3', '2018-06-28 20:43:50', null, null);
 INSERT INTO `user` VALUES ('550b9ab3f89b428f9f4aa32c764609bb', '2018-06-21 09:03:44', '2018-07-21 09:03:44', '2', '3', '2018-06-21 08:57:41', null, null);
 INSERT INTO `user` VALUES ('5f61c209bdbc455cb75df631637f1e79', '2018-06-20 10:02:46', '2018-06-21 10:02:46', '0', '3', '2018-06-20 10:02:46', null, null);
 INSERT INTO `user` VALUES ('6520e50e1acb47a7ba763b3cb68d6cec', '2018-06-19 15:58:24', '2018-06-20 15:58:24', '0', '3', '2018-06-19 15:58:24', null, null);
 INSERT INTO `user` VALUES ('6fe7cf22447f4299b30a126d575d96f6', '2018-06-15 11:32:46', '2018-06-16 11:32:46', '0', '3', '2018-06-15 11:32:46', null, null);
+INSERT INTO `user` VALUES ('715831636ca44c498ed154b540a8b341', '2018-06-28 17:24:26', '2018-06-29 17:24:26', '0', '3', '2018-06-28 17:24:26', null, null);
 INSERT INTO `user` VALUES ('7336df85761d4a8785d5cb28450de7e7', '2018-06-14 17:26:59', '2018-06-15 17:26:59', '100', null, null, '胡珊珊', '15622193500');
 INSERT INTO `user` VALUES ('734ceddbf65348cbb8b0f6ceafd7558e', '2018-06-21 12:30:16', '2018-06-22 12:30:16', '0', '3', '2018-06-21 11:40:13', null, null);
+INSERT INTO `user` VALUES ('7e0d7fd571154291885d9b82ec8ce9e9', '2018-06-28 11:16:09', '2018-06-29 11:16:09', '0', '3', '2018-06-28 11:16:09', null, null);
 INSERT INTO `user` VALUES ('7fcd282f73d74fe5a3d9b7570744cddf', '2018-06-20 12:35:51', '2018-07-20 12:35:51', '2', '3', '2018-06-20 12:35:03', null, null);
 INSERT INTO `user` VALUES ('8d774bb85b644b998d8170f033ca96a5', '2018-06-20 11:57:11', '2018-06-21 11:57:11', '0', '3', '2018-06-20 11:57:11', null, null);
 INSERT INTO `user` VALUES ('97d413b0a297441a918beafd4eeb4b07', '2018-06-20 13:51:29', '2018-06-21 13:51:29', '0', '3', '2018-06-20 13:51:29', null, null);
-INSERT INTO `user` VALUES ('97dffec878cb4a7d9201ace8e1cee94b', '2018-06-14 22:24:26', '2018-06-15 22:24:26', '100', null, '2018-06-14 22:24:26', '刘继', '1562219600');
+INSERT INTO `user` VALUES ('97dffec878cb4a7d9201ace8e1cee94b', '2018-06-14 22:24:26', '2018-06-15 22:24:26', '5', null, '2018-06-14 22:24:26', '刘继', '1562219600');
 INSERT INTO `user` VALUES ('9b9f17af190e4df19b1f77298129cd21', '2018-06-15 10:41:03', '2018-06-16 10:41:03', '0', '9d5f2aca3d484fa7885a6bfcff9f253b', '2018-06-15 10:33:20', null, null);
 INSERT INTO `user` VALUES ('9d2ba83fcc204e22ba922cbbb709ade8', '2018-06-20 11:41:07', '2018-07-20 11:41:07', '2', '3', '2018-06-20 11:30:42', null, null);
 INSERT INTO `user` VALUES ('9d5f2aca3d484fa7885a6bfcff9f253b', '2018-06-15 10:08:10', '2018-06-16 10:08:10', '100', null, '2018-06-15 09:50:50', '周魉', '1562219700');
 INSERT INTO `user` VALUES ('b25e375e67b34bb188a0aa404a8e0425', '2018-06-21 16:27:44', '2018-07-21 16:27:44', '2', '3', '2018-06-20 18:20:40', null, null);
+INSERT INTO `user` VALUES ('b6940b5adb4f489f864c461913c295d7', '2018-06-26 15:31:46', '2018-07-26 15:31:46', '4', '3', '2018-06-26 15:18:24', null, null);
+INSERT INTO `user` VALUES ('b9dc7d9ca7de4f65bae9338c04faaa6e', '2018-06-28 11:18:15', '2018-06-29 11:18:15', '0', '3', '2018-06-28 11:18:15', null, null);
 INSERT INTO `user` VALUES ('bc0de338f3124b98a6e3d7ae4e78f299', '2018-06-21 15:39:44', '2018-07-21 15:39:44', '2', '3', '2018-06-21 15:35:03', null, null);
 INSERT INTO `user` VALUES ('c816a4152cf74a3da26370b81e5c6483', '2018-06-20 10:04:07', '2018-06-21 10:04:07', '0', '3', '2018-06-20 10:04:07', null, null);
-INSERT INTO `user` VALUES ('d5d181919d9141789ac0f7b1d9bb50da', '2018-06-22 10:58:25', '2018-06-23 10:58:25', '0', '4', '2018-06-22 10:58:25', null, null);
+INSERT INTO `user` VALUES ('d5d181919d9141789ac0f7b1d9bb50da', '2018-06-23 00:30:48', '2018-07-23 00:30:48', '2', '4', '2018-06-22 10:58:25', null, null);
 INSERT INTO `user` VALUES ('dc01d5c5fe6643098f6cc0cae934d3c5', '2018-06-20 12:14:53', '2019-06-20 12:14:53', '3', '3', '2018-06-20 12:02:51', null, null);
 INSERT INTO `user` VALUES ('e8e394b4832b4171bc1fe4b500abe7e4', '2018-06-20 11:47:20', '2018-06-21 11:47:20', '0', '3', '2018-06-20 11:47:20', null, null);
 INSERT INTO `user` VALUES ('eb3d011573884eca8d0348d230419474', '2018-06-22 18:50:55', '2018-06-23 18:50:55', '100', null, '2018-06-22 18:50:54', null, null);
@@ -416,7 +351,80 @@ CREATE TABLE `user_order` (
 -- Records of user_order
 -- ----------------------------
 INSERT INTO `user_order` VALUES ('aaaaaaaaaaa', '1529660099929', '1', 'aaa', 'WX', '2018-06-22 17:34:59', '0');
-INSERT INTO `user_order` VALUES ('7336df85761d4a8785d5cb28450de7e7', '1529721494979', '1', 'VIP充值', 'WX', '2018-06-23 10:38:14', '0');
+INSERT INTO `user_order` VALUES ('d5d181919d9141789ac0f7b1d9bb50da', '1529681318761', '1', 'aaa', 'WX', '2018-06-22 23:28:38', '0');
+INSERT INTO `user_order` VALUES ('2027039e494b4b15b3e4885985104278', '1529729814339', '1', 'VIP充值', 'WX', '2018-06-23 12:56:54', '0');
+INSERT INTO `user_order` VALUES ('2027039e494b4b15b3e4885985104278', '1529729827527', '1', 'VIP充值', 'ALI', '2018-06-23 12:57:07', '0');
+INSERT INTO `user_order` VALUES ('2027039e494b4b15b3e4885985104278', '1529729856699', '1', 'VIP充值', 'WX', '2018-06-23 12:57:36', '1');
+INSERT INTO `user_order` VALUES ('2027039e494b4b15b3e4885985104278', '1529731097548', '1', 'VIP充值', 'WX', '2018-06-23 13:18:17', '0');
+INSERT INTO `user_order` VALUES ('2027039e494b4b15b3e4885985104278', '1529731119777', '1', 'VIP充值', 'WX', '2018-06-23 13:18:39', '1');
+INSERT INTO `user_order` VALUES ('2027039e494b4b15b3e4885985104278', '1529732993230', '1', 'VIP充值', 'WX', '2018-06-23 13:49:53', '1');
+INSERT INTO `user_order` VALUES ('97dffec878cb4a7d9201ace8e1cee94b', '1529976286199', '1', 'VIP充值', 'WX', '2018-06-26 09:24:46', '0');
+INSERT INTO `user_order` VALUES ('97dffec878cb4a7d9201ace8e1cee94b', '1529976405464', '1', 'VIP充值', 'ALI', '2018-06-26 09:26:45', '0');
+INSERT INTO `user_order` VALUES ('97dffec878cb4a7d9201ace8e1cee94b', '1529976418730', '1', 'VIP充值', 'WX', '2018-06-26 09:26:58', '0');
+INSERT INTO `user_order` VALUES ('97dffec878cb4a7d9201ace8e1cee94b', '1529976440933', '1', 'VIP充值', 'WX', '2018-06-26 09:27:20', '0');
+INSERT INTO `user_order` VALUES ('97dffec878cb4a7d9201ace8e1cee94b', '1529976476043', '1', 'VIP充值', 'WX', '2018-06-26 09:27:56', '0');
+INSERT INTO `user_order` VALUES ('97dffec878cb4a7d9201ace8e1cee94b', '1529976490964', '1', 'VIP充值', 'WX', '2018-06-26 09:28:10', '0');
+INSERT INTO `user_order` VALUES ('97dffec878cb4a7d9201ace8e1cee94b', '1529977027402', '1', 'VIP充值', 'WX', '2018-06-26 09:37:07', '0');
+INSERT INTO `user_order` VALUES ('97dffec878cb4a7d9201ace8e1cee94b', '1529977064543', '1', 'VIP充值', 'WX', '2018-06-26 09:37:44', '0');
+INSERT INTO `user_order` VALUES ('b6940b5adb4f489f864c461913c295d7', '1529997751589', '1', 'VIP充值', 'WX', '2018-06-26 15:22:31', '1');
+INSERT INTO `user_order` VALUES ('b6940b5adb4f489f864c461913c295d7', '1529997869199', '1', 'VIP充值', 'ALI', '2018-06-26 15:24:29', '1');
+INSERT INTO `user_order` VALUES ('b6940b5adb4f489f864c461913c295d7', '1529998148121', '1', 'VIP充值', 'WX', '2018-06-26 15:29:08', '1');
+INSERT INTO `user_order` VALUES ('b6940b5adb4f489f864c461913c295d7', '1529998297355', '1', 'VIP充值', 'WX', '2018-06-26 15:31:37', '1');
+INSERT INTO `user_order` VALUES ('3e5b2d5dba8d4093a12d3a3974fb245d', '1529998407309', '1', 'VIP充值', 'WX', '2018-06-26 15:33:27', '1');
+INSERT INTO `user_order` VALUES ('3e5b2d5dba8d4093a12d3a3974fb245d', '1530001727652', '1', 'VIP充值', 'WX', '2018-06-26 16:28:47', '1');
+INSERT INTO `user_order` VALUES ('97dffec878cb4a7d9201ace8e1cee94b', '1530108566214', '1', 'VIP充值', 'WX', '2018-06-27 22:09:26', '0');
+INSERT INTO `user_order` VALUES ('97dffec878cb4a7d9201ace8e1cee94b', '1530108583621', '1', 'VIP充值', 'WX', '2018-06-27 22:09:43', '0');
+INSERT INTO `user_order` VALUES ('97dffec878cb4a7d9201ace8e1cee94b', '1530153175183', '1', 'VIP充值', 'WX', '2018-06-28 10:32:55', '0');
+INSERT INTO `user_order` VALUES ('97dffec878cb4a7d9201ace8e1cee94b', '1530154265246', '2', 'VIP充值', 'WX', '2018-06-28 10:51:05', '0');
+INSERT INTO `user_order` VALUES ('97dffec878cb4a7d9201ace8e1cee94b', '1530154286355', '2', 'VIP充值', 'ALI', '2018-06-28 10:51:26', '0');
+INSERT INTO `user_order` VALUES ('97dffec878cb4a7d9201ace8e1cee94b', '1530154789574', '2', 'VIP充值', 'WX', '2018-06-28 10:59:49', '0');
+INSERT INTO `user_order` VALUES ('97dffec878cb4a7d9201ace8e1cee94b', '1530155012824', '2', 'VIP充值', 'WX', '2018-06-28 11:03:32', '0');
+INSERT INTO `user_order` VALUES ('97dffec878cb4a7d9201ace8e1cee94b', '1530155037308', '2', 'VIP充值', 'WX', '2018-06-28 11:03:57', '0');
+INSERT INTO `user_order` VALUES ('97dffec878cb4a7d9201ace8e1cee94b', '1530155097058', '2', 'VIP充值', 'WX', '2018-06-28 11:04:57', '0');
+INSERT INTO `user_order` VALUES ('97dffec878cb4a7d9201ace8e1cee94b', '1530155179496', '2', 'VIP充值', 'WX', '2018-06-28 11:06:19', '0');
+INSERT INTO `user_order` VALUES ('97dffec878cb4a7d9201ace8e1cee94b', '1530155291855', '2', 'VIP充值', 'ALI', '2018-06-28 11:08:11', '0');
+INSERT INTO `user_order` VALUES ('97dffec878cb4a7d9201ace8e1cee94b', '1530155307761', '2', 'VIP充值', 'WX', '2018-06-28 11:08:27', '0');
+INSERT INTO `user_order` VALUES ('97dffec878cb4a7d9201ace8e1cee94b', '1530155356386', '2', 'VIP充值', 'WX', '2018-06-28 11:09:16', '0');
+INSERT INTO `user_order` VALUES ('97dffec878cb4a7d9201ace8e1cee94b', '1530155380605', '2', 'VIP充值', 'WX', '2018-06-28 11:09:40', '0');
+INSERT INTO `user_order` VALUES ('7e0d7fd571154291885d9b82ec8ce9e9', '1530155799864', '1', 'VIP充值', 'WX', '2018-06-28 11:16:39', '0');
+INSERT INTO `user_order` VALUES ('b9dc7d9ca7de4f65bae9338c04faaa6e', '1530156285402', '1', 'VIP充值', 'WX', '2018-06-28 11:24:45', '0');
+INSERT INTO `user_order` VALUES ('b9dc7d9ca7de4f65bae9338c04faaa6e', '1530156330043', '1', 'VIP充值', 'ALI', '2018-06-28 11:25:30', '0');
+INSERT INTO `user_order` VALUES ('b9dc7d9ca7de4f65bae9338c04faaa6e', '1530156368480', '1', 'VIP充值', 'WX', '2018-06-28 11:26:08', '0');
+INSERT INTO `user_order` VALUES ('b9dc7d9ca7de4f65bae9338c04faaa6e', '1530156782068', '1', 'VIP充值', 'WX', '2018-06-28 11:33:02', '0');
+INSERT INTO `user_order` VALUES ('b9dc7d9ca7de4f65bae9338c04faaa6e', '1530156814777', '2', 'VIP充值', 'ALI', '2018-06-28 11:33:34', '0');
+INSERT INTO `user_order` VALUES ('b9dc7d9ca7de4f65bae9338c04faaa6e', '1530157207824', '2', 'VIP充值', 'WX', '2018-06-28 11:40:07', '0');
+INSERT INTO `user_order` VALUES ('b9dc7d9ca7de4f65bae9338c04faaa6e', '1530157610996', '1', 'VIP充值', 'WX', '2018-06-28 11:46:50', '0');
+INSERT INTO `user_order` VALUES ('d5d181919d9141789ac0f7b1d9bb50da', '1530157626918', '1', 'aaa', 'WX', '2018-06-28 11:47:06', '0');
+INSERT INTO `user_order` VALUES ('b9dc7d9ca7de4f65bae9338c04faaa6e', '1530157628746', '1', 'VIP充值', 'ALI', '2018-06-28 11:47:08', '0');
+INSERT INTO `user_order` VALUES ('b9dc7d9ca7de4f65bae9338c04faaa6e', '1530159382934', '1', 'VIP充值', 'WX', '2018-06-28 12:16:22', '0');
+INSERT INTO `user_order` VALUES ('b9dc7d9ca7de4f65bae9338c04faaa6e', '1530159395871', '1', 'VIP充值', 'WX', '2018-06-28 12:16:35', '0');
+INSERT INTO `user_order` VALUES ('b9dc7d9ca7de4f65bae9338c04faaa6e', '1530165146574', '1', 'VIP充值', 'WX', '2018-06-28 13:52:26', '0');
+INSERT INTO `user_order` VALUES ('b9dc7d9ca7de4f65bae9338c04faaa6e', '1530169959386', '1', 'VIP充值', 'WX', '2018-06-28 15:12:39', '0');
+INSERT INTO `user_order` VALUES ('b9dc7d9ca7de4f65bae9338c04faaa6e', '1530170871558', '2', 'VIP充值', 'WX', '2018-06-28 15:27:51', '0');
+INSERT INTO `user_order` VALUES ('b9dc7d9ca7de4f65bae9338c04faaa6e', '1530174869965', '1', 'VIP充值', 'WX', '2018-06-28 16:34:29', '0');
+INSERT INTO `user_order` VALUES ('b9dc7d9ca7de4f65bae9338c04faaa6e', '1530174880449', '1', 'VIP充值', 'WX', '2018-06-28 16:34:40', '0');
+INSERT INTO `user_order` VALUES ('b9dc7d9ca7de4f65bae9338c04faaa6e', '1530175295778', '2', 'VIP充值', 'ALI', '2018-06-28 16:41:35', '0');
+INSERT INTO `user_order` VALUES ('b9dc7d9ca7de4f65bae9338c04faaa6e', '1530175417371', '2', 'VIP充值', 'WX', '2018-06-28 16:43:37', '0');
+INSERT INTO `user_order` VALUES ('b9dc7d9ca7de4f65bae9338c04faaa6e', '1530177543402', '1', 'VIP充值', 'WX', '2018-06-28 17:19:03', '0');
+INSERT INTO `user_order` VALUES ('b9dc7d9ca7de4f65bae9338c04faaa6e', '1530177551011', '1', 'VIP充值', 'WX', '2018-06-28 17:19:11', '0');
+INSERT INTO `user_order` VALUES ('715831636ca44c498ed154b540a8b341', '1530178014589', '1', 'VIP充值', 'WX', '2018-06-28 17:26:54', '0');
+INSERT INTO `user_order` VALUES ('15e414f8703944e88f3271bc822b74b2', '1530180905808', '1', 'VIP充值', 'WX', '2018-06-28 18:15:05', '0');
+INSERT INTO `user_order` VALUES ('15e414f8703944e88f3271bc822b74b2', '1530189423949', '1', 'VIP充值', 'WX', '2018-06-28 20:37:03', '0');
+INSERT INTO `user_order` VALUES ('15e414f8703944e88f3271bc822b74b2', '1530189436168', '1', 'VIP充值', 'WX', '2018-06-28 20:37:16', '1');
+INSERT INTO `user_order` VALUES ('15e414f8703944e88f3271bc822b74b2', '1530189564996', '1', 'VIP充值', 'ALI', '2018-06-28 20:39:24', '1');
+INSERT INTO `user_order` VALUES ('15e414f8703944e88f3271bc822b74b2', '1530189615699', '1', 'VIP充值', 'WX', '2018-06-28 20:40:15', '1');
+INSERT INTO `user_order` VALUES ('15e414f8703944e88f3271bc822b74b2', '1530189693402', '1', 'VIP充值', 'WX', '2018-06-28 20:41:33', '1');
+INSERT INTO `user_order` VALUES ('15e414f8703944e88f3271bc822b74b2', '1530189739105', '1', 'VIP充值', 'WX', '2018-06-28 20:42:19', '1');
+INSERT INTO `user_order` VALUES ('15e414f8703944e88f3271bc822b74b2', '1530189780355', '2', 'VIP充值', 'WX', '2018-06-28 20:43:00', '0');
+INSERT INTO `user_order` VALUES ('529c4a20b2de4c8e89f5a34aa132d8e4', '1530189840949', '2', 'VIP充值', 'WX', '2018-06-28 20:44:00', '1');
+INSERT INTO `user_order` VALUES ('529c4a20b2de4c8e89f5a34aa132d8e4', '1530189928949', '2', 'VIP充值', 'WX', '2018-06-28 20:45:28', '0');
+INSERT INTO `user_order` VALUES ('529c4a20b2de4c8e89f5a34aa132d8e4', '1530190007715', '2', 'VIP充值', 'WX', '2018-06-28 20:46:47', '1');
+INSERT INTO `user_order` VALUES ('09afd734ba89438eb7bdd0c339e01f74', '1530195396980', '2', 'VIP充值', 'WX', '2018-06-28 22:16:36', '0');
+INSERT INTO `user_order` VALUES ('09afd734ba89438eb7bdd0c339e01f74', '1530195405652', '1', 'VIP充值', 'WX', '2018-06-28 22:16:45', '0');
+INSERT INTO `user_order` VALUES ('09afd734ba89438eb7bdd0c339e01f74', '1530230436824', '1', 'VIP充值', 'WX', '2018-06-29 08:00:36', '0');
+INSERT INTO `user_order` VALUES ('09afd734ba89438eb7bdd0c339e01f74', '1530230445090', '1', 'VIP充值', 'WX', '2018-06-29 08:00:45', '0');
+INSERT INTO `user_order` VALUES ('09afd734ba89438eb7bdd0c339e01f74', '1530230726544', '2', 'VIP充值', 'WX', '2018-06-29 08:05:26', '1');
+INSERT INTO `user_order` VALUES ('715831636ca44c498ed154b540a8b341', '1530236403574', '1', 'VIP充值', 'WX', '2018-06-29 09:40:03', '0');
 
 -- ----------------------------
 -- Table structure for video
@@ -432,37 +440,39 @@ CREATE TABLE `video` (
   `quality` varchar(100) DEFAULT NULL,
   `watch` int(2) DEFAULT '1',
   `sid` varchar(32) DEFAULT NULL COMMENT '明星',
-  `time` int(5) DEFAULT NULL,
   `level` varchar(10) DEFAULT NULL,
+  `time` int(5) DEFAULT NULL,
   PRIMARY KEY (`id`,`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of video
 -- ----------------------------
-INSERT INTO `video` VALUES ('1404a99af22f4d76b333b2da6de49cc9', '但丁篮球梦', '', '2', 'http://101.132.170.212/upload/img/2018060912560949.jpg', 'http://101.132.170.212/upload/video/1404a99af22f4d76b333b2da6de49cc9.mp4', '蓝光', '1', '3', null, '1');
-INSERT INTO `video` VALUES ('15cd4b4b696c40158aa17c0450349676', '詹姆斯(等级二视频)', '', '1', 'http://101.132.170.212/upload/img/20180620122831856.png', 'http://101.132.170.212/upload/video/15cd4b4b696c40158aa17c0450349676.mp4', '蓝光', '1', '3', '100', '2');
-INSERT INTO `video` VALUES ('233c3fe80418463a92d3708293378a61', '梅西阿根廷', '', '1', 'http://101.132.170.212/upload/img/20180620103526661.png', 'http://101.132.170.212/upload/video/233c3fe80418463a92d3708293378a61.mp4', '蓝光', '1', '17', null, '0');
-INSERT INTO `video` VALUES ('23e004e01d5442ff8fb696b17e927016', '詹姆斯（等级三视频）', '<p>詹姆斯（等级三视频）</p>', '1', 'http://101.132.170.212/upload/img/20180620123008832.png', 'http://101.132.170.212/upload/video/23e004e01d5442ff8fb696b17e927016.mp4', 'HD', '1', '3', null, '3');
-INSERT INTO `video` VALUES ('2c618e8597c344ecb9f36628750334f8', '小黄人（等级一视频）', '', '4', 'http://101.132.170.212/upload/img/20180620130528327.png', 'http://101.132.170.212/upload/video/2c618e8597c344ecb9f36628750334f8.mp4', '蓝光', '1', '20', null, '1');
-INSERT INTO `video` VALUES ('2fbbfbdfe01c424f840e822d7057dd29', '唐太宗登基', '', '1', 'http://101.132.170.212/upload/img/20180614102905990.png', 'http://101.132.170.212/upload/video/2fbbfbdfe01c424f840e822d7057dd29.mp4', 'HD', '1', '10', null, '1');
-INSERT INTO `video` VALUES ('4556319b99f44f81905f2780209ec459', '钢杆舞蹈', '<p>热舞明星<br></p>', '1', 'http://101.132.170.212/upload/img/20180609133252399.png', 'http://101.132.170.212/upload/video/4556319b99f44f81905f2780209ec459.mp4', '蓝光', '1', '8', null, '2');
-INSERT INTO `video` VALUES ('468c7195de8d4aa195e92311004121bd', 'papi酱', '<p>papi酱</p><p>papi酱</p><p>papi酱</p>', '2', 'http://101.132.170.212/upload/img/20180615080623427.png', 'http://101.132.170.212/upload/video/468c7195de8d4aa195e92311004121bd.mp4', 'HD', '1', '16', null, '3');
-INSERT INTO `video` VALUES ('490371dd8b3442efbac6ce7f9f9f0311', 'KD霸气广告', '', '2', 'http://101.132.170.212/upload/img/20180614103437884.png', 'http://101.132.170.212/upload/video/490371dd8b3442efbac6ce7f9f9f0311.mp4', 'HD', '1', '7', null, '1');
-INSERT INTO `video` VALUES ('6a4de0e725974b0ebaa79feb5df4a056', '民间翻纸', '<p>高手在民间<br></p>', '2', 'http://101.132.170.212/upload/img/20180615075353699.png', 'http://101.132.170.212/upload/video/6a4de0e725974b0ebaa79feb5df4a056.mp4', '蓝光', '1', '14', null, '2');
-INSERT INTO `video` VALUES ('6ac5e40009f647bea7fe6e29ca2be03c', '菲尔普斯夺冠', '', '3', 'http://101.132.170.212/upload/img/2018061410361534.png', 'http://101.132.170.212/upload/video/6ac5e40009f647bea7fe6e29ca2be03c.mp4', '蓝光', '1', '12', null, '1');
-INSERT INTO `video` VALUES ('6ba4b534d55a4b37ac3cb0a5a2855a51', 'C罗(等级二视频)', '<p>C罗(等级2视频)</p><p>C罗(等级2视频)</p>', '2', 'http://101.132.170.212/upload/img/20180620124920312.png', 'http://101.132.170.212/upload/video/6ba4b534d55a4b37ac3cb0a5a2855a51.mp4', '蓝光', '1', '18', null, '2');
-INSERT INTO `video` VALUES ('8173efc6f04040fe9fb1613a4912a023', '詹姆斯集锦', '', '1', 'http://101.132.170.212/upload/img/20180614132650749.png', 'http://101.132.170.212/upload/video/8173efc6f04040fe9fb1613a4912a023.mp4', 'HD', '1', '3', null, '1');
-INSERT INTO `video` VALUES ('8af0e438a4cf4173a14305d5dfd3745d', '梅西(等级三视频)', '<p>梅西(等级三视频)</p><p>梅西(等级三视频)</p>', '2', 'http://101.132.170.212/upload/img/2018062012531994.png', 'http://101.132.170.212/upload/video/8af0e438a4cf4173a14305d5dfd3745d.mp4', 'HD', '1', '17', null, '3');
-INSERT INTO `video` VALUES ('8bf3ffa4d43d447aa25808ea8c6bab56', '秦始皇', '', '1', 'http://101.132.170.212/upload/img/20180614103519882.png', 'http://101.132.170.212/upload/video/8bf3ffa4d43d447aa25808ea8c6bab56.mp4', '蓝光', '1', '11', null, '1');
-INSERT INTO `video` VALUES ('b14d55d79c1a45c38dc9ff2bf45ac504', 'C罗进球', '', '1', 'http://101.132.170.212/upload/img/20180620104104639.png', 'http://101.132.170.212/upload/video/b14d55d79c1a45c38dc9ff2bf45ac504.mp4', 'HD', '1', '18', null, '0');
-INSERT INTO `video` VALUES ('b3471ffb73e5435180b14cad87a0327e', 'C罗(等级三视频)', '<p>C罗(等级三视频)</p><p>C罗(等级三视频)</p>', '1', 'http://101.132.170.212/upload/img/20180620124618959.png', 'http://101.132.170.212/upload/video/b3471ffb73e5435180b14cad87a0327e.mp4', '蓝光', '1', '18', null, '3');
-INSERT INTO `video` VALUES ('b9463d336013458f8e5b711fb4589d89', '德鲁大叔打球', '', '3', 'http://101.132.170.212/upload/img/20180614103629396.png', 'http://101.132.170.212/upload/video/b9463d336013458f8e5b711fb4589d89.mp4', '蓝光', '1', '4', null, '1');
-INSERT INTO `video` VALUES ('c3f0c860cc8448cba32eb652a26f138c', '守门的猫', '<p>这只猫去世界杯肯定是最佳守门员<br></p>', '2', 'http://101.132.170.212/upload/img/20180615074802861.png', 'http://101.132.170.212/upload/video/c3f0c860cc8448cba32eb652a26f138c.mp4', '蓝光', '2', '13', null, '2');
-INSERT INTO `video` VALUES ('d020831260604f058508e51aff921aec', '梅西(等级二视频)', '<p>梅西(等级二视频)</p>', '3', 'http://101.132.170.212/upload/img/20180620125532249.png', 'http://101.132.170.212/upload/video/d020831260604f058508e51aff921aec.mp4', '蓝光', '1', '17', null, '2');
-INSERT INTO `video` VALUES ('da361b9f46d34fce8e22b87cd08821e4', '喜洋洋与灰太狼', '', '1', 'http://101.132.170.212/upload/img/20180620130924138.png', 'http://101.132.170.212/upload/video/da361b9f46d34fce8e22b87cd08821e4.mp4', '蓝光', '1', '21', null, '0');
-INSERT INTO `video` VALUES ('f93742c70a984d22a360508e585de221', '梅西(等级一视频)', '<p>梅西(等级一视频)</p>', '4', 'http://101.132.170.212/upload/img/20180620125709213.png', 'http://101.132.170.212/upload/video/f93742c70a984d22a360508e585de221.mp4', 'HD', '1', '17', null, '1');
-INSERT INTO `video` VALUES ('fbe6ac06932549f4bc7b780296640fb6', '内马尔进球', '', '1', 'http://101.132.170.212/upload/img/2018062010461266.png', 'http://101.132.170.212/upload/video/fbe6ac06932549f4bc7b780296640fb6.mp4', 'HD', '1', '19', null, '0');
+INSERT INTO `video` VALUES ('1404a99af22f4d76b333b2da6de49cc9', '但丁篮球梦', '', '2', 'http://101.132.170.212/upload/img/2018060912560949.jpg', 'http://101.132.170.212/upload/video/1404a99af22f4d76b333b2da6de49cc9.mp4', '蓝光', '1', '3', '1', null);
+INSERT INTO `video` VALUES ('15cd4b4b696c40158aa17c0450349676', '詹姆斯(等级二视频)', '<p>詹姆斯(等级二视频)</p>', '1', 'http://101.132.170.212/upload/img/20180620122831856.png', 'http://101.132.170.212/upload/video/15cd4b4b696c40158aa17c0450349676.mp4', '蓝光', '1', '3', '2', null);
+INSERT INTO `video` VALUES ('233c3fe80418463a92d3708293378a61', '梅西阿根廷', '', '1', 'http://101.132.170.212/upload/img/20180620103526661.png', 'http://101.132.170.212/upload/video/233c3fe80418463a92d3708293378a61.mp4', '蓝光', '1', '17', '0', null);
+INSERT INTO `video` VALUES ('23e004e01d5442ff8fb696b17e927016', '詹姆斯（等级三视频）', '<p>詹姆斯（等级三视频）</p>', '1', 'http://101.132.170.212/upload/img/20180620123008832.png', 'http://101.132.170.212/upload/video/23e004e01d5442ff8fb696b17e927016.mp4', 'HD', '1', '3', '3', null);
+INSERT INTO `video` VALUES ('25d0f839b4cd4b8abe6532c13954fb7f', '老九门看球（等级四视频）', '', '1', 'http://101.132.170.212/upload/img/2018062809541035.png', 'http://101.132.170.212/upload/video/25d0f839b4cd4b8abe6532c13954fb7f.mp4', 'HD', '1', '15', '4', '1');
+INSERT INTO `video` VALUES ('2c618e8597c344ecb9f36628750334f8', '小黄人（等级一视频）', '', '4', 'http://101.132.170.212/upload/img/20180620130528327.png', 'http://101.132.170.212/upload/video/2c618e8597c344ecb9f36628750334f8.mp4', '蓝光', '1', '20', '1', null);
+INSERT INTO `video` VALUES ('2fbbfbdfe01c424f840e822d7057dd29', '唐太宗登基', '', '1', 'http://101.132.170.212/upload/img/20180614102905990.png', 'http://101.132.170.212/upload/video/2fbbfbdfe01c424f840e822d7057dd29.mp4', 'HD', '1', '10', '1', null);
+INSERT INTO `video` VALUES ('4556319b99f44f81905f2780209ec459', '钢杆舞蹈', '<p>热舞明星<br></p>', '1', 'http://101.132.170.212/upload/img/20180609133252399.png', 'http://101.132.170.212/upload/video/4556319b99f44f81905f2780209ec459.mp4', '蓝光', '1', '8', '2', null);
+INSERT INTO `video` VALUES ('468c7195de8d4aa195e92311004121bd', 'papi酱', '<p>papi酱</p><p>papi酱</p><p>papi酱</p>', '2', 'http://101.132.170.212/upload/img/20180615080623427.png', 'http://101.132.170.212/upload/video/468c7195de8d4aa195e92311004121bd.mp4', 'HD', '1', '16', '3', null);
+INSERT INTO `video` VALUES ('490371dd8b3442efbac6ce7f9f9f0311', 'KD霸气广告', '', '2', 'http://101.132.170.212/upload/img/20180614103437884.png', 'http://101.132.170.212/upload/video/490371dd8b3442efbac6ce7f9f9f0311.mp4', 'HD', '1', '7', '1', null);
+INSERT INTO `video` VALUES ('560e9df634fa49f18291655243b05fba', '美女看球（等级五视频）', '', '1', 'http://101.132.170.212/upload/img/20180628095138431.png', 'http://101.132.170.212/upload/video/560e9df634fa49f18291655243b05fba.mp4', '蓝光', '1', '15', '5', '1');
+INSERT INTO `video` VALUES ('6a4de0e725974b0ebaa79feb5df4a056', '民间翻纸', '<p>高手在民间<br></p>', '2', 'http://101.132.170.212/upload/img/20180615075353699.png', 'http://101.132.170.212/upload/video/6a4de0e725974b0ebaa79feb5df4a056.mp4', '蓝光', '1', '14', '2', null);
+INSERT INTO `video` VALUES ('6ac5e40009f647bea7fe6e29ca2be03c', '菲尔普斯夺冠', '', '3', 'http://101.132.170.212/upload/img/2018061410361534.png', 'http://101.132.170.212/upload/video/6ac5e40009f647bea7fe6e29ca2be03c.mp4', '蓝光', '1', '12', '1', null);
+INSERT INTO `video` VALUES ('6ba4b534d55a4b37ac3cb0a5a2855a51', 'C罗(等级二视频)', '<p>C罗(等级2视频)</p><p>C罗(等级2视频)</p>', '2', 'http://101.132.170.212/upload/img/20180620124920312.png', 'http://101.132.170.212/upload/video/6ba4b534d55a4b37ac3cb0a5a2855a51.mp4', '蓝光', '1', '18', '2', null);
+INSERT INTO `video` VALUES ('8173efc6f04040fe9fb1613a4912a023', '詹姆斯集锦', '', '1', 'http://101.132.170.212/upload/img/20180614132650749.png', 'http://101.132.170.212/upload/video/8173efc6f04040fe9fb1613a4912a023.mp4', 'HD', '1', '3', '1', null);
+INSERT INTO `video` VALUES ('8af0e438a4cf4173a14305d5dfd3745d', '梅西(等级三视频)', '<p>梅西(等级三视频)</p><p>梅西(等级三视频)</p>', '2', 'http://101.132.170.212/upload/img/2018062012531994.png', 'http://101.132.170.212/upload/video/8af0e438a4cf4173a14305d5dfd3745d.mp4', 'HD', '1', '17', '3', null);
+INSERT INTO `video` VALUES ('8bf3ffa4d43d447aa25808ea8c6bab56', '秦始皇', '', '1', 'http://101.132.170.212/upload/img/20180614103519882.png', 'http://101.132.170.212/upload/video/8bf3ffa4d43d447aa25808ea8c6bab56.mp4', '蓝光', '1', '11', '1', null);
+INSERT INTO `video` VALUES ('b14d55d79c1a45c38dc9ff2bf45ac504', 'C罗进球', '', '1', 'http://101.132.170.212/upload/img/20180620104104639.png', 'http://101.132.170.212/upload/video/b14d55d79c1a45c38dc9ff2bf45ac504.mp4', 'HD', '1', '18', '0', null);
+INSERT INTO `video` VALUES ('b3471ffb73e5435180b14cad87a0327e', 'C罗(等级三视频)', '<p>C罗(等级三视频)</p><p>C罗(等级三视频)</p>', '1', 'http://101.132.170.212/upload/img/20180620124618959.png', 'http://101.132.170.212/upload/video/b3471ffb73e5435180b14cad87a0327e.mp4', '蓝光', '1', '18', '3', null);
+INSERT INTO `video` VALUES ('b9463d336013458f8e5b711fb4589d89', '德鲁大叔打球', '', '3', 'http://101.132.170.212/upload/img/20180614103629396.png', 'http://101.132.170.212/upload/video/b9463d336013458f8e5b711fb4589d89.mp4', '蓝光', '1', '4', '1', null);
+INSERT INTO `video` VALUES ('c3f0c860cc8448cba32eb652a26f138c', '守门的猫', '<p>这只猫去世界杯肯定是最佳守门员<br></p>', '2', 'http://101.132.170.212/upload/img/20180615074802861.png', 'http://101.132.170.212/upload/video/c3f0c860cc8448cba32eb652a26f138c.mp4', '蓝光', '2', '13', '2', null);
+INSERT INTO `video` VALUES ('d020831260604f058508e51aff921aec', '梅西(等级二视频)', '<p>梅西(等级二视频)</p>', '3', 'http://101.132.170.212/upload/img/20180620125532249.png', 'http://101.132.170.212/upload/video/d020831260604f058508e51aff921aec.mp4', '蓝光', '1', '17', '2', null);
+INSERT INTO `video` VALUES ('da361b9f46d34fce8e22b87cd08821e4', '喜洋洋与灰太狼', '', '1', 'http://101.132.170.212/upload/img/20180620130924138.png', 'http://101.132.170.212/upload/video/da361b9f46d34fce8e22b87cd08821e4.mp4', '蓝光', '1', '21', '0', null);
+INSERT INTO `video` VALUES ('f93742c70a984d22a360508e585de221', '梅西(等级一视频)', '<p>梅西(等级一视频)</p>', '4', 'http://101.132.170.212/upload/img/20180620125709213.png', 'http://101.132.170.212/upload/video/f93742c70a984d22a360508e585de221.mp4', 'HD', '1', '17', '1', null);
+INSERT INTO `video` VALUES ('fbe6ac06932549f4bc7b780296640fb6', '内马尔进球', '', '1', 'http://101.132.170.212/upload/img/2018062010461266.png', 'http://101.132.170.212/upload/video/fbe6ac06932549f4bc7b780296640fb6.mp4', 'HD', '1', '19', '0', null);
 
 -- ----------------------------
 -- Table structure for video_cid
@@ -494,6 +504,7 @@ INSERT INTO `video_cid` VALUES ('468c7195de8d4aa195e92311004121bd', 'f1dc41ce727
 INSERT INTO `video_cid` VALUES ('233c3fe80418463a92d3708293378a61', '7878c6031d60477095e12e7316fe842b');
 INSERT INTO `video_cid` VALUES ('b14d55d79c1a45c38dc9ff2bf45ac504', 'b633553aa32f46f4af7c9debf7ea1204');
 INSERT INTO `video_cid` VALUES ('fbe6ac06932549f4bc7b780296640fb6', 'f228ef13c5b648f495447e1f3fd51800');
+INSERT INTO `video_cid` VALUES ('15cd4b4b696c40158aa17c0450349676', '9db5b157ab4440ceab35543d4687bef4');
 INSERT INTO `video_cid` VALUES ('23e004e01d5442ff8fb696b17e927016', '9db5b157ab4440ceab35543d4687bef4');
 INSERT INTO `video_cid` VALUES ('b3471ffb73e5435180b14cad87a0327e', 'b633553aa32f46f4af7c9debf7ea1204');
 INSERT INTO `video_cid` VALUES ('b3471ffb73e5435180b14cad87a0327e', '7878c6031d60477095e12e7316fe842b');
@@ -509,7 +520,8 @@ INSERT INTO `video_cid` VALUES ('2c618e8597c344ecb9f36628750334f8', '7b51c9c02dc
 INSERT INTO `video_cid` VALUES ('2c618e8597c344ecb9f36628750334f8', 'a9a11b139af243779e8d49fe300e6db5');
 INSERT INTO `video_cid` VALUES ('da361b9f46d34fce8e22b87cd08821e4', 'a9a11b139af243779e8d49fe300e6db5');
 INSERT INTO `video_cid` VALUES ('da361b9f46d34fce8e22b87cd08821e4', '7b51c9c02dcb47478ec8df3b1e3c3f5b');
-INSERT INTO `video_cid` VALUES ('15cd4b4b696c40158aa17c0450349676', '9db5b157ab4440ceab35543d4687bef4');
+INSERT INTO `video_cid` VALUES ('560e9df634fa49f18291655243b05fba', '7878c6031d60477095e12e7316fe842b');
+INSERT INTO `video_cid` VALUES ('25d0f839b4cd4b8abe6532c13954fb7f', '7878c6031d60477095e12e7316fe842b');
 
 -- ----------------------------
 -- Table structure for video_img
@@ -613,3 +625,12 @@ INSERT INTO `video_img` VALUES ('2c618e8597c344ecb9f36628750334f8', 'http://101.
 INSERT INTO `video_img` VALUES ('da361b9f46d34fce8e22b87cd08821e4', 'http://101.132.170.212/upload/img/20180620131039463.png');
 INSERT INTO `video_img` VALUES ('da361b9f46d34fce8e22b87cd08821e4', 'http://101.132.170.212/upload/img/20180620131041974.png');
 INSERT INTO `video_img` VALUES ('da361b9f46d34fce8e22b87cd08821e4', 'http://101.132.170.212/upload/img/20180620131043111.png');
+INSERT INTO `video_img` VALUES ('560e9df634fa49f18291655243b05fba', 'http://101.132.170.212/upload/img/20180628095247601.png');
+INSERT INTO `video_img` VALUES ('560e9df634fa49f18291655243b05fba', 'http://101.132.170.212/upload/img/20180628095251883.png');
+INSERT INTO `video_img` VALUES ('560e9df634fa49f18291655243b05fba', 'http://101.132.170.212/upload/img/20180628095253560.png');
+INSERT INTO `video_img` VALUES ('25d0f839b4cd4b8abe6532c13954fb7f', 'http://101.132.170.212/upload/img/20180628095505176.png');
+INSERT INTO `video_img` VALUES ('25d0f839b4cd4b8abe6532c13954fb7f', 'http://101.132.170.212/upload/img/20180628095507244.png');
+INSERT INTO `video_img` VALUES ('25d0f839b4cd4b8abe6532c13954fb7f', 'http://101.132.170.212/upload/img/20180628095509318.png');
+INSERT INTO `video_img` VALUES ('25d0f839b4cd4b8abe6532c13954fb7f', 'http://101.132.170.212/upload/img/20180628095511498.png');
+INSERT INTO `video_img` VALUES ('25d0f839b4cd4b8abe6532c13954fb7f', 'http://101.132.170.212/upload/img/2018062809551343.png');
+INSERT INTO `video_img` VALUES ('25d0f839b4cd4b8abe6532c13954fb7f', 'http://101.132.170.212/upload/img/20180628095515657.png');

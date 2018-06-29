@@ -1,5 +1,8 @@
 package com.app.view.mapper;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -24,5 +27,8 @@ public interface PayMapper {
 
 	
 	void saveMoneyInfo(PayInfo pm);
+	//获取商户信息
+	@Select(" select `key`,mch_id,url from pay_info ")
+	List<Map<String, Object>> getPayInfo();
 
 }

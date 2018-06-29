@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.app.view.entry.PayInfo;
@@ -30,6 +31,9 @@ import com.app.view.util.pay.SignUtils;
 @Service
 public class PayServiceImple implements PayService {
 	
+	@Value("${ip}")
+	private String ip;
+	
 	@Autowired
 	private PayMapper payMapper;
 	
@@ -49,6 +53,8 @@ public class PayServiceImple implements PayService {
 		pm.setResult("0");
 		payMapper.add(pm);		
 	}
+	
+	
 
 
 //	@Override
@@ -72,7 +78,11 @@ public class PayServiceImple implements PayService {
 
 	@Override
 	public String getPayUrl(PayMent pm) {
-		String key="cbd4f10f115673f0e76d223168bf99d3";//秘钥	
+		Map<String,Object> pay_info = this.getPayInfo();
+		String mch_id = pay_info.get("mch_id").toString();
+		String key = pay_info.get("key").toString();
+		String url = pay_info.get("url").toString();
+//		String key="cbd4f10f115673f0e76d223168bf99d3";//秘钥	
 		String out_trade_no = System.currentTimeMillis()+"";//客户支付的订单号	
 		pm.setOut_trade_no(out_trade_no);
 		String total_fee = pm.getTotal_fee()+"";
@@ -82,12 +92,12 @@ public class PayServiceImple implements PayService {
 		//保存充值记录
 		this.add(pm);	
 		Map<String, String> params = new HashMap<String, String>();
-		params.put("mch_id", "gxtttooo");//商户/
+		params.put("mch_id", mch_id);//商户/
 		params.put("out_trade_no",out_trade_no);//商户订单
 		params.put("body", body);//商品
 		params.put("total_fee", total_fee);//总价
 		params.put("spbill_create_ip", pm.getIp());//客户端ip
-		params.put("notify_url", "http://101.132.170.212/api/pay/result");//服务器通知地址
+		params.put("notify_url", "http://"+ip+"/api/pay/result");//服务器通知地址
 		params.put("redirect_url", redirect_url);//前端跳转地址
 		params.put("trade_type", trade_type);//支付方式
 		
@@ -95,9 +105,18 @@ public class PayServiceImple implements PayService {
 		SignUtils.buildPayParams(buf, params, false);
 		String preStr = buf.toString();
 		String signRecieve = MD5.sign(preStr, "&key=" + key, "utf-8");
-		String httUrl = "http://weixin.vvjvv.cn/platform/pay/unifiedorder/video?sign=" + signRecieve + "&" + preStr;	
+	
+		String httUrl = url+"?sign=" + signRecieve + "&" + preStr;	
 		return httUrl;
 	}
+
+
+	private Map<String, Object> getPayInfo() {	
+	List<Map<String, Object>> datas = payMapper.getPayInfo();
+	return  datas.get(0);
+}
+
+
 
 
 	@Override
