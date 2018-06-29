@@ -27,11 +27,9 @@
 		</select>
 		
 		<insert id="add" parameterType="com.app.view.entry.Setmeal">
-		INSERT INTO code_meal (code_id,one,text)
+		INSERT INTO code_meal (code_id,one)
 			  VALUES(#{id,jdbcType=VARCHAR},
-			  #{one,jdbcType=INTEGER},	
-			  #{text,jdbcType=VARCHAR}
-			  )		
+			  #{one,jdbcType=INTEGER})		
 		</insert>
 
 </mapper>
