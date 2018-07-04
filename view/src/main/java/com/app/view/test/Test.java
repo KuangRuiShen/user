@@ -1,21 +1,16 @@
 package com.app.view.test;
 
-import java.util.Date;
-
-import com.app.view.util.MyUtils;
+import java.util.Optional;
 
 public class Test {
 
 	public static void main(String[] args) {	
-		String text= "1123a13121";
-		try {
-			Integer.parseInt(text);
-			text = "";
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+		String value = "ABCa";
+
+		String name =  Optional.ofNullable(value).map(String::toUpperCase).orElse("NONE");
+//		name.orElse("为空");
+		System.out.println(name);
 		
-		System.out.println(MyUtils.RechargeDate(new Date(), "5"));
 	}
 	
 
