@@ -1,6 +1,7 @@
 package com.app.view.service.impl;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,6 +77,16 @@ public class VideoServiceImpl implements VideoService {
 	@Override
 	public Video findbyId(String id) {
 		return videoMapper.findbyId(id);
+	}
+
+	@Override
+	public List<Video> hobbyList(Integer num) {
+		if(num == null || num == 0){
+			num = 10;
+		}
+		 List<Video> list =  videoMapper.list(new VideoCondtion ());
+		 Collections.shuffle(list);//打算顺序
+		return 	list.subList(0, num-1);
 	}
 
 

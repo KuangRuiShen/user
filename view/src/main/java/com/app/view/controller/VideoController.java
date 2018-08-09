@@ -105,5 +105,17 @@ public class VideoController {
 		}
 	}
 	
+	@GetMapping("hobbyList")
+	public JsonResult<?> hobbyList(Integer num){
+		try {		
+			  List<Video> list  = videoServce.hobbyList(num);
+        	return JsonResult.buildSuccessResult(list);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return JsonResult.buildExceptionResult("添加失败,请联系管理员!");
+		}
+	}
+	
+	
 
 }

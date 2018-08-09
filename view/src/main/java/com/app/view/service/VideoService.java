@@ -23,5 +23,7 @@ public interface VideoService {
 	
 	int count(VideoCondtion vc);
 
+	List<Video> hobbyList(Integer num);
+
 
 }
