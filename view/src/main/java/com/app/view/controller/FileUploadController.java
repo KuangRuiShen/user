@@ -130,9 +130,9 @@ public class FileUploadController {
 					String newFilename = id + fileName.substring(fileName.lastIndexOf("."));
 		            // 得到 destTempFile 就是最终的文件  
 		            File destTempFile = new File(realpath+"/upload/video/"+newFilename);
-		            if(!destTempFile.exists()){
+//		            if(!destTempFile.exists()){
 		            	destTempFile.delete();
-		            }
+//		            }
                 	FileOutputStream destTempfos = new FileOutputStream(destTempFile, true);
 	                for (int i = 0; i < chunks; i++) {                  
 	                	File partFile = new File(tmppath + id + "_" + i + ".part");                       
