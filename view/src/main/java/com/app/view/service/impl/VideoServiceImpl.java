@@ -80,12 +80,12 @@ public class VideoServiceImpl implements VideoService {
 	}
 
 	@Override
-	public List<Video> hobbyList(Integer num) {
-		if(num == null || num == 0){
-			num = 10;
-		}
-		 List<Video> list =  videoMapper.list(new VideoCondtion ());
+	public List<Video> hobbyList(VideoCondtion vc) {
+		//默认10条
+		 int num = 10;		 
+		 List<Video> list =  videoMapper.list(vc);
 		 Collections.shuffle(list);//打算顺序
+		 
 		return 	list.subList(0, num-1);
 	}
 

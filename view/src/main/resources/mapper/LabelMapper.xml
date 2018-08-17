@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.view.mapper.LaberMapper">
+	
+	<select id="list" resultType="com.app.view.pojo.Laber" >
+		 select id, name from laber
+		 <where>
+		 	<if test="name !=null and name != '' ">
+		 		name like CONCAT('%', #{name}, '%')
+		 	</if>	 
+		 </where>	 
+
+	</select>
+	
+	<insert id="add" parameterType="com.app.view.pojo.Laber">
+		INSERT INTO laber (name) VALUES (#{name,jdbcType=VARCHAR})
+	</insert>
+	
+	<update id="update" parameterType="com.app.view.pojo.Laber">
+		UPDATE laber SET
+		name=#{name,jdbcType=VARCHAR}
+		WHERE id = #{id}
+	</update>
+	
+	<delete id="delete">
+	   DELETE FROM laber WHERE id IN
+		<foreach collection="list" item="id"  open="(" separator=","
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
+	
+		<select id="findVideo" resultType="java.lang.Integer">
+	    select count(l.id) from  
+	 	laber l left join  video_laber m on m.lid = l.id 
+	 	where l.id in 
+		<foreach collection="list" item="id"  open="(" separator=","
+			close=")">
+			#{id}
+		</foreach>
+	</select>
+	
+
+
+</mapper>

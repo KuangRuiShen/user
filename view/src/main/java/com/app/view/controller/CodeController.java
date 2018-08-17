@@ -25,6 +25,6 @@ public class CodeController {
 			e.printStackTrace();
 			return JsonResult.buildExceptionResult("查询code,请联系管理员!");
 		}
-      
+   
 	}
 }

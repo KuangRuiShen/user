@@ -24,9 +24,13 @@ public class Video {
 	
 	private String videourl;
 	
-	private List<String> cids =new ArrayList<>();
+	private List<String> cids = new ArrayList<>();
 	
-	private List<Category> categorys =new ArrayList<>();
+	private List<Category> categorys = new ArrayList<>();
+	
+	private List<String> laberIds = new ArrayList<>(); 
+	
+	private List<String> laberTexts = new ArrayList<>(); 
 	
 	private Integer px;
 	
@@ -169,6 +173,23 @@ public class Video {
 	public void setTime(Integer time) {
 		this.time = time;
 	}
+
+	public List<String> getLaberIds() {
+		return laberIds;
+	}
+
+	public void setLaberIds(List<String> laberIds) {
+		this.laberIds = laberIds;
+	}
+
+	public List<String> getLaberTexts() {
+		return laberTexts;
+	}
+
+	public void setLaberTexts(List<String> laberTexts) {
+		this.laberTexts = laberTexts;
+	}
+
 	
 		
 }

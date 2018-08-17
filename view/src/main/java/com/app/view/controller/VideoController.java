@@ -106,9 +106,16 @@ public class VideoController {
 	}
 	
 	@GetMapping("hobbyList")
-	public JsonResult<?> hobbyList(Integer num){
-		try {		
-			  List<Video> list  = videoServce.hobbyList(num);
+	public JsonResult<?> hobbyList(String user_id,Integer page,Integer pageSize,String name,String cid,String sid,String level,String type){
+		try {	
+				VideoCondtion vc = new VideoCondtion();
+				vc.setUser_id(user_id);
+				vc.setCid(cid);
+				vc.setName(name);
+				vc.setSid(sid);
+				vc.setLevel(level);
+				vc.setType(type);
+			  List<Video> list  = videoServce.hobbyList(vc);
         	return JsonResult.buildSuccessResult(list);
 		} catch (Exception e) {
 			e.printStackTrace();
