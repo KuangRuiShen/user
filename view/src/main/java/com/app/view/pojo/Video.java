@@ -28,9 +28,9 @@ public class Video {
 	
 	private List<Category> categorys = new ArrayList<>();
 	
-	private List<String> laberIds = new ArrayList<>(); 
+	private List<String> labelIds = new ArrayList<>(); 
 	
-	private List<String> laberTexts = new ArrayList<>(); 
+	private List<String> labelTexts = new ArrayList<>(); 
 	
 	private Integer px;
 	
@@ -174,19 +174,21 @@ public class Video {
 		this.time = time;
 	}
 
-	public List<String> getLaberIds() {
-		return laberIds;
+	public List<String> getLabelIds() {
+		return labelIds;
 	}
 
-	public void setLaberIds(List<String> laberIds) {
-		this.laberIds = laberIds;
+	public void setLabelIds(List<String> labelIds) {
+		this.labelIds = labelIds;
 	}
 
-	public List<String> getLaberTexts() {
-		return laberTexts;
+	public List<String> getLabelTexts() {
+		return labelTexts;
 	}
 
-	public void setLaberTexts(List<String> laberTexts) {
-		this.laberTexts = laberTexts;
+	public void setLabelTexts(List<String> labelTexts) {
+		this.labelTexts = labelTexts;
 	}
+
+	
 }

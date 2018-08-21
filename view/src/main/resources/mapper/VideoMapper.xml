@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.app.view.mapper.VideoMapper">
-	
+
 	<resultMap id="baseMap" type="com.app.view.pojo.Video">
 		<id property="id" column="id" />
 		<result property="name" column="name" />
@@ -17,94 +17,108 @@
 		<result property="level" column="level" />
 		<result property="levelText" column="levelText" />
 		<collection property="imgs" ofType="java.lang.String">
-			<id  column="img" />
+			<id column="img" />
 		</collection>
 		<collection property="cids" ofType="java.lang.String">
-			<id  column="cid" />
+			<id column="cid" />
+		</collection>
+		<collection property="labelIds" ofType="java.lang.String">
+			<id column="bid" />
+		</collection>
+		<collection property="labelTexts" ofType="java.lang.String">
+			<id column="bname" />
 		</collection>
 		<collection property="categorys" ofType="com.app.view.pojo.Category">
-				<id property="id" column="cid" />
-				<result property="name" column="cname" />
-				<result property="type" column="type" />
-				<result property="typeText" column="typeText" />
+			<id property="id" column="cid" />
+			<result property="name" column="cname" />
+			<result property="type" column="type" />
+			<result property="typeText" column="typeText" />
 		</collection>
-		
+
 	</resultMap>
 
-  <select id="list" resultMap="baseMap">
+	<select id="list" resultMap="baseMap">
 		select v.id,v.name,v.remark,v.px,v.videourl,v.imgurl,v.quality,v.time,
 		v.watch,s.id,s.name as sname,v.level,l.name as levelText,
-		vi.imgurl as img,s.id as sid,s.name AS sname,
-	     c.id as cid, c.name as cname,c.type,t.name as typeText
-		 from  video v
-        left join video_img vi on vi.vid = v.id
-        left join star s on s.id = v.sid
-        left join video_cid m on m.vid =v.id
+		vi.imgurl as
+		img,s.id as sid,s.name AS sname,
+		c.id as cid, c.name as cname,c.type,t.name as typeText,
+		b.id as bid,b.name as bname
+		from video v
+		left join video_img vi on vi.vid = v.id
+		left join star s on s.id = v.sid
+		left join video_cid m on m.vid =v.id
 		left join category c on c.id = m.cid
 		left join code t on t.code_id =c.type and t.type='page'
-		left join code l on l.code_id =v.level and l.type='level'
-		 <where>
-		 	<if test="name !=null and name != '' ">
-		 		v.name like CONCAT('%', #{name}, '%')
-		 	</if>	 
-		 	<if test="cid !=null and cid != '' ">
-		 		and c.id =#{cid}
-		 	</if>
-		 	<if test="sid !=null and sid != '' ">
-		 		and v.sid =#{sid}
-		 	</if>
-		 	<if test="level !=null and level != '' ">
-		 		and v.level =#{level}
-		 	</if>
-		 	<if test="type !=null and type != '' ">
-		 		and c.type =#{type}
-		 	</if>
-		 	<if test="user_id !=null and user_id != '' ">
-		 		and v.level = (select role_id from user where id = #{user_id})
-		 	</if>
-		 </where>	 
-		  order by CONVERT (c.px, SIGNED),CONVERT(v.px,SIGNED)	  
+		left join code
+		l on l.code_id =v.level and l.type='level'
+		left join video_label vl on
+		vl.vid = v.id
+		left join label b on b.id = vl.lid
+		<where>
+			<if test="name !=null and name != '' ">
+				v.name like CONCAT('%', #{name}, '%')
+			</if>
+			<if test="cid !=null and cid != '' ">
+				and c.id =#{cid}
+			</if>
+			<if test="sid !=null and sid != '' ">
+				and v.sid =#{sid}
+			</if>
+			<if test="level !=null and level != '' ">
+				and v.level =#{level}
+			</if>
+			<if test="type !=null and type != '' ">
+				and c.type =#{type}
+			</if>
+			<if test="user_id !=null and user_id != '' ">
+				and v.level = (select role_id from user where id = #{user_id})
+			</if>
+		</where>
+		order by CONVERT (c.px, SIGNED),CONVERT(v.px,SIGNED)
 	</select>
-	
+
 	<select id="count" resultType="java.lang.Integer">
 		select count(DISTINCT v.id)
 		from video v
-        left join video_img vi on vi.vid = v.id
-        left join star s on s.id = v.sid
-        left join video_cid m on m.vid =v.id
+		left join video_img vi on vi.vid = v.id
+		left join star s on s.id = v.sid
+		left join video_cid m on m.vid =v.id
 		left join category c on c.id = m.cid
 		left join code t on t.code_id =c.type and t.type='page'
-		left join code l on l.code_id =v.level and l.type='level'
-		 <where>
-		 	<if test="name !=null and name != '' ">
-		 		v.name like CONCAT('%', #{name}, '%')
-		 	</if>	 
-		 	<if test="cid !=null and cid != '' ">
-		 		and c.id =#{cid}
-		 	</if>
-		 	<if test="sid !=null and sid != '' ">
-		 		and v.sid =#{sid}
-		 	</if>
-		 	<if test="level !=null and level != '' ">
-		 		and v.level =#{level}
-		 	</if>
-		 	<if test="type !=null and type != '' ">
-		 		and c.type =#{type}
-		 	</if>
-		 	<if test="user_id !=null and user_id != '' ">
-		 		and v.level = (select role_id from user where id = #{user_id})
-		 	</if>
-		 </where>	 
-		  order by CONVERT (c.px, SIGNED),CONVERT(v.px,SIGNED)	  
+		left join code
+		l on l.code_id =v.level and l.type='level'
+		<where>
+			<if test="name !=null and name != '' ">
+				v.name like CONCAT('%', #{name}, '%')
+			</if>
+			<if test="cid !=null and cid != '' ">
+				and c.id =#{cid}
+			</if>
+			<if test="sid !=null and sid != '' ">
+				and v.sid =#{sid}
+			</if>
+			<if test="level !=null and level != '' ">
+				and v.level =#{level}
+			</if>
+			<if test="type !=null and type != '' ">
+				and c.type =#{type}
+			</if>
+			<if test="user_id !=null and user_id != '' ">
+				and v.level = (select role_id from user where id = #{user_id})
+			</if>
+		</where>
+		order by CONVERT (c.px, SIGNED),CONVERT(v.px,SIGNED)
 	</select>
-	
-	
+
+
 	<insert id="add" parameterType="com.app.view.pojo.Video">
-		INSERT INTO video (id,name,remark,imgurl,quality,watch,px,sid,level,time) VALUES (
+		INSERT INTO video
+		(id,name,remark,imgurl,quality,watch,px,sid,level,time) VALUES (
 		#{id,jdbcType=VARCHAR},
-		#{name,jdbcType=VARCHAR},	
-		#{remark,jdbcType=VARCHAR},	  
-		#{imgurl,jdbcType=VARCHAR},	 
+		#{name,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR},
+		#{imgurl,jdbcType=VARCHAR},
 		#{quality,jdbcType=VARCHAR},
 		#{watch,jdbcType=INTEGER},
 		#{px,jdbcType=INTEGER},
@@ -113,73 +127,75 @@
 		#{time,jdbcType=INTEGER}
 		)
 	</insert>
-	
+
 	<insert id="addcid" parameterType="com.app.view.pojo.Video">
 		INSERT INTO video_cid(vid,cid) VALUES
-		<foreach collection="cids" item="cid" open=""  separator="," close="">
-		(#{id},#{cid})
+		<foreach collection="cids" item="cid" open="" separator=","
+			close="">
+			(#{id},#{cid})
 		</foreach>
 	</insert>
-	
-		<delete id="deletecid">
-	   DELETE FROM video_cid WHERE vid IN
-		<foreach collection="list" item="id"  open="(" separator=","
+
+	<delete id="deletecid">
+		DELETE FROM video_cid WHERE vid IN
+		<foreach collection="list" item="id" open="(" separator=","
 			close=")">
 			#{id}
 		</foreach>
 	</delete>
-	
-	
-	
+
+
+
 	<update id="update" parameterType="com.app.view.pojo.Category">
 		UPDATE video SET
 		name=#{name,jdbcType=VARCHAR},
 		px=#{px,jdbcType=INTEGER},
-		watch=#{watch,jdbcType=INTEGER},	 
-		time=#{time,jdbcType=INTEGER},	 
-		imgurl=#{imgurl,jdbcType=VARCHAR},	 
+		watch=#{watch,jdbcType=INTEGER},
+		time=#{time,jdbcType=INTEGER},
+		imgurl=#{imgurl,jdbcType=VARCHAR},
 		quality=#{quality,jdbcType=VARCHAR},
 		remark=#{remark,jdbcType=VARCHAR},
 		sid=#{sid,jdbcType=VARCHAR},
 		level=#{level,jdbcType=VARCHAR}
 		WHERE id = #{id}
 	</update>
-	
+
 	<delete id="delete">
-	   DELETE FROM video WHERE id IN
-		<foreach collection="list" item="id"  open="(" separator=","
+		DELETE FROM video WHERE id IN
+		<foreach collection="list" item="id" open="(" separator=","
 			close=")">
 			#{id}
 		</foreach>
 	</delete>
-	
-	
-	
-		<delete id="deleteImg">
-	   DELETE FROM video_img WHERE vid IN
-		<foreach collection="list" item="id"  open="(" separator=","
+
+
+
+	<delete id="deleteImg">
+		DELETE FROM video_img WHERE vid IN
+		<foreach collection="list" item="id" open="(" separator=","
 			close=")">
 			#{id}
 		</foreach>
 	</delete>
-	
+
 	<select id="findimgs" resultType="java.util.Map">
-	 select * from  video_img WHERE vid  IN
-		<foreach collection="list" item="id"  open="(" separator=","
+		select * from video_img WHERE vid IN
+		<foreach collection="list" item="id" open="(" separator=","
 			close=")">
 			#{id}
 		</foreach>
 	</select>
 
-	
+
 	<insert id="addrelation" parameterType="com.app.view.pojo.Video">
-		INSERT INTO 
-		video_img(vid,imgurl) 
+		INSERT INTO
+		video_img(vid,imgurl)
 		VALUES
-		<foreach collection="imgs" item="img"  open=""  separator="," close="">
+		<foreach collection="imgs" item="img" open="" separator=","
+			close="">
 			(#{id},#{img})
 		</foreach>
 	</insert>
-	
-	
+
+
 </mapper>

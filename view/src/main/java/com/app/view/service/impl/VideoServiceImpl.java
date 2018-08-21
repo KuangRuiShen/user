@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.view.entry.VideoCondtion;
+import com.app.view.mapper.LabelMapper;
 import com.app.view.mapper.VideoMapper;
 import com.app.view.pojo.Video;
 import com.app.view.service.VideoService;
@@ -18,6 +19,9 @@ public class VideoServiceImpl implements VideoService {
 
 	@Autowired
 	private VideoMapper videoMapper;
+	
+	@Autowired
+	private LabelMapper labelMapper;
 	
 	@Override
 	public List<Video> list(VideoCondtion vc) {
@@ -35,6 +39,10 @@ public class VideoServiceImpl implements VideoService {
 		 videoMapper.add(v);
 		 if(!v.getCids().isEmpty()){
 			 videoMapper.addcid(v);
+		 }	 
+		 //添加标签
+		 if(!v.getLabelIds().isEmpty()){
+			 labelMapper.addConn(v.getId(),v.getLabelIds());
 		 }
 		
 	}
@@ -45,6 +53,11 @@ public class VideoServiceImpl implements VideoService {
 		 videoMapper.deletecid(Arrays.asList(v.getId()));
 		 if(!v.getCids().isEmpty()){
 			 videoMapper.addcid(v);
+		 }
+		 //删除标签
+		 labelMapper.deleteConnByid(v.getId());
+		 if(!v.getLabelIds().isEmpty()){
+			 labelMapper.addConn(v.getId(),v.getLabelIds());
 		 }
 	}
 

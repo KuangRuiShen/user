@@ -55,7 +55,7 @@ public class LabelController {
 			if(bindingResult.hasErrors()){
 				return JsonResult.buildFailuredResult(ResultCode.PARAMS_ERROR, bindingResult.getFieldError().getDefaultMessage());
 			}	
-			if(l.getId() != null){
+			if(l.getId() == null){
 				return JsonResult.buildExceptionResult("id不能为空");
 			}
 			labelService.update(l);
@@ -73,9 +73,9 @@ public class LabelController {
 			if(ids.isEmpty()){
 				return JsonResult.buildExceptionResult("参数不能为空");
 			}
-			if(labelService.findVideo(ids) > 0){
-				return JsonResult.buildExceptionResult("选择标签已经有关联的视频，不能删除");
-			}
+//			if(labelService.findVideo(ids) > 0){
+//				return JsonResult.buildExceptionResult("选择标签已经有关联的视频，不能删除");
+//			}
 			labelService.delete(ids);
         	return JsonResult.buildSuccessResult();
 		} catch (Exception e) {

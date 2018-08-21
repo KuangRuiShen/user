@@ -26,7 +26,7 @@
 		 #{imgurl,jdbcType=VARCHAR})
 	 </insert> 
 	 
-	 		<update id="update" parameterType="com.app.view.pojo.Comment">
+	 	<update id="update" parameterType="com.app.view.pojo.Comment">
 		UPDATE comment SET
 		username=#{username,jdbcType=VARCHAR},
 		remark=#{remark,jdbcType=VARCHAR},

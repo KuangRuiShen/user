@@ -259,14 +259,14 @@ CREATE TABLE `video_img` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-DROP TABLE IF EXISTS `video_laber`;
-CREATE TABLE `video_laber` (
+DROP TABLE IF EXISTS `video_Label`;
+CREATE TABLE `video_Label` (
   `vid` varchar(32) NOT NULL,
   `lid` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `laber`;
-CREATE TABLE `laber` (
+DROP TABLE IF EXISTS `Label`;
+CREATE TABLE `Label` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)

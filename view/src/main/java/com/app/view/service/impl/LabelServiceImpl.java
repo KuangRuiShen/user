@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.app.view.mapper.LaberMapper;
+import com.app.view.mapper.LabelMapper;
 import com.app.view.pojo.Label;
 import com.app.view.service.LabelService;
 
@@ -13,7 +13,7 @@ import com.app.view.service.LabelService;
 public class LabelServiceImpl implements LabelService {
 	
 	@Autowired
-	private LaberMapper laberMapper;
+	private LabelMapper laberMapper;
 	
 	
 	@Override
@@ -23,7 +23,7 @@ public class LabelServiceImpl implements LabelService {
 
 	@Override
 	public List<Label> list(String name) {
-		return 	laberMapper.add(name);	
+		return 	laberMapper.list(name);	
 	}
 
 	@Override
@@ -40,6 +40,7 @@ public class LabelServiceImpl implements LabelService {
 	@Override
 	public void delete(List<String> ids) {
 		laberMapper.delete(ids);	
+		laberMapper.deleteConn(ids);
 		
 	}
 
