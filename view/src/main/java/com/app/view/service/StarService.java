@@ -7,7 +7,7 @@ import com.app.view.pojo.Star;
 
 public interface StarService {
 
-	List<Star> list(String string);
+	List<Star> list(String string, String sid);
 
 	void add(Star c);
 

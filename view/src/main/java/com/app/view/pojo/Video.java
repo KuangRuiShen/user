@@ -189,7 +189,4 @@ public class Video {
 	public void setLaberTexts(List<String> laberTexts) {
 		this.laberTexts = laberTexts;
 	}
-
-	
-		
 }

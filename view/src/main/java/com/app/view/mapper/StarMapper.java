@@ -11,7 +11,7 @@ import com.app.view.pojo.Star;
 
 public interface StarMapper {
 	
-	List<Star> list(@Param("name") String name);
+	List<Star> list(@Param("name") String name, @Param("sid")String sid);
 
 	void add(Star c);
 

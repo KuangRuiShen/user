@@ -26,14 +26,14 @@ public class StarController {
 	private StarService starService;
 	
 	@GetMapping("list")
-	public JsonResult<?> list(Integer page,Integer pageSize,String name){		
+	public JsonResult<?> list(Integer page,Integer pageSize,String name,String sid){		
 		if(page == null || page < 1 )
 			page = 1;
 		if(pageSize == null || pageSize <10)
 		  pageSize = JsonResult.PAGESIZR;			 
 		try {
 			  PageHelper.startPage(page, pageSize);
-			  List<Star> list = starService.list(name);
+			  List<Star> list = starService.list(name,sid);
 	          PageInfo<Star> pageInfo = new PageInfo<Star>(list);
 	          return JsonResult.buildSuccessResult(list,pageInfo.getTotal());
 		} catch (Exception e) {
@@ -102,8 +102,6 @@ public class StarController {
 			return JsonResult.buildExceptionResult("删除异常,请联系管理员!");
 		}
 	}
-
-
 
 
 }

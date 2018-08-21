@@ -7,7 +7,10 @@
 		 <where>
 		 	<if test="name !=null and name != '' ">
 		 		name like CONCAT('%', #{name}, '%')
-		 	</if>	 
+		 	</if>
+		 	<if test="sid !=null and sid != '' ">
+		 		and id = #{sid}
+		 	</if>	 	 
 		 </where>	 
 		  order by  CONVERT(px,SIGNED)	  
 	</select>

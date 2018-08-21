@@ -17,8 +17,8 @@ public class StarServiceImpl implements StarService {
 	private StarMapper starMapper;
 	
 	@Override
-	public List<Star> list(String name) {
-		return starMapper.list(name);
+	public List<Star> list(String name,String sid) {
+		return starMapper.list(name,sid);
 	}
 
 	@Override
