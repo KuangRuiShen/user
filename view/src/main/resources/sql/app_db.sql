@@ -272,4 +272,10 @@ CREATE TABLE `Label` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `video_upload`;
+CREATE TABLE `video_upload` (
+  `id` varchar(32) NOT NULL,
+  `videourl` varchar(500) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
