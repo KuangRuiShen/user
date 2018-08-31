@@ -17,7 +17,7 @@ public interface VideoService {
 
 	void saveVideourl(String vid, String path);
 
-	Video findbyId(String id);
+	String findbyId(String id);
 
 	List<Video> list(VideoCondtion vc);
 	

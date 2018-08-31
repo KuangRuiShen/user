@@ -7,7 +7,7 @@ import com.app.view.entry.Setmeal;
 /**
  * @author krs
  * @date 创建时间  2018年6月22日 下午6:57:52
- * @describe
+ * @describe 套餐
  */
 public interface SetmealService {
 

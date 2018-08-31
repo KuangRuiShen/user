@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.app.view.pojo.Video;
 import com.app.view.service.VideoService;
 import com.app.view.util.JsonResult;
 import com.app.view.util.MyFileUtil;
@@ -60,9 +59,7 @@ public class FileUploadController {
 	@PostMapping(value = "/image" , produces = "multipart/form-data	;charset=UTF-8") 
 	public String image(@RequestParam MultipartFile file,HttpServletRequest request) {
 		String path = "";
-			if (file.isEmpty()) {
-				System.out.println("文件未上传");
-			} else {
+			if (!file.isEmpty()) {
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 				Date date = new java.util.Date();
 				String strDate = sdf.format(date);
@@ -158,11 +155,12 @@ public class FileUploadController {
 					String path = "http://"+ip+"/upload/video/"+fileName;
 					//保存
 					videoService.saveVideourl(id, path);
+					
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
-			System.out.println(result.toString());
+//			System.out.println(result.toString());
 //		return result;
 	}
 	
@@ -173,11 +171,19 @@ public class FileUploadController {
 		 MyFileUtil.delFolder(realpath+"/upload/video/tmp/"+id+"/");
 	}
 	
+
+	@GetMapping("/getpreurl") 
+	public JsonResult<?> getpreurl() {
+		  return JsonResult.buildSuccessResult("http://"+ip+"/upload/video/");
+	}
+	
+	
+	
 	@GetMapping("/videurl") 
 	public JsonResult<?> geturl(String id) {
 		 try {
-			 	Video v = videoService.findbyId(id);
-			    return JsonResult.buildSuccessResult(v.getVideourl());
+			 	String videourl = videoService.findbyId(id);
+			    return JsonResult.buildSuccessResult(videourl);
 			} catch (Exception e) {
 				e.printStackTrace();
 				return JsonResult.buildExceptionResult("查询失败,请联系管理员!");

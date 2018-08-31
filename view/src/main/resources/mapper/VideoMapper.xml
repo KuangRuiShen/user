@@ -114,11 +114,12 @@
 
 	<insert id="add" parameterType="com.app.view.pojo.Video">
 		INSERT INTO video
-		(id,name,remark,imgurl,quality,watch,px,sid,level,time) VALUES (
+		(id,name,remark,imgurl,videourl,quality,watch,px,sid,level,time) VALUES (
 		#{id,jdbcType=VARCHAR},
 		#{name,jdbcType=VARCHAR},
 		#{remark,jdbcType=VARCHAR},
 		#{imgurl,jdbcType=VARCHAR},
+		#{videourl,jdbcType=VARCHAR},
 		#{quality,jdbcType=VARCHAR},
 		#{watch,jdbcType=INTEGER},
 		#{px,jdbcType=INTEGER},
@@ -153,6 +154,7 @@
 		watch=#{watch,jdbcType=INTEGER},
 		time=#{time,jdbcType=INTEGER},
 		imgurl=#{imgurl,jdbcType=VARCHAR},
+		videourl=#{videourl,jdbcType=VARCHAR},
 		quality=#{quality,jdbcType=VARCHAR},
 		remark=#{remark,jdbcType=VARCHAR},
 		sid=#{sid,jdbcType=VARCHAR},

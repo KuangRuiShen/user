@@ -84,11 +84,12 @@ public class VideoServiceImpl implements VideoService {
 
 	@Override
 	public void saveVideourl(String vid, String path) {
+		videoMapper.deleteVideourl(vid);
 		videoMapper.saveVideourl(vid,path);	 	
 	}
 
 	@Override
-	public Video findbyId(String id) {
+	public String findbyId(String id) {
 		return videoMapper.findbyId(id);
 	}
 
