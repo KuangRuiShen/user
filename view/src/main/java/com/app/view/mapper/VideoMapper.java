@@ -31,7 +31,7 @@ public interface VideoMapper {
 	@Delete("DELETE FROM video_upload WHERE id=#{id}")
 	void deleteVideourl(@Param("id") String id);
 
-	@Insert("insert video_upload (id,videourl) VALUES (#{id},#{path}")
+	@Insert("insert video_upload (id,videourl) VALUES (#{id},#{path})")
 	void saveVideourl(@Param("id") String vid,@Param("path") String path);
 
 	@Select("select videourl from video_upload where id =#{id}")

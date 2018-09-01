@@ -30,7 +30,7 @@ pagehelper:
   
  #存放路径
 realpath: c:/file/
-ip: 101.132.170.212
+ip: 127.0.0.1
          
 server : 
   port : 7001 
