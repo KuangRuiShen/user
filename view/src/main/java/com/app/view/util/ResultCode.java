@@ -2,8 +2,6 @@ package com.app.view.util;
 
 /**
  * 错误代码编号
- * @author zhanglei
- * 2017-05-15
  */
 public enum ResultCode {
 	SUCCESS(200, "成功"),

@@ -24,6 +24,18 @@ public class VideoController {
 	@Autowired
 	private VideoService videoServce;
 	
+	/**
+	 * 
+	 * @param user_id 用户id
+	 * @param page 当前页
+	 * @param pageSize 页面大小
+	 * @param name 名称
+	 * @param cid 类型id
+	 * @param sid 明星id
+	 * @param level 等级id
+	 * @param type 页面类型：1首页，2vip,3试看
+	 * @return
+	 */
 	@GetMapping("list")
 	public JsonResult<?> list(String user_id,Integer page,Integer pageSize,String name,String cid,String sid,String level,String type){		
 		if(page == null || page < 1 )
@@ -104,7 +116,19 @@ public class VideoController {
 			return JsonResult.buildExceptionResult("添加失败,请联系管理员!");
 		}
 	}
-	
+	/**
+	 * 
+	   * 随机获取爱好视频
+	 * @param user_id
+	 * @param page
+	 * @param pageSize
+	 * @param name
+	 * @param cid
+	 * @param sid
+	 * @param level
+	 * @param type
+	 * @return
+	 */
 	@GetMapping("hobbyList")
 	public JsonResult<?> hobbyList(String user_id,Integer page,Integer pageSize,String name,String cid,String sid,String level,String type){
 		try {	
