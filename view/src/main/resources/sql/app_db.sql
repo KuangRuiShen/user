@@ -146,7 +146,7 @@ CREATE TABLE `pay_info` (
 -- ----------------------------
 -- Records of pay_info
 -- ----------------------------
-INSERT INTO `pay_info` VALUES ('cbd4f10f115673f0e76d223168bf99d3', 'gxtttooo', 'http://weixin.n1lm.cn/platform/pay/unifiedorder/video');
+INSERT INTO `pay_info` VALUES ('cbd4f10f115673f0e76d223168bf99d3', 'gxtttooo', 'http://weixin.06302s.cn/platform/pay/unifiedorder/video');
 
 -- ----------------------------
 -- Table structure for role
@@ -276,6 +276,10 @@ DROP TABLE IF EXISTS `video_upload`;
 CREATE TABLE `video_upload` (
   `id` varchar(32) NOT NULL,
   `videourl` varchar(500) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `welcome` (
+  `imgurl` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

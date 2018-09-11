@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.view.mapper.WelcomeMapper">
+
+	<select id="list" resultType="java.lang.String">
+		select imgurl  from welcome where imgurl is not null
+	</select>
+
+	<delete id="delete">
+		delete from welcome
+	</delete>
+
+	<insert id="save">
+		INSERT INTO welcome(imgurl) VALUES
+		<foreach collection="list" item="url" open="" separator=","
+			close="">
+			(#{url})
+		</foreach>
+	</insert>
+
+</mapper>
