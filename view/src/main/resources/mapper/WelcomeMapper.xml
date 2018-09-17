@@ -2,20 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.app.view.mapper.WelcomeMapper">
 
-	<select id="list" resultType="java.lang.String">
-		select imgurl  from welcome where imgurl is not null
+	<select id="list" resultType="com.app.view.pojo.Welcome">
+		select id,url,imgurl,px from welcome order by
+		CONVERT(px, SIGNED)
 	</select>
 
-	<delete id="delete">
-		delete from welcome
-	</delete>
-
-	<insert id="save">
-		INSERT INTO welcome(imgurl) VALUES
-		<foreach collection="list" item="url" open="" separator=","
-			close="">
-			(#{url})
-		</foreach>
+	<insert id="add" parameterType="com.app.view.pojo.Welcome">
+		INSERT INTO welcome (url,imgurl,px)
+		VALUES (
+		#{url,jdbcType=VARCHAR},
+		#{imgurl,jdbcType=VARCHAR},
+		#{px,jdbcType=INTEGER}
+		)
 	</insert>
+
+	<update id="update" parameterType="com.app.view.pojo.Welcome">
+		UPDATE welcome SET
+		url=#{url,jdbcType=VARCHAR},
+		px=#{px,jdbcType=INTEGER},
+		imgurl=#{imgurl,jdbcType=VARCHAR}
+		WHERE id = #{id}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM welcome WHERE id IN
+		<foreach collection="list" item="id" open="(" separator=","
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
 
 </mapper>

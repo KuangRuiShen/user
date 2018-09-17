@@ -278,8 +278,16 @@ CREATE TABLE `video_upload` (
   `videourl` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `welcome`;
 CREATE TABLE `welcome` (
-  `imgurl` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `imgurl` varchar(200) NOT NULL,
+  `url` varchar(500) DEFAULT NULL,
+  `px` int(5) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+
+
 
 
