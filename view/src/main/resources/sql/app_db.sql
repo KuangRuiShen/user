@@ -146,7 +146,7 @@ CREATE TABLE `pay_info` (
 -- ----------------------------
 -- Records of pay_info
 -- ----------------------------
-INSERT INTO `pay_info` VALUES ('cbd4f10f115673f0e76d223168bf99d3', 'gxtttooo', 'http://weixin.06302s.cn/platform/pay/unifiedorder/video');
+INSERT INTO `pay_info` VALUES ('cbd4f10f115673f0e76d223168bf99d3', 'gxtttooo', 'http://weixin.9xen12.cn/platform/pay/unifiedorder/video');
 
 -- ----------------------------
 -- Table structure for role
