@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.view.mapper.SystemMapper">
+
+	<select id="list" resultType="com.app.view.pojo.LoginUser">
+		select l.id,l.username,l.user_id,l.remark,l.total,l.people,
+		u.create_time,u.name,u.phone
+		from login_user l
+		left join user u on u.id = l.user_id
+		<where>
+			<if test="username !=null and username != '' ">
+				l.username like CONCAT('%', #{username}, '%')
+			</if>
+			and l.username &lt;&gt; 'admin'
+		</where>
+		order by id
+	</select>
+
+	<select id="getById" resultType="com.app.view.pojo.LoginUser">
+		select id,username,user_id,remark,people,total
+		from login_user
+		<where>
+			id = #{id} and username &lt;&gt; 'admin'
+		</where>
+	</select>
+
+	<select id="total" resultType="java.util.Map">
+		select u.id,
+		u.recharge_time,
+		u.invite_id,
+		u.valid_time,
+		u.role_id,t.name,o.trade_type,c.text as roleText
+		from user
+		u left join user_order o on u.id = o.user_id
+		left join user t on t.id =
+		u.invite_id
+        left join code_text c on u.role_id = c.code_id 
+		where u.invite_id =#{id}
+		limit #{total}
+	</select>
+
+
+	<select id="checkUsername" resultType="java.lang.Integer">
+		select count(1)from login_user
+		<where>
+			username =#{username}
+		</where>
+	</select>
+
+	<insert id="add" parameterType="com.app.view.pojo.LoginUser">
+		INSERT INTO login_user
+		(username,password,remark,user_id,total,people) VALUES (
+		#{username,jdbcType=VARCHAR},
+		#{password,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR},
+		#{user_id,jdbcType=VARCHAR},
+		#{total,jdbcType=VARCHAR},
+		#{people,jdbcType=INTEGER})
+	</insert>
+
+	<update id="edit" parameterType="com.app.view.pojo.LoginUser">
+		UPDATE login_user SET
+		username=#{username,jdbcType=VARCHAR},
+		remark=#{remark,jdbcType=VARCHAR},
+		user_id=#{user_id,jdbcType=VARCHAR},
+		total=#{total,jdbcType=VARCHAR},
+		people=#{people,jdbcType=INTEGER}
+		WHERE id = #{id}
+	</update>
+
+	<!-- 修改用户密码 -->
+	<update id="changePassword"
+		parameterType="com.app.view.pojo.LoginUser">
+		UPDATE login_user SET password =#{password} WHERE id
+		=#{id}
+	</update>
+
+
+	<delete id="delete">
+		DELETE FROM login_user WHERE id IN
+		<foreach collection="list" item="id" open="(" separator=","
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<select id="getUser" resultType="com.app.view.pojo.MyItem">
+		select id as `key` ,name as
+		`value` from user where invite_id is null and
+		name is not null
+	</select>
+
+</mapper>

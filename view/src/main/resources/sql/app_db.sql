@@ -56,7 +56,8 @@ INSERT INTO `code` VALUES ('等级五', 'level', '5');
 INSERT INTO `code` VALUES ('等级四', 'level', '4');
 INSERT INTO `code` VALUES ('管理员', 'level', '100');
 INSERT INTO `code` VALUES ('试看区', 'page', '3');
-
+INSERT INTO `code` VALUES ('首页热播', 'page', '4');
+	
 -- ----------------------------
 -- Table structure for code_meal
 -- ----------------------------
@@ -82,11 +83,12 @@ CREATE TABLE `code_text` (
 -- ----------------------------
 -- Records of code_text
 -- ----------------------------
-INSERT INTO `code_text` VALUES ('1', '周');
-INSERT INTO `code_text` VALUES ('2', '月');
-INSERT INTO `code_text` VALUES ('3', '季');
+INSERT INTO `code_text` VALUES ('1', '黄金');
+INSERT INTO `code_text` VALUES ('2', '铂金');
+INSERT INTO `code_text` VALUES ('3', '钻石');
 INSERT INTO `code_text` VALUES ('4', '年');
 INSERT INTO `code_text` VALUES ('5', '永久');
+
 
 -- ----------------------------
 -- Table structure for comment
@@ -107,17 +109,20 @@ CREATE TABLE `comment` (
 -- ----------------------------
 DROP TABLE IF EXISTS `login_user`;
 CREATE TABLE `login_user` (
-  `id` varchar(32) NOT NULL,
+  `id` int(32) NOT NULL AUTO_INCREMENT,
   `username` varchar(100) NOT NULL,
   `password` varchar(100) DEFAULT NULL,
-  `remark` varchar(500) DEFAULT NULL,
+  `user_id` varchar(32) DEFAULT NULL,
+  `people` int(10) DEFAULT NULL,
+  `remark` varchar(5000) DEFAULT NULL,
+  `total` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`,`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of login_user
 -- ----------------------------
-INSERT INTO `login_user` VALUES ('25', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'dfsfw32');
+INSERT INTO `login_user` VALUES ('25', 'admin', '21232f297a57a5a743894a0e4a801fc3', '1', null, 'dfsfw32', null);
 
 -- ----------------------------
 -- Table structure for menoy_info
@@ -199,8 +204,8 @@ INSERT INTO `user` VALUES ('1', '2018-06-15 10:08:10', '2018-06-16 10:08:10', '1
 INSERT INTO `user` VALUES ('2', '2018-06-15 10:08:10', '2018-06-16 10:08:10', '100', null, '2018-06-15 09:20:50', '张天梁', '15622193200');
 INSERT INTO `user` VALUES ('3', '2018-06-15 10:08:10', '2018-06-16 10:08:10', '100', null, '2018-06-15 09:30:50', '李嘉晨', '15622193300');
 INSERT INTO `user` VALUES ('4', '2018-06-15 10:08:10', '2018-06-16 10:08:10', '100', null, '2018-06-15 09:40:50', '大哥的测试号', '15622193400');
-INSERT INTO `user` VALUES ('5', '2018-06-14 17:26:59', '2018-06-15 17:26:59', '100', null, null, '胡珊珊', '15622193500');
-INSERT INTO `user` VALUES ('6', '2018-06-14 22:24:26', '2018-06-15 22:24:26', '5', null, '2018-06-14 22:24:26', '刘继', '1562219600');
+INSERT INTO `user` VALUES ('5', '2018-06-14 17:26:59', '2018-06-15 17:26:59', '100', null, '2018-06-15 09:40:50', '胡珊珊', '15622193500');
+INSERT INTO `user` VALUES ('6', '2018-06-14 22:24:26', '2018-06-15 22:24:26', '100', null, '2018-06-14 22:24:26', '刘继', '1562219600');
 INSERT INTO `user` VALUES ('7', '2018-06-15 10:08:10', '2018-06-16 10:08:10', '100', null, '2018-06-15 09:50:50', '周魉', '1562219700');
 
 -- ----------------------------

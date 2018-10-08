@@ -26,7 +26,7 @@ import com.github.pagehelper.PageInfo;
 /**
  * @author krs
  * @date 创建时间  2018年5月25日 下午3:30:43
- * @describe
+ * @describe 
  */
 @RestController
 @RequestMapping("user")
@@ -158,7 +158,7 @@ public class UserController {
 	public JsonResult<?> updatework(@RequestBody User u){		
 		try {		
 			User user = userService.findById(u.getId());
-			if(user!=null && MD5.enc(u.getLastpassword()).equals(u.getPassword())){
+			if(user!=null && MD5.enc(u.getLastpassword()).equals(user.getPassword())){
 				userService.updatePassword(u);
 				return JsonResult.buildSuccessResult();		
 			}else{
