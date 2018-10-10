@@ -71,7 +71,7 @@
 	select *,IFNULL((select sum(m.total_fee) from user_order a  left join menoy_info m on a.out_trade_no = m.out_trade_no 
 	left join user  on 	user.id = a.user_id WHERE 	user.invite_id = u.id),0) as total,
 	(select count(m.id) from user m where m.invite_id = u.id) as people
-	from user u where u.invite_id is null
+	from user u where u.invite_id is null order by CONVERT(id,SIGNED)
 	</select>
 	
 	<select id="log" resultType="java.util.Map">
