@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -136,6 +137,39 @@ public class PayController {
 	}
 	
 	
+	//修改接口信息
+	@GetMapping("list")
+	public JsonResult<?> list(){	
+		try {
+			 Map<String,Object> resut = payService.list();
+	         return JsonResult.buildSuccessResult(resut);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return JsonResult.buildExceptionResult("查询失败,请联系管理员!");
+		}
+      	
+	}
+	
+	//修改接口信息
+	@PostMapping("change")
+	public JsonResult<?> change(@RequestBody Map<String,String> pi){
+		try {	
+			if(StringUtils.isBlank(pi.get("key"))){
+				return JsonResult.buildExceptionResult("key不能为空");
+			}
+			if(StringUtils.isBlank(pi.get("mch_id"))){
+				return JsonResult.buildExceptionResult("mch_id不能为空");
+			}
+			if(StringUtils.isBlank(pi.get("url"))){
+				return JsonResult.buildExceptionResult("接口不能为空");
+			}
+			payService.change(pi);
+        	return JsonResult.buildSuccessResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return JsonResult.buildExceptionResult("添加失败,请联系管理员!");
+		}
+	}
 	
 	
 }

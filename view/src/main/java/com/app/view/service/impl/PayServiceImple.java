@@ -176,4 +176,17 @@ public class PayServiceImple implements PayService {
 		}
 			
 	}
+
+
+
+
+	@Override
+	public Map<String, Object> list() {
+		return this.getPayInfo();
+	}
+
+	@Override
+	public void change(Map<String, String> pi) {
+		payMapper.changePayInfo(pi);		
+	}
 }

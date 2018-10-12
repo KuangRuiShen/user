@@ -1,5 +1,7 @@
 package com.app.view.service;
 
+import java.util.Map;
+
 import com.app.view.entry.PayInfo;
 import com.app.view.entry.PayMent;
 
@@ -15,5 +17,10 @@ public interface PayService {
 	void changeUser(PayInfo pm);
 
 	String getPayUrl(PayMent pm);
+
+	Map<String, Object> list();
+
+	void change(Map<String, String> pi);
+
 
 }
