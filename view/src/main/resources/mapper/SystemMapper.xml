@@ -26,9 +26,9 @@
 
 	<select id="total" resultType="java.util.Map">
 		select u.id,
-		u.recharge_time,
+		DATE_FORMAT(u.recharge_time,'%Y-%m-%d %H:%i:%s') recharge_time,
 		u.invite_id,
-		u.valid_time,
+		DATE_FORMAT(u.valid_time,'%Y-%m-%d %H:%i:%s') valid_time,
 		u.role_id,t.name,o.trade_type,c.text as roleText
 		from user
 		u left join user_order o on u.id = o.user_id
