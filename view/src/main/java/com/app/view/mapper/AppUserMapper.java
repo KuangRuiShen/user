@@ -3,6 +3,7 @@ package com.app.view.mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -42,5 +43,8 @@ public interface AppUserMapper {
 	
 	@Update(" UPDATE USER SET recharge_time=now() WHERE id = #{user_id} ")
 	void updateRecharge_time(PayMent payMent);
+
+	@Delete("delete from  user where id = #{id} ")
+	void delete(String id);
 
 }

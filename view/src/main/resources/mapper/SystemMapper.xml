@@ -86,7 +86,7 @@
 
 	<select id="getUser" resultType="com.app.view.pojo.MyItem">
 		select id as `key` ,name as
-		`value` from user where invite_id is null and
+		`value` from user where type='1' and
 		name is not null order by CONVERT(id,SIGNED)
 	</select>
 

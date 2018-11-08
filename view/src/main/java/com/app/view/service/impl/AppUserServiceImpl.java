@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,10 +30,10 @@ public class AppUserServiceImpl implements AppUserService {
 		u.setId(MyUtils.getUUID());	
 		u.setRole_id("0");
 		u.setRoleText("普通成员");
-		if(StringUtils.isBlank(u.getInvite_id())){
-			u.setRole_id("100");
-			u.setRoleText("管理员");
-		}
+//		if(StringUtils.isBlank(u.getInvite_id())){
+//			u.setRole_id("100");
+//			u.setRoleText("管理员");
+//		}
 		//加密
 		Date d = new Date();
 		u.setRecharge_time(d);
@@ -93,5 +92,26 @@ public class AppUserServiceImpl implements AppUserService {
 	public List<Map<String, String>> order(String name) {
 	
 		return appUserMapper.order(name);
+	}
+
+	@Override
+	public AppUser addmaster(AppUser u) {
+//		u.setId(MyUtils.getUUID());	
+//		u.setRole_id("0");
+//		u.setRoleText("普通成员");
+			u.setType("1");
+			u.setRole_id("100");
+			u.setRoleText("管理员");
+		//加密
+		Date d = new Date();
+		u.setRecharge_time(d);
+		u.setValid_time(MyUtils.RechargeDate(d, "day"));
+		appUserMapper.add(u);
+		return u;
+	}
+
+	@Override
+	public void delete(String id) {
+		appUserMapper.delete(id);
 	}
 }

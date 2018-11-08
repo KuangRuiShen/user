@@ -57,17 +57,29 @@ public class UserController {
 	}
 	
 	//添加用户
-	@GetMapping("/addmaster")
-	public JsonResult<?> addmaster(){		
+	@PostMapping("/addmaster")
+	public JsonResult<?> addmaster(@RequestBody AppUser u){		
 		try {	
-			AppUser user = appUserService.add(new AppUser());
+			AppUser user = appUserService.addmaster(u);
 			return JsonResult.buildSuccessResult(user);				
 		} catch (Exception e) {
 			e.printStackTrace();
-			return JsonResult.buildFailuredResult(ResultCode.SYS_ERROR,"系统异常");
+			return JsonResult.buildFailuredResult(ResultCode.SYS_ERROR,"已经存在相同的用户id");
 		}	
 	}
 	
+	//删除
+		@PostMapping("/delete")
+		public JsonResult<?> delete(@RequestBody AppUser u){		
+			try {	
+				 appUserService.delete(u.getId());
+				return JsonResult.buildSuccessResult();				
+			} catch (Exception e) {
+				e.printStackTrace();
+				return JsonResult.buildFailuredResult(ResultCode.SYS_ERROR,"已经存在相同的用户id");
+			}	
+		}
+		
 	
 	
 	//修改用户信息

@@ -41,13 +41,16 @@
 			  INSERT INTO USER (id,valid_time,recharge_time,
 			  <if test="invite_id != null and invite_id !='' ">
 			  invite_id,
+			  </if>	
+			    <if test="type != null and type !='' ">
+			      type,
 			  </if>	  
 			  role_id,create_time) 
 			  VALUES(#{id},#{valid_time},#{recharge_time},
 			    <if test="invite_id != null and invite_id !='' ">
 			  #{invite_id}, 
 			  </if>	  
-			  #{role_id},now())  
+			   #{type}, #{role_id},now())  
 		  </trim>
 	</insert>
 	
@@ -71,7 +74,7 @@
 	select *,IFNULL((select sum(m.total_fee) from user_order a  left join menoy_info m on a.out_trade_no = m.out_trade_no 
 	left join user  on 	user.id = a.user_id WHERE 	user.invite_id = u.id),0) as total,
 	(select count(m.id) from user m where m.invite_id = u.id) as people
-	from user u where u.invite_id is null order by CONVERT(id,SIGNED)
+	from user u where u.type='1' order by CONVERT(id,SIGNED)
 	</select>
 	
 	<select id="log" resultType="java.util.Map">

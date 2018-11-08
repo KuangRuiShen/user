@@ -35,4 +35,8 @@ public interface AppUserService {
 
 	List<Map<String,String>> order(String name);
 
+	AppUser addmaster(AppUser appUser);
+
+	void delete(String id);
+
 }

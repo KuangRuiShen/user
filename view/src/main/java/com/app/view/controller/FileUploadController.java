@@ -80,6 +80,38 @@ public class FileUploadController {
 		return path;
 	}
 	
+	/**
+	 * apk 上传下载
+	 * @param model
+	 * @param newsCategory
+	 * @param imageFile
+	 * @param httpSession
+	 * @return
+	 */
+	@PostMapping(value = "/apk" , produces = "multipart/form-data	;charset=UTF-8") 
+	public String apk(@RequestParam MultipartFile file,HttpServletRequest request) {
+		String path = "";
+			if (!file.isEmpty()) {
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+				Date date = new java.util.Date();
+				String strDate = sdf.format(date);
+				String fileName = strDate + new Random().nextInt(1000)
+						        + file.getOriginalFilename().substring(
+						         file.getOriginalFilename().indexOf("."),
+								 file.getOriginalFilename().length());
+//				String realPath = request.getSession().getServletContext().getRealPath("/upload/img");
+//				System.out.println("realPath : "+realPath);
+				try {
+					FileUtils.copyInputStreamToFile(file.getInputStream(),new File(realpath+"upload/img/", fileName));
+					path = "http://"+ip+"/upload/img/"+fileName;
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+
+		return path;
+	}
+	
 	@PostMapping(value = "/video" ) 
 	public void video(MultipartFile file,HttpServletRequest request, 
 			@RequestParam Map<String,Object> param) {

@@ -34,6 +34,8 @@ public class AppUser {
 	
 	private String eTime;
 	
+	private String type;//类型
+	
 	private String out_trade_no;
 	private List<String> trades;
 
@@ -142,6 +144,14 @@ public class AppUser {
 
 	public void setTrades(List<String> trades) {
 		this.trades = trades;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 	
