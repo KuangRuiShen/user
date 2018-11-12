@@ -190,6 +190,7 @@ CREATE TABLE `user` (
   `recharge_time` datetime DEFAULT NULL,
   `valid_time` datetime DEFAULT NULL,
   `role_id` varchar(32) NOT NULL,
+  `type` varchar(1) NOT NULL,
   `invite_id` varchar(32) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
