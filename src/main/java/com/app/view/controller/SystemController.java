@@ -51,9 +51,9 @@ public class SystemController {
 	
 	//获取所有管理员
 	@GetMapping("getUsers")
-	public JsonResult<?> all(){		
+	public JsonResult<?> all(String userId){		
 		try {			
-		    return JsonResult.buildSuccessResult(systemService.getUser());
+		    return JsonResult.buildSuccessResult(systemService.getUser(userId));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return JsonResult.buildExceptionResult("查询失败,请联系管理员!");

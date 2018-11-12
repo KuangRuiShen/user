@@ -26,7 +26,7 @@ public interface SystemService {
 
 	int checkUsername(String username);
 
-	List<MyItem> getUser();
+	List<MyItem> getUser(String userId);
 
 	LoginUser getById(Integer id);
 

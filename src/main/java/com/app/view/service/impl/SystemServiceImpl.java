@@ -65,8 +65,8 @@ public class SystemServiceImpl implements SystemService {
 	}
 
 	@Override
-	public List<MyItem> getUser() {
-		return systemMapper.getUser();
+	public List<MyItem> getUser(String userId) {
+		return systemMapper.getUser(userId);
 	}
 
 	@Override

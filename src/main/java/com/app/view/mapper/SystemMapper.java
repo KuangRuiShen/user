@@ -28,7 +28,7 @@ public interface SystemMapper {
 
 	int checkUsername(@Param("username")String username);
 
-	List<MyItem> getUser();
+	List<MyItem> getUser(@Param("userId")String userId);
 
 	LoginUser getById(@Param("id")Integer id);
 

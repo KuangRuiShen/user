@@ -55,7 +55,7 @@ public class ApkFileUploadController {
 		}
 	}
 
-	@GetMapping("/down/{fileId}")
+	@GetMapping("/apk/{fileId}")
 	public JsonResult<?> down(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("fileId") String fileId) {
 		try {

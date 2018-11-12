@@ -6,7 +6,8 @@
 		select l.id,l.username,l.user_id,l.remark,l.total,l.people,
 		u.create_time,u.name,u.phone
 		from login_user l
-		left join user u on u.id = l.user_id
+		left join user u on u.id
+		= l.user_id
 		<where>
 			<if test="username !=null and username != '' ">
 				l.username like CONCAT('%', #{username}, '%')
@@ -31,10 +32,11 @@
 		DATE_FORMAT(u.valid_time,'%Y-%m-%d %H:%i:%s') valid_time,
 		u.role_id,t.name,o.trade_type,c.text as roleText
 		from user
-		u left join user_order o on u.id = o.user_id
+		u left join
+		user_order o on u.id = o.user_id
 		left join user t on t.id =
 		u.invite_id
-        left join code_text c on u.role_id = c.code_id 
+		left join code_text c on u.role_id = c.code_id
 		where u.invite_id =#{id}
 		limit #{total}
 	</select>
@@ -86,8 +88,14 @@
 
 	<select id="getUser" resultType="com.app.view.pojo.MyItem">
 		select id as `key` ,name as
-		`value` from user where type='1' and
-		name is not null order by CONVERT(id,SIGNED)
+		`value` from user where type='1'
+		and name is not null
+		and user_id not in (select user_id from login_user
+		<if test="userId !=null and userId != '' ">
+			where user_id != #{userId}
+		</if>
+		)
+		order by CONVERT(id,SIGNED)
 	</select>
 
 </mapper>
