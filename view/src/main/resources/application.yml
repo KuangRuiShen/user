@@ -1,10 +1,9 @@
-spring :       
+spring :  
+  profiles:
+    active: pro       
   mvc: 
     throw-exception-if-no-handler-found : true 
-    view:
-     prefix: /webapp/build/      
-     suffix: .html 
-               
+                  
   datasource:
       url : jdbc:mysql://127.0.0.1:3306/app_db?useUnicode=true&characterEncoding=utf8&useSSL=false
       username : root
@@ -12,25 +11,41 @@ spring :
       driver-class-name: com.mysql.jdbc.Driver 
          
   http:
+    encoding:
+      charset: UTF-8
     multipart:
      maxFileSize: 50Mb
      maxRequestSize: 100Mb 
 
-#mybatis配置
-mybatis: 
+#mybatis配置       
+mybatis-plus: 
   mapperLocations: classpath:mapper/*Mapper.xml
-  typeAliasesPackage : com.app.view.pojo
-  
+  typeAliasesPackage : com.app.view.pojo,com.app.view.entity
+    # 原生配置
+  configuration:
+    #auto-mapping-behavior: FULL
+    map-underscore-to-camel-case: true
+    cache-enabled: false  
+    jdbcTypeForNull: null
+ 
+  global-config:
+      # 数据库相关配置
+      #主键类型  AUTO:"数据库ID自增", INPUT:"用户输入ID",ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+    id-type: 3
+      #字段策略 IGNORED:"忽略判断",NOT_NULL:"非 NULL 判断"),NOT_EMPTY:"非空判断"
+    field-strategy: 1
+    refresh-mapper: true
+     
+logging:
+   level:
+       com.app.view.mapper: DEBUG   
+       
 # 分页配置
 pagehelper:
   helper-dialect: mysql
   reasonable: true
   support-methods-arguments: true
-  params: count=countSql    
-  
- #存放路径
-realpath: c:/file/
-ip: 127.0.0.1
+  params: count=countSql     
          
 server : 
   port : 7001 

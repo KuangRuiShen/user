@@ -134,4 +134,8 @@ public class JsonResult<T> {
 	public static <T> JsonResult<T> buildResultWithOutData(JsonResult<?> jsonResult) {
 		return new JsonResult<T>(jsonResult.getCode(), jsonResult.getMessage(), null);
 	}
+
+	public static <T>JsonResult<T> error(String jsonResult) {
+		return JsonResult.buildExceptionResult(jsonResult);
+	}
 }
