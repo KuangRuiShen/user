@@ -37,7 +37,7 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, FileInfo> implement
 	private String filePath;
 
 	// 下载路径
-	static public String downPath = "/api/file/down/";
+	static public String downPath = "/api/file/apk/";
 
 	// 保存文件
 	@Override
