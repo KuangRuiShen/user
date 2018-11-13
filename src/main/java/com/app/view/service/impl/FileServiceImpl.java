@@ -22,7 +22,7 @@ import com.app.view.entry.FileInfo;
 import com.app.view.mapper.FileMapper;
 import com.app.view.service.FileService;
 import com.app.view.util.UUIDuitls;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 
 
 /**

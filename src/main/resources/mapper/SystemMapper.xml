@@ -90,7 +90,7 @@
 		select id as `key` ,name as
 		`value` from user where type in ('1' ,'2')
 		and name is not null
-		and user_id not in (select user_id from login_user
+		and id not in (select user_id from login_user
 		<if test="userId !=null and userId != '' ">
 			where user_id != #{userId}
 		</if>

@@ -1,7 +1,7 @@
 package com.app.view.mapper;
 
 import com.app.view.entry.FileInfo;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 /**
  * @author krs

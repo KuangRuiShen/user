@@ -47,7 +47,7 @@ public class ApkFileUploadController {
 	public JsonResult<?> query(String fileId) {
 		try {
 			// 查询
-			FileInfo f = fileService.getById(fileId);
+			FileInfo f = fileService.selectById(fileId);
 			return JsonResult.buildSuccessResult(f);
 		} catch (Exception e) {
 			e.printStackTrace();
