@@ -17,9 +17,13 @@ public class LoginUser {
 	
 	private String name;
 	
+	private String fileId;//文件id
+	
 	private String total;
 	
 	private Integer people;
+	
+	private String type;
 
 	
 	public Integer getId() {
@@ -95,6 +99,23 @@ public class LoginUser {
 	public void setPeople(Integer people) {
 		this.people = people;
 	}
+
+	public String getFileId() {
+		return fileId;
+	}
+
+	public void setFileId(String fileId) {
+		this.fileId = fileId;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+	
 	
 	
 	

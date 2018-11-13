@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.app.view.entry.FileInfo;
+import com.app.view.pojo.FileInfo;
 import com.app.view.service.FileService;
 import com.app.view.util.JsonResult;
 

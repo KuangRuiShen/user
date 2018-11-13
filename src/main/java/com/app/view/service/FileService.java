@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.app.view.entry.FileInfo;
+import com.app.view.pojo.FileInfo;
 import com.baomidou.mybatisplus.service.IService;
 
 

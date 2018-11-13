@@ -3,7 +3,7 @@
 <mapper namespace="com.app.view.mapper.SystemMapper">
 
 	<select id="list" resultType="com.app.view.pojo.LoginUser">
-		select l.id,l.username,l.user_id,l.remark,l.total,l.people,
+		select l.id,l.username,l.user_id,l.remark,l.total,l.people,l.fileId,
 		u.create_time,u.name,u.phone
 		from login_user l
 		left join user u on u.id
@@ -18,7 +18,7 @@
 	</select>
 
 	<select id="getById" resultType="com.app.view.pojo.LoginUser">
-		select id,username,user_id,remark,people,total
+		select id,username,user_id,remark,people,total,fileId
 		from login_user
 		<where>
 			id = #{id} and username &lt;&gt; 'admin'
@@ -51,12 +51,13 @@
 
 	<insert id="add" parameterType="com.app.view.pojo.LoginUser">
 		INSERT INTO login_user
-		(username,password,remark,user_id,total,people) VALUES (
+		(username,password,remark,user_id,total,fileId,people) VALUES (
 		#{username,jdbcType=VARCHAR},
 		#{password,jdbcType=VARCHAR},
 		#{remark,jdbcType=VARCHAR},
 		#{user_id,jdbcType=VARCHAR},
 		#{total,jdbcType=VARCHAR},
+		#{fileId,jdbcType=VARCHAR},
 		#{people,jdbcType=INTEGER})
 	</insert>
 
@@ -66,6 +67,7 @@
 		remark=#{remark,jdbcType=VARCHAR},
 		user_id=#{user_id,jdbcType=VARCHAR},
 		total=#{total,jdbcType=VARCHAR},
+		fileId=#{fileId,jdbcType=VARCHAR},
 		people=#{people,jdbcType=INTEGER}
 		WHERE id = #{id}
 	</update>

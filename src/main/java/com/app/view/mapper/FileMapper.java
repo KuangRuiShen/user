@@ -1,6 +1,6 @@
 package com.app.view.mapper;
 
-import com.app.view.entry.FileInfo;
+import com.app.view.pojo.FileInfo;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 /**

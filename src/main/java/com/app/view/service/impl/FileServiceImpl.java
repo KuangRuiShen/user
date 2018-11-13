@@ -18,12 +18,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.app.view.entry.FileInfo;
 import com.app.view.mapper.FileMapper;
+import com.app.view.pojo.FileInfo;
 import com.app.view.service.FileService;
 import com.app.view.util.UUIDuitls;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-
 
 /**
  * @author krs
@@ -31,7 +30,8 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
  * @describe 文件操作服务实现
  */
 @Service
-public class FileServiceImpl extends ServiceImpl<FileMapper, FileInfo> implements FileService {
+public class FileServiceImpl extends ServiceImpl<FileMapper, FileInfo>
+		implements FileService {
 
 	@Value("${filePath}")
 	private String filePath;
@@ -44,7 +44,9 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, FileInfo> implement
 	public FileInfo saveFile(MultipartFile file) throws Exception {
 		String filename = file.getOriginalFilename();
 		// 拼接成完整的指定的文件路径名，创建新文件
-		String name = System.currentTimeMillis() + filename.substring(filename.lastIndexOf("."), filename.length());
+		String name = System.currentTimeMillis()
+				+ filename.substring(filename.lastIndexOf("."),
+						filename.length());
 
 		String realPath = filePath + "/" + name;
 
@@ -63,8 +65,13 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, FileInfo> implement
 			throw e;
 		} finally {
 			// 关闭输入输出流
-			os.close();
-			is.close();
+			if (os != null) {
+				os.close();
+			}
+			if (is != null) {
+				is.close();
+			}
+
 		}
 
 		String uuid = UUIDuitls.getUUID();
@@ -73,8 +80,8 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, FileInfo> implement
 		f.setFileId(uuid);
 		f.setName(filename);
 		f.setFileSize(file.getSize());
-		f.setUrl(downPath + uuid);//请求路径
-		f.setLocalName(name);//本地路径
+		f.setUrl(downPath + uuid);// 请求路径
+		f.setLocalName(name);// 本地路径
 		f.setCreateTime(new Date());
 		baseMapper.insert(f);
 		return f;
@@ -95,13 +102,15 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, FileInfo> implement
 		} catch (UnsupportedEncodingException e1) {
 			e1.printStackTrace();
 		}
-		response.setHeader("Content-Disposition", "attachment;filename=" + tempFileName);
+		response.setHeader("Content-Disposition", "attachment;filename="
+				+ tempFileName);
 		byte[] buff = new byte[1024];
 		BufferedInputStream bis = null;
 		OutputStream os = null;
 		try {
 			os = response.getOutputStream();
-			bis = new BufferedInputStream(new FileInputStream(new File(realPath)));
+			bis = new BufferedInputStream(new FileInputStream(
+					new File(realPath)));
 			int i = bis.read(buff);
 			while (i != -1) {
 				os.write(buff, 0, buff.length);
