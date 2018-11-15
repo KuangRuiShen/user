@@ -15,11 +15,7 @@ import com.app.view.pojo.FileInfo;
 import com.app.view.service.FileService;
 import com.app.view.util.JsonResult;
 
-/**
- * @author krs
- * @time 2018年10月22日 上午9:24:16
- * @describe 文件上传
- */
+
 @RestController
 @RequestMapping("/file")
 public class ApkFileUploadController {

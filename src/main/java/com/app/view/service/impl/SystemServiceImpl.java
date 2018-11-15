@@ -50,7 +50,7 @@ public class SystemServiceImpl implements SystemService {
 
 	@Override
 	public boolean changePassword(LoginUser user) {
-		if (StringUtils.isNotBlank(user.getPassword()) && StringUtils.isNotBlank(user.getPassword())) {
+		if (StringUtils.isNotBlank(user.getPassword()) ) {
 			String yhmm = MD5.decoDecode64(user.getPassword());
 			user.setPassword(MD5.enc(yhmm));// 加密
 			return systemMapper.changePassword(user) == 1;

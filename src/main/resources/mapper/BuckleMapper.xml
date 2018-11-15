@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.view.mapper.BuckleMapper">
+
+	<resultMap id="baseMap" type="com.app.view.entry.ChargingCount">
+		<id property="id" column="code_id" />
+		<result property="total" column="total" jdbcType="INTEGER" />
+		<result property="text" column="text" />
+	</resultMap>
+
+	<select id="list" resultType="com.app.view.pojo.Charging">
+		select u.id,
+		u.recharge_time,
+		u.valid_time
+		,u.role_id,t.name,t.id as
+		invite_id,o.trade_type,o.out_trade_no,a.total,c.text as roleText
+		from
+		user
+		u left join user_order o on u.id = o.user_id
+		left join user t on t.id =
+		u.invite_id
+		left join code_text c on u.role_id = c.code_id
+		left join (select sum(m.total_fee) total, m.out_trade_no from menoy_info m
+		<if test="btime !=null and etime != null ">
+			where DATE_FORMAT(m.end_time,'%y-%m-%d')
+			BETWEEN DATE_FORMAT(#{btime},'%y-%m-%d') and
+			DATE_FORMAT(#{etime},'%y-%m-%d')
+		</if>
+		group by m.out_trade_no) a on a.out_trade_no = o.out_trade_no
+		where
+		o.out_trade_no is not null and a.total &gt; 0
+		<if test="way !=null and way != '' ">
+			and o.trade_type =#{way}
+		</if>
+	</select>
+
+	<select id="count" resultMap="baseMap">
+		select ct.code_id,r.tt as total,ct.text from
+		code_text ct
+		left join (select u.role_id,sum(a.total) tt from user u left join
+		user_order o on u.id = o.user_id
+		left join user t on t.id = u.invite_id
+		left join (select sum(m.total_fee) total, m.out_trade_no from menoy_info m
+		<if test="btime !=null and etime != null ">
+			where DATE_FORMAT(m.end_time,'%y-%m-%d')
+			BETWEEN DATE_FORMAT(#{btime},'%y-%m-%d') and
+			DATE_FORMAT(#{etime},'%y-%m-%d')
+		</if>
+		group by m.out_trade_no) a on a.out_trade_no = o.out_trade_no
+		where o.out_trade_no is not null and a.total > 0
+		<if test="way !=null and way != '' ">
+			and o.trade_type =#{way}
+		</if>
+		group by u.role_id )r
+		on ct.code_id = r.role_id
+	</select>
+	
+		<select id="getMange" resultType="java.util.Map">
+	select *,IFNULL((select sum(m.total_fee) from user_order a  left join menoy_info m on a.out_trade_no = m.out_trade_no 
+	left join user  on 	user.id = a.user_id WHERE 	user.invite_id = u.id),0) as total,
+	(select count(m.id) from user m where m.invite_id = u.id) as people
+	from user u where u.type in ('1' ,'2') and u.invite_id =#{userId}
+	order by CONVERT(id,SIGNED)
+	</select>
+
+
+
+</mapper>

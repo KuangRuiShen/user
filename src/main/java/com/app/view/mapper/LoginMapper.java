@@ -16,7 +16,9 @@ import com.app.view.pojo.LoginUser;
  */
 public interface LoginMapper {
 	
-	@Select("select u.id,u.username,u.`password`,u.people,u.user_id,`user`.type from login_user u"
-			+ " LEFT JOIN USER ON `user`.id = u.user_id where username = #{username}")
+	@Select("select u.id,u.username,u.`password`,u.people,u.user_id,`user`.type,f.url from login_user u"
+			+ " LEFT JOIN USER ON `user`.id = u.user_id "
+           +" left join file_info f on f.id = u.fileId "
+			+ " where username = #{username}")
 	List<LoginUser> Login(@Param("username") String username);
 }

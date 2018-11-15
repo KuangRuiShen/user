@@ -6,6 +6,8 @@ public class ChargingParam {
 	private String etime;
 	
 	private String way;
+	
+	private String userId;
 
 	public String getBtime() {
 		return btime;
@@ -41,6 +43,15 @@ public class ChargingParam {
 	public ChargingParam() {
 		super();
 	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	
 	
 	
 	

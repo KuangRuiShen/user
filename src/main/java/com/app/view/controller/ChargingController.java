@@ -34,7 +34,5 @@ public class ChargingController {
 			return JsonResult.buildFailuredResult(ResultCode.SYS_ERROR,"系统异常");
 		}	
 	}
-	
-
-	
+		
 }
