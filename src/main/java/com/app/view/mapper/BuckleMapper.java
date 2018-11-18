@@ -14,5 +14,7 @@ public interface BuckleMapper {
 	List<Charging> list(ChargingParam p);
 
 	List<Map<String, String>> getMange(String userId);
+//修改参数
+	void updateByUserId(String userId);
 
 }

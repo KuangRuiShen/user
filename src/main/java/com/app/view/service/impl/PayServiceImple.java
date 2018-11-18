@@ -19,6 +19,7 @@ import com.app.view.mapper.SetmealMapper;
 import com.app.view.pojo.AppUser;
 import com.app.view.service.AppUserService;
 import com.app.view.service.PayService;
+import com.app.view.util.BuckleUitl;
 import com.app.view.util.MyUtils;
 import com.app.view.util.pay.MD5;
 import com.app.view.util.pay.SignUtils;
@@ -124,6 +125,8 @@ public class PayServiceImple implements PayService {
 		//保存订单
 		pm.setPayment_time(MyUtils.mYdateFrom(pm.getPayment_time()));
 		pm.setEnd_time(MyUtils.dateToString(new Date()));
+		//设置参数
+		pm.setType(BuckleUitl.getType());
 		payMapper.saveMoneyInfo(pm);
 		
 		//获取用户id

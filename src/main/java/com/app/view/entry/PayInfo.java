@@ -18,6 +18,8 @@ public class PayInfo {
 	//商户订单(自己生成)
 	private String out_trade_no;
 	
+	private String type;
+	
 
 	public String getPayment_time() {
 		return payment_time;
@@ -66,6 +68,15 @@ public class PayInfo {
 	public void setEnd_time(String end_time) {
 		this.end_time = end_time;
 	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+	
 	
 	
 

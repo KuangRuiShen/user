@@ -21,7 +21,15 @@ public class BuckleServiceImpl implements BuckleService{
 	
 	@Override
 	public List<Charging> list(ChargingParam p) {
-		return buckleMapper.list(p);
+		
+		List<Charging> list = buckleMapper.list(p);
+		if(list.size() <= 50){
+			buckleMapper.updateByUserId(p.getUserId());
+		}
+		//修改后再查询多一次
+	   list = buckleMapper.list(p);
+		
+		return list;
 	}
 
 	@Override
