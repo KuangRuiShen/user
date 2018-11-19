@@ -34,6 +34,8 @@ public class PayMent {
 	
 	private String result;
 	
+	private String role_id;
+	
 
 	public String getPayment_time() {
 		return payment_time;
@@ -123,6 +125,14 @@ public class PayMent {
 
 	public void setResult(String result) {
 		this.result = result;
+	}
+
+	public String getRole_id() {
+		return role_id;
+	}
+
+	public void setRole_id(String role_id) {
+		this.role_id = role_id;
 	}
 	
 	

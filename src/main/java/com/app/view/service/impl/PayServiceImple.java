@@ -46,7 +46,7 @@ public class PayServiceImple implements PayService {
 	
 	
 	@Autowired
-	private SetmealMapper setmealMapper;
+	private SetmealMapper setmealMapper;//套餐信息
 	
 	@Override
 	public void add(PayMent pm) {
@@ -90,6 +90,14 @@ public class PayServiceImple implements PayService {
 		String body = pm.getBody();
 		String trade_type = pm.getTrade_type();
 		String redirect_url = pm.getRedirect_url();
+		//获取套餐
+		List<Setmeal> datas= setmealMapper.list(new Setmeal());				
+		for(Setmeal s : datas){
+			if(s.getOne() == pm.getTotal_fee()){
+				pm.setRole_id(s.getId());
+			}
+		}
+		
 		//保存充值记录
 		this.add(pm);	
 		Map<String, String> params = new HashMap<String, String>();
@@ -111,7 +119,7 @@ public class PayServiceImple implements PayService {
 		return httUrl;
 	}
 
-
+	//商户信息
 	private Map<String, Object> getPayInfo() {	
 	List<Map<String, Object>> datas = payMapper.getPayInfo();
 	return  datas.get(0);
