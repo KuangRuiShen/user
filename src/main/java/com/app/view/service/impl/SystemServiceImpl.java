@@ -81,4 +81,14 @@ public class SystemServiceImpl implements SystemService {
 		return systemMapper.total(id,total);
 	}
 
+	@Override
+	public int getNum() {
+		return systemMapper.getNum();
+	}
+
+	@Override
+	public void updateNum(Integer num) {
+		systemMapper.updateNum(num);
+	}
+
 }

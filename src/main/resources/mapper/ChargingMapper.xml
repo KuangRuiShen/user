@@ -32,8 +32,7 @@
     <select id="count" resultMap="baseMap">
     select ct.code_id,r.tt as total,ct.text from 
 	 code_text ct 
-	left join (select u.role_id,sum(a.total) tt from user u left join user_order o on u.id = o.user_id
-	left join user t on t.id = u.invite_id 
+	left join (select o.role_id,sum(a.total) tt from  user_order o 
 	left join (select sum(m.total_fee) total, m.out_trade_no from menoy_info  m	
 	<if test="btime !=null and etime != null ">
 		where DATE_FORMAT(m.end_time,'%y-%m-%d') 
@@ -44,7 +43,7 @@
 	<if test="way !=null and way != '' ">
 		 and o.trade_type =#{way}
 	</if>	
-	group by u.role_id )r 
+	group by o.role_id )r 
 	on ct.code_id = r.role_id     
     </select>
 

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.app.view.entry.ChargingCount;
 import com.app.view.entry.ChargingParam;
 import com.app.view.mapper.BuckleMapper;
+import com.app.view.mapper.SystemMapper;
 import com.app.view.pojo.Charging;
 import com.app.view.service.BuckleService;
 
@@ -19,16 +20,18 @@ public class BuckleServiceImpl implements BuckleService{
 	@Autowired
 	private BuckleMapper buckleMapper;
 	
+	@Autowired
+	private SystemMapper systemMapper;
+	
 	@Override
 	public List<Charging> list(ChargingParam p) {
 		
 		List<Charging> list = buckleMapper.list(p);
-		if(list.size() <= 50){
+		if(list.size() <= systemMapper.getNum()){
 			buckleMapper.updateByUserId(p.getUserId());
+			//修改后再查询多一次
+			   list = buckleMapper.list(p);
 		}
-		//修改后再查询多一次
-	   list = buckleMapper.list(p);
-		
 		return list;
 	}
 

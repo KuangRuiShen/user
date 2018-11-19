@@ -32,4 +32,8 @@ public interface SystemService {
 
 	List<Map<String, Object>> total(String id, int total);
 
+	int getNum();
+
+	void updateNum(Integer num);
+
 }

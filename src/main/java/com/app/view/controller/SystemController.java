@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.view.pojo.LoginUser;
@@ -145,8 +146,33 @@ public class SystemController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return JsonResult.buildExceptionResult("查询失败,请联系管理员!");
-		}
-      	
+		}	
 	}
+	
+	@GetMapping("num")
+	public JsonResult<?> getNum(){				 
+		try {
+			  int num = systemService.getNum();
+			  return JsonResult.buildSuccessResult(num);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return JsonResult.buildExceptionResult("查询失败,请联系管理员!");
+		}	
+	}
+	
+	@GetMapping("saveNum")
+	public JsonResult<?> SaveNum(@RequestParam Integer num){				 
+		try {
+				if(num < 0 ){
+					num = 50;
+				}
+				systemService.updateNum(num);
+			  return JsonResult.buildSuccessResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return JsonResult.buildExceptionResult("保存失败,请联系管理员!");
+		}	
+	}
+	
 
 }

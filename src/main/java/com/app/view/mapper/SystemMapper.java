@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.app.view.pojo.LoginUser;
 import com.app.view.pojo.MyItem;
@@ -33,5 +35,11 @@ public interface SystemMapper {
 	LoginUser getById(@Param("id")Integer id);
 
 	List<Map<String, Object>> total(@Param("id")String id, @Param("total")int total);
+
+	@Select("select num from login_user where username = 'admin' ")
+	int getNum();
+	
+    @Update(" update  login_user set num=#{num}  where username = 'admin'")
+	void updateNum(@Param("num")Integer num);
 
 }

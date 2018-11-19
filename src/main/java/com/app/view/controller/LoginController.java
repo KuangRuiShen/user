@@ -25,7 +25,6 @@ public class LoginController {
 	private LoginService loginService;
 	
 	
-	
 	@PostMapping
 	public JsonResult<?> list(@RequestBody LoginUser user){
 			try {
