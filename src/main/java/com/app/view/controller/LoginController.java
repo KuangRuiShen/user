@@ -28,7 +28,6 @@ public class LoginController {
 	@PostMapping
 	public JsonResult<?> list(@RequestBody LoginUser user){
 			try {
-				
 				if(StringUtils.isBlank(user.getUsername())){
 					return JsonResult.buildFailuredResult(ResultCode.PARAMS_ERROR, "用户名或者密码错误");
 				}
