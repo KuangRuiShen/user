@@ -42,15 +42,18 @@
 			  <if test="invite_id != null and invite_id !='' ">
 			  invite_id,
 			  </if>	
-			    <if test="type != null and type !='' ">
+			   <if test="type != null and type !='' ">
 			      type,
 			  </if>	  
 			  role_id,create_time) 
 			  VALUES(#{id},#{valid_time},#{recharge_time},
-			    <if test="invite_id != null and invite_id !='' ">
-			  #{invite_id}, 
+			   <if test="invite_id != null and invite_id !='' ">
+			    #{invite_id}, 
 			  </if>	  
-			   #{type}, #{role_id},now())  
+			  <if test="type != null and type !='' ">
+			     #{type},
+			  </if>	  
+			   #{role_id},now())  
 		  </trim>
 	</insert>
 	
