@@ -33,7 +33,9 @@
 		UPDATE pay_info
 		SET `key` = #{key,jdbcType=VARCHAR},
 		 mch_id = #{mch_id,jdbcType=VARCHAR},
-		 url= #{url,jdbcType=VARCHAR}
+		 url= #{url,jdbcType=VARCHAR},
+		 beginValue= #{beginValue,jdbcType=INTEGER},
+		 time= #{time,jdbcType=INTEGER}
 	</update>
 
 

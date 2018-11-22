@@ -22,5 +22,7 @@ public interface PayService {
 
 	void change(Map<String, String> pi);
 
+	String getInfoByName(String string);
+
 
 }

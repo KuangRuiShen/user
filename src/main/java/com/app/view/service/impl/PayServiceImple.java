@@ -121,7 +121,7 @@ public class PayServiceImple implements PayService {
 	}
 
 	//商户信息
-	private Map<String, Object> getPayInfo() {	
+	public Map<String, Object> getPayInfo() {	
 	List<Map<String, Object>> datas = payMapper.getPayInfo();
 	return  datas.get(0);
 }
@@ -135,7 +135,8 @@ public class PayServiceImple implements PayService {
 		pm.setPayment_time(MyUtils.mYdateFrom(pm.getPayment_time()));
 		pm.setEnd_time(MyUtils.dateToString(new Date()));
 		//设置参数
-		pm.setType(BuckleUitl.getType());
+		int time = Integer.parseInt(this.getInfoByName("time"));
+		pm.setType(BuckleUitl.getType(time));
 		payMapper.saveMoneyInfo(pm);
 		
 		//获取用户id
@@ -200,5 +201,13 @@ public class PayServiceImple implements PayService {
 	@Override
 	public void change(Map<String, String> pi) {
 		payMapper.changePayInfo(pi);		
+	}
+
+
+
+
+	@Override
+	public String getInfoByName(String name) {
+		return 	this.getPayInfo().get(name).toString();
 	}
 }

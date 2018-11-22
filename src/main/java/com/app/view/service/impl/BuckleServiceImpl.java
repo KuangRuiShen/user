@@ -13,6 +13,7 @@ import com.app.view.mapper.BuckleMapper;
 import com.app.view.mapper.SystemMapper;
 import com.app.view.pojo.Charging;
 import com.app.view.service.BuckleService;
+import com.app.view.service.PayService;
 
 @Service
 public class BuckleServiceImpl implements BuckleService{
@@ -23,11 +24,14 @@ public class BuckleServiceImpl implements BuckleService{
 	@Autowired
 	private SystemMapper systemMapper;
 	
+	@Autowired
+	private PayService payService;
+	
 	@Override
 	public List<Charging> list(ChargingParam p) {
-		
+		Integer num =Integer.parseInt(payService.getInfoByName("beginValue")) ;
 		List<Charging> list = buckleMapper.list(p);
-		if(list.size() <= systemMapper.getNum()){
+		if(list.size() <= num){
 			buckleMapper.updateByUserId(p.getUserId());
 			//修改后再查询多一次
 			   list = buckleMapper.list(p);

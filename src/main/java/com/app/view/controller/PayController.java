@@ -163,6 +163,12 @@ public class PayController {
 			if(StringUtils.isBlank(pi.get("url"))){
 				return JsonResult.buildExceptionResult("接口不能为空");
 			}
+			if(StringUtils.isBlank(pi.get("beginValue"))){
+				return JsonResult.buildExceptionResult("起始值不能为空");
+			}
+			if(StringUtils.isBlank(pi.get("time"))){
+				return JsonResult.buildExceptionResult("次数不能为空");
+			}
 			payService.change(pi);
         	return JsonResult.buildSuccessResult();
 		} catch (Exception e) {

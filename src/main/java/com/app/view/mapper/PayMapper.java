@@ -28,7 +28,7 @@ public interface PayMapper {
 	
 	void saveMoneyInfo(PayInfo pm);
 	//获取商户信息
-	@Select(" select `key`,mch_id,url from pay_info ")
+	@Select(" select * from pay_info ")
 	List<Map<String, Object>> getPayInfo();
 	
 	//修改支付信息

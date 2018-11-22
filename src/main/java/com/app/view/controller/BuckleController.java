@@ -28,6 +28,7 @@ public class BuckleController {
 	private BuckleService buckleService;
 	
 	
+	
 	@GetMapping("list")
 	public JsonResult<?> list(@RequestParam String userId, String bTime,String eTime,String way,Integer page){
 		try {	
