@@ -15,6 +15,7 @@ import com.app.view.pojo.Charging;
 import com.app.view.service.BuckleService;
 import com.app.view.util.JsonResult;
 import com.app.view.util.ResultCode;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 //处理数据
@@ -28,11 +29,15 @@ public class BuckleController {
 	
 	
 	@GetMapping("list")
-	public JsonResult<?> list(@RequestParam String userId, String bTime,String eTime,String way){
+	public JsonResult<?> list(@RequestParam String userId, String bTime,String eTime,String way,Integer page){
 		try {	
 			Map<String, Object> resutl = new HashMap<>();
 			ChargingParam p = new ChargingParam(bTime,eTime, way);	
 			p.setUserId(userId);
+		
+				if(page == null || page < 1 )
+					page = 1;			
+			 PageHelper.startPage(page, 10);
 			 List<Charging> list = buckleService.list(p);
 	         PageInfo<Charging> pageInfo = new PageInfo<Charging>(list);         
 			resutl.put("datas", pageInfo.getList());

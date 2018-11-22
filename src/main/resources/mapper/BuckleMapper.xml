@@ -12,13 +12,17 @@
 		select u.id,
 		u.recharge_time,
 		u.valid_time
-		,u.role_id,u.invite_id,o.trade_type,o.out_trade_no,a.total,c.name as roleText
+		,u.role_id,u.invite_id,o.trade_type,o.out_trade_no,a.total,c.name as
+		roleText
 		from
 		user u left join user_order o on u.id = o.user_id
-		left join code c on u.role_id = c.code_id and c.type= 'level'
-		left join (select sum(m.total_fee) total, m.out_trade_no from
+		left join
+		code c on u.role_id = c.code_id and c.type= 'level'
+		left join (select
+		sum(m.total_fee) total, m.out_trade_no from
 		menoy_info m
-		where type = '1'
+		where type =
+		'1'
 		<if test="btime !=null and etime != null ">
 			and DATE_FORMAT(m.end_time,'%y-%m-%d')
 			BETWEEN
@@ -39,16 +43,23 @@
 	<select id="count" resultMap="baseMap">
 		select ct.code_id,r.tt as total,ct.text from
 		code_text ct
-		left join (select o.role_id,sum(a.total) tt from user_order o 
+		left join
+		(select o.role_id,sum(a.total) tt from user_order o
+		left join user u on o.user_id = u.id
 		left join (select sum(m.total_fee) total, m.out_trade_no from menoy_info m
 		where type = '1'
 		<if test="btime !=null and etime != null ">
 			and DATE_FORMAT(m.end_time,'%y-%m-%d')
-			BETWEEN DATE_FORMAT(#{btime},'%y-%m-%d') and
+			BETWEEN
+			DATE_FORMAT(#{btime},'%y-%m-%d') and
 			DATE_FORMAT(#{etime},'%y-%m-%d')
 		</if>
 		group by m.out_trade_no) a on a.out_trade_no = o.out_trade_no
-		where o.out_trade_no is not null and a.total > 0
+		where
+		o.out_trade_no is not null and a.total > 0
+		<if test="userId !=null and userId != '' ">
+			and u.invite_id=#{userId}
+		</if>
 		<if test="way !=null and way != '' ">
 			and o.trade_type =#{way}
 		</if>
@@ -61,17 +72,22 @@
 		select *,IFNULL((select
 		sum(m.total_fee) from user_order a left join menoy_info m on
 		a.out_trade_no = m.out_trade_no
-		left join user on user.id = a.user_id WHERE user.invite_id = u.id),0) as
+		left join user on user.id = a.user_id
+		WHERE user.invite_id = u.id and m.type='1'),0) as
 		total,
-		(select count(m.id) from user m where m.invite_id = u.id) as
+		(select
+		count(m.id) from user m where m.invite_id = u.id) as
 		people
-		from user u where u.type in ('2') and u.invite_id =#{userId}
-		order by CONVERT(id,SIGNED)
+		from user u
+		where u.type in ('2') and u.invite_id =#{userId}
+		order by
+		CONVERT(id,SIGNED)
 	</select>
 
 	<update id="updateByUserId">
 		update menoy_info set type = '1'
-		WHERE out_trade_no IN (
+		WHERE out_trade_no IN
+		(
 		SELECT
 		out_trade_no
 		FROM

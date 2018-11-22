@@ -95,6 +95,7 @@ public class PayServiceImple implements PayService {
 		for(Setmeal s : datas){
 			if(s.getOne() == pm.getTotal_fee()){
 				pm.setRole_id(s.getId());
+				break;
 			}
 		}
 		

@@ -4,12 +4,13 @@
 
 	<insert id="add" parameterType="com.app.view.entry.PayMent">
 		INSERT INTO user_order
-		(user_id,out_trade_no,total_fee,body,trade_type,start_time)
+		(user_id,out_trade_no,total_fee,body,trade_type,role_id,start_time)
 		VALUES(#{user_id,jdbcType=VARCHAR},
 		#{out_trade_no,jdbcType=VARCHAR},
 		#{total_fee,jdbcType=INTEGER},
 		#{body,jdbcType=VARCHAR},
 		#{trade_type,jdbcType=VARCHAR},
+		#{role_id,jdbcType=VARCHAR},
 		#{start_time,jdbcType=VARCHAR})
 
 	</insert>
