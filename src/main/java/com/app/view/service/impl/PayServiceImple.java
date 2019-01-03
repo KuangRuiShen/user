@@ -93,7 +93,7 @@ public class PayServiceImple implements PayService {
 		//获取套餐
 		List<Setmeal> datas= setmealMapper.list(new Setmeal());				
 		for(Setmeal s : datas){
-			if(s.getOne() == pm.getTotal_fee()){
+			if(s.getOne().equals(pm.getTotal_fee())){
 				pm.setRole_id(s.getId());
 				break;
 			}
@@ -160,7 +160,7 @@ public class PayServiceImple implements PayService {
 						//查询套餐
 						List<Setmeal> datas= setmealMapper.list(new Setmeal());				
 						for(Setmeal s : datas){
-							if(s.getOne() == pm.getTotal_fee() && !s.getId().equals(user.getRole_id())){
+							if(s.getOne().equals(pm.getTotal_fee()) && !s.getId().equals(user.getRole_id())){
 								valid_time = MyUtils.RechargeDate(valid_time, s.getId());
 								user.setRole_id(s.getId());
 								break;

@@ -80,8 +80,7 @@ public class PayController {
 		            
 //		            System.err.println(builder.toString());
 //		            response.getWriter().write("success");
-//					response.getWriter().flush();
-		         
+//					response.getWriter().flush();      
 //					response.getWriter().close();
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();

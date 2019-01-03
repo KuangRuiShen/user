@@ -36,6 +36,13 @@ public class MyUtils {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return sdf.format(System.currentTimeMillis());
 	}
+	
+	public static String getPreAllTime(){
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYYMMddHHmmssSSS");  
+		return sdf.format(System.currentTimeMillis());
+	}
+	
+	
 	/**
 	 * 时间转字符
 	 * @describe 
@@ -105,7 +112,7 @@ public class MyUtils {
 			cal.add(Calendar.YEAR, 5);
 			break;
 		default:// day
-			cal.add(Calendar.DAY_OF_YEAR, 1);
+			cal.add(Calendar.DAY_OF_YEAR, 5);
 		}
 		return cal.getTime();		
 	}
@@ -161,6 +168,12 @@ public class MyUtils {
 	    return ip.equals("0:0:0:0:0:0:0:1")?"127.0.0.1":ip;
 	}
 
+	public static void main(String[] args) {
+		//2018 11 13 18 58 28 11
+		//2019 01 02 11 14 08 41
+		//2019 01 02 11 14 54 235
+		System.out.println(getPreAllTime());
+	}
 	
 
 }
