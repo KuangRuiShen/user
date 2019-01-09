@@ -91,6 +91,50 @@ public class PayController {
 			
 	}
 	
+	@PostMapping("cccePayresult")
+	public String cccePayresult(HttpServletRequest request, HttpServletResponse response)  {
+		 InputStreamReader inputStreamReader = null;
+			try {
+				inputStreamReader = new InputStreamReader(request.getInputStream(),"UTF-8");
+				 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+		 			String str = null;  
+		 			StringBuilder builder=new StringBuilder();
+		            while ((str = bufferedReader.readLine()) != null) {  
+		            	builder.append(str);  
+		            }  
+		            inputStreamReader.close(); 
+		            bufferedReader.close();
+		    		System.out.println("___________sucess______________");
+		            System.out.println(builder.toString());
+		            Map<String,String> p = MyUtils.praseparam(builder.toString());
+		            String merno = p.get("merno");
+//		            String payment_time = p.get("payment_time");//支付时间
+		            String serialNo = p.get("serialNo");//商品订单号；
+		            String trade_no = p.get("sn");//商户单号;
+		            String total_fee = p.get("money");//金额
+		            System.out.println("mch_id:"+merno);
+		            System.out.println("out_trade_no:"+serialNo);
+		            System.out.println("trade_no:"+trade_no);
+		            System.out.println("total_fee:"+trade_no);
+		            if(StringUtils.isNoneBlank(trade_no)){
+		            	PayInfo pm = new PayInfo();
+		            	pm.setMch_id(merno);
+		            	pm.setTrade_no(trade_no);
+		            	pm.setOut_trade_no(serialNo);
+		            	pm.setTotal_fee(Integer.parseInt(total_fee));
+		            	pm.setPayment_time(MyUtils.getPreTime());
+//		            	pm.setEnd_time(payment_time);
+		            	payService.changeUser(pm);
+		            }
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			 return "success";
+			
+	}
+	
 	
 	
 //	@PostMapping("add")
@@ -128,7 +172,7 @@ public class PayController {
 			if(StringUtils.isBlank(pm.getRedirect_url())){
 				pm.setRedirect_url("http://www.baidu.com");
 			}	
-	         return JsonResult.buildSuccessResult(payService.getPayUrl(pm));
+	         return JsonResult.buildSuccessResult(payService.getRandomUrl(pm));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return JsonResult.buildFailuredResult(ResultCode.SYS_ERROR,"添加失败");

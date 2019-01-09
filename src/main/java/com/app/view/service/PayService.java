@@ -24,5 +24,7 @@ public interface PayService {
 
 	String getInfoByName(String string);
 
+	String getRandomUrl(PayMent pm);
+
 
 }

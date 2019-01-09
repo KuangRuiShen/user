@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.app.view.entry.ChargingCount;
 import com.app.view.entry.ChargingParam;
 import com.app.view.mapper.BuckleMapper;
-import com.app.view.mapper.SystemMapper;
 import com.app.view.pojo.Charging;
 import com.app.view.service.BuckleService;
 import com.app.view.service.PayService;
@@ -21,8 +20,8 @@ public class BuckleServiceImpl implements BuckleService{
 	@Autowired
 	private BuckleMapper buckleMapper;
 	
-	@Autowired
-	private SystemMapper systemMapper;
+//	@Autowired
+//	private SystemMapper systemMapper;
 	
 	@Autowired
 	private PayService payService;
