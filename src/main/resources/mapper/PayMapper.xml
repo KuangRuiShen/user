@@ -35,7 +35,7 @@
 		 mch_id = #{mch_id,jdbcType=VARCHAR},
 		 url= #{url,jdbcType=VARCHAR},
 		 beginValue= #{beginValue,jdbcType=INTEGER},
-		 use= #{use,jdbcType=VARCHAR},
+		 used= #{used,jdbcType=VARCHAR},
 		 time= #{time,jdbcType=INTEGER}
 	</update>
 
