@@ -18,11 +18,13 @@ import com.app.view.mapper.PayMapper;
 import com.app.view.mapper.SetmealMapper;
 import com.app.view.pojo.AppUser;
 import com.app.view.service.AppUserService;
+import com.app.view.service.CccePayService;
 import com.app.view.service.PayService;
 import com.app.view.util.BuckleUitl;
 import com.app.view.util.MyUtils;
 import com.app.view.util.pay.MD5;
 import com.app.view.util.pay.SignUtils;
+import com.app.view.vo.CccePayVO;
 
 /**
  * @author krs
@@ -46,6 +48,9 @@ public class PayServiceImple implements PayService {
 
 	@Autowired
 	private SetmealMapper setmealMapper;// 套餐信息
+	
+	@Autowired
+	private CccePayService cccePayService;//新支付
 
 	@Override
 	public void add(PayMent pm) {
@@ -202,22 +207,30 @@ public class PayServiceImple implements PayService {
 
 	@Override
 	public String getRandomUrl(PayMent pm) {
-		return getcccePayUrl(pm);
+		String user = getInfoByName("use");
+		if(user.equals("1")) {
+			return getPayUrl(pm);
+		}else {
+			return getcccePayUrl(pm);
+		}	
 	}
 
 	private String getcccePayUrl(PayMent pm) {
-		String merno = "180002";
-		String key = "b3e562f60ef9ecbb0274283a07b0feb6";
-		String sn =  MyUtils.getPreAllTime();
-//		String url = "http://coin.cccepay.com/api/Index/pay";
-		String url = "http://coin.cccepay.com/api/Index/TUNPay";
+		//新支付
+		CccePayVO cccepay= cccePayService.queryVO();
+		String merno = cccepay.getWMerno();
+		String key = cccepay.getWkey();
+		String url = cccepay.getUrl();
 		
+		String sn =  MyUtils.getPreAllTime();
 		String money = MyUtils.getMenoy(pm.getTotal_fee());
 		String acode = pm.getTrade_type();
 		if (!pm.getTrade_type().equals("WX")) {
 			acode = "ZFB";
+			merno = cccepay.getZMerno();
+			key = cccepay.getZkey();
 		}
-		String urlCallback = "http://" + ip + "/api/pay/result";
+		String urlCallback = "http://" + ip + "/api/pay/cccePayresult";
 		// 获取套餐
 		List<Setmeal> datas = setmealMapper.list(new Setmeal());
 		for (Setmeal s : datas) {

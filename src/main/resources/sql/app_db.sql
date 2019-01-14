@@ -783,3 +783,15 @@ CREATE TABLE `welcome` (
 -- Records of welcome
 -- ----------------------------
 INSERT INTO `welcome` VALUES ('4', 'http://128.14.132.134/upload/img/20181010115852649.png', 'https://static.zifeiyucoco.com/h5/package/guji-release-1.0.5-cpa.apk', '1');
+
+DROP TABLE IF EXISTS `pay_cccepay`;
+CREATE TABLE `pay_cccepay` (
+  `url` varchar(255) default NULL COMMENT '请求的url',
+  `id` int(11) NOT NULL COMMENT '标识',
+  `merno` varchar(100) default NULL COMMENT '商户号',
+  `md5Key` varchar(255) default NULL COMMENT '秘钥',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO `app_db`.`pay_cccepay`(`url`, `id`, `merno`, `md5Key`) VALUES ('http://coin.cccepay.com/api/Index/pay', 1, '180060', 'c50677cc872f0029d0ec62e384525428');
+INSERT INTO `app_db`.`pay_cccepay`(`url`, `id`, `merno`, `md5Key`) VALUES ('http://coin.cccepay.com/api/Index/pay', 2, '180059', '02f6c0804536df5c1fefa751d058134d');
+
