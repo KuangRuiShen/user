@@ -39,8 +39,8 @@ public class CccePayController {
 	@PostMapping("update")
 	public JsonResult<?> update(@RequestBody CccePayVO vo){	
 		try {
-			CccePay weixin = new CccePay("1", vo.getUrl(), vo.getWMerno(), vo.getWkey());
-			CccePay zfb = new CccePay("2", vo.getUrl(), vo.getZMerno(), vo.getZkey());
+			CccePay weixin = new CccePay("1", vo.getUrl(), vo.getWmerno(), vo.getWkey());
+			CccePay zfb = new CccePay("2", vo.getUrl(), vo.getZmerno(), vo.getZkey());
 			cccePayService.updateById(weixin);
 			cccePayService.updateById(zfb);
 	        return JsonResult.buildSuccessResult();

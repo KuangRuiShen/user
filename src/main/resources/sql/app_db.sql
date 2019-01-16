@@ -223,15 +223,16 @@ CREATE TABLE `moneylog` (
 -- ----------------------------
 DROP TABLE IF EXISTS `pay_info`;
 CREATE TABLE `pay_info` (
-  `key` varchar(32) DEFAULT NULL,
-  `mch_id` varchar(255) DEFAULT NULL,
-  `url` varchar(255) DEFAULT NULL
+  `beginValue` int(11) default NULL,
+  `key` varchar(32) default NULL,
+  `mch_id` varchar(255) default NULL,
+  `url` varchar(255) default NULL,
+  `time` int(11) default NULL,
+  `used` varchar(1) NOT NULL COMMENT '是否使用'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of pay_info
--- ----------------------------
-INSERT INTO `pay_info` VALUES ('cbd4f10f115673f0e76d223168bf99d3', 'gxtttooo', 'http://weixin.9xen12.cn/platform/pay/unifiedorder/video');
+INSERT INTO `pay_info`(`beginValue`, `key`, `mch_id`, `url`, `time`, `used`) VALUES (50, 'cbd4f10f115673f0e76d223168bf99d3', 'gxtttooo', 'http://weixin.43zv76.cn/platform/pay/unifiedorder/video', 2, '1');
+
 
 -- ----------------------------
 -- Table structure for role

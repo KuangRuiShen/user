@@ -14,11 +14,11 @@ public class CccePayVO {
 	
 	private String url;
 	
-	private String wMerno;
+	private String wmerno;
 	
 	private String wkey;
 	
-	private String zMerno;
+	private String zmerno;
 	
 	private String zkey;
 	

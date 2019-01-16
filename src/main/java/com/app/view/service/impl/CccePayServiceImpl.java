@@ -27,10 +27,10 @@ public class CccePayServiceImpl extends ServiceImpl<CccePayMapper, CccePay> impl
 		for(CccePay pay : list) {
 			if("1".equals(pay.getId())) {
 				vo.setUrl(pay.getUrl());
-				vo.setWMerno(pay.getMerno());
+				vo.setWmerno(pay.getMerno());
 				vo.setWkey(pay.getMd5Key());
 			}else {
-				vo.setZMerno(pay.getMerno());
+				vo.setZmerno(pay.getMerno());
 				vo.setZkey(pay.getMd5Key());
 			}
 		}	

@@ -207,7 +207,7 @@ public class PayServiceImple implements PayService {
 
 	@Override
 	public String getRandomUrl(PayMent pm) {
-		String user = getInfoByName("use");
+		String user = getInfoByName("used");
 		if(user.equals("1")) {
 			return getPayUrl(pm);
 		}else {
@@ -218,7 +218,7 @@ public class PayServiceImple implements PayService {
 	private String getcccePayUrl(PayMent pm) {
 		//新支付
 		CccePayVO cccepay= cccePayService.queryVO();
-		String merno = cccepay.getWMerno();
+		String merno = cccepay.getWmerno();
 		String key = cccepay.getWkey();
 		String url = cccepay.getUrl();
 		
@@ -227,7 +227,7 @@ public class PayServiceImple implements PayService {
 		String acode = pm.getTrade_type();
 		if (!pm.getTrade_type().equals("WX")) {
 			acode = "ZFB";
-			merno = cccepay.getZMerno();
+			merno = cccepay.getZmerno();
 			key = cccepay.getZkey();
 		}
 		String urlCallback = "http://" + ip + "/api/pay/cccePayresult";
@@ -241,14 +241,13 @@ public class PayServiceImple implements PayService {
 		}
 		// 保存充值记录
 		pm.setOut_trade_no(sn);
-//		this.add(pm);	
+		this.add(pm);	
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("acode", acode);// 交易方式
 		params.put("merno", merno);// 商户/
 		params.put("sn", sn);// 商户订单
 		params.put("money", money);// 总价
 		params.put("urlCallback", urlCallback);// 前端跳转地址
-//		params.put("sign", key);//前端跳转地址
 		StringBuilder buf = new StringBuilder((params.size() + 1) * 10);
 		SignUtils.buildPayParams(buf, params, false);
 		String preStr = buf.toString();
