@@ -56,7 +56,7 @@ public class PayServiceImple implements PayService {
 	public void add(PayMent pm) {
 		pm.setStart_time(MyUtils.dateToString(new Date()));
 		pm.setResult("0");
-		if (StringUtils.isNotBlank(pm.getRole_id())) {
+		if (StringUtils.isBlank(pm.getRole_id())) {
 			pm.setRole_id("1");
 		}
 		payMapper.add(pm);
