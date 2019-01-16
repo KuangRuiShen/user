@@ -179,5 +179,15 @@ public class MyUtils {
 		BigDecimal b = new BigDecimal(menoy);
 		return b.divide(new BigDecimal(100)).toString();
 	}
+	
+	/**
+	 * 
+	 * @param menoy(单位分)
+	 * @return
+	 */
+	public static Integer getMenoy(String menoy) {
+		BigDecimal b = new BigDecimal(menoy);
+		return b.multiply(new BigDecimal(100)).intValue();
+	}
 
 }

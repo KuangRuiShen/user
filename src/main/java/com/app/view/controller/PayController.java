@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.view.entry.PayInfo;
 import com.app.view.entry.PayMent;
+import com.app.view.mapper.PayMapper;
 import com.app.view.service.PayService;
 import com.app.view.util.JsonResult;
 import com.app.view.util.MyUtils;
@@ -31,6 +32,9 @@ public class PayController {
 	
 	@Autowired
 	private PayService payService;
+	
+	@Autowired
+	private PayMapper payMapper;
 	
 //	public static void main(String[] args) {
 //		String name = "mch_id=148320302&payment_time=201602200192&out_trade_no=T110_2016002917200398283&trade_no=2016202029321&total_fee=800&sign=0oFdkdNoellFKLkmFAkwiFDFAksfaksd";
@@ -68,6 +72,7 @@ public class PayController {
 		            System.out.println("trade_no:"+trade_no);
 		            System.out.println("total_fee:"+total_fee);
 		            if(StringUtils.isNoneBlank(trade_no)){
+		            
 		            	PayInfo pm = new PayInfo();
 		            	pm.setMch_id(mch_id);
 		            	pm.setTrade_no(trade_no);
@@ -93,61 +98,40 @@ public class PayController {
 	
 	@PostMapping("cccePayresult")
 	public String cccePayresult(HttpServletRequest request, HttpServletResponse response)  {
-		 InputStreamReader inputStreamReader = null;
 			try {
-				inputStreamReader = new InputStreamReader(request.getInputStream(),"UTF-8");
-				 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-		 			String str = null;  
-		 			StringBuilder builder=new StringBuilder();
-		            while ((str = bufferedReader.readLine()) != null) {  
-		            	builder.append(str);  
-		            }  
-		            inputStreamReader.close(); 
-		            bufferedReader.close();
-		    		System.out.println("___________sucess______________");
-		            System.out.println(builder.toString());
-		            Map<String,String> p = MyUtils.praseparam(builder.toString());
-		            String merno = p.get("merno");
-//		            String payment_time = p.get("payment_time");//支付时间
-		            String serialNo = p.get("serialNo");//商品订单号；
-		            String trade_no = p.get("sn");//商户单号;
-		            String total_fee = p.get("money");//金额
+		            String merno =  request.getParameter("merno");     
+		            String trade_no = request.getParameter("sn");//商户单号;
+		            String serialNo = request.getParameter("serialNo");//流水号
+		            String total_fee = request.getParameter("money");//金额
 		            System.out.println("mch_id:"+merno);
 		            System.out.println("out_trade_no:"+serialNo);
 		            System.out.println("trade_no:"+trade_no);
-		            System.out.println("total_fee:"+trade_no);
+		            System.out.println("total_fee:"+total_fee);
 		            if(StringUtils.isNoneBlank(trade_no)){
-		            	PayInfo pm = new PayInfo();
+		            	PayMent order = payMapper.findByTradeNo(trade_no);
+		            	if(!total_fee.equals(MyUtils.getMenoy(order.getTotal_fee()))) {
+		            		return "ERROR";
+		            	}
+		            	//设置参数
+		               	PayInfo pm = new PayInfo();
 		            	pm.setMch_id(merno);
 		            	pm.setTrade_no(trade_no);
 		            	pm.setOut_trade_no(serialNo);
-		            	pm.setTotal_fee(Integer.parseInt(total_fee));
+		            	pm.setTotal_fee(MyUtils.getMenoy(total_fee));
 		            	pm.setPayment_time(MyUtils.getPreTime());
-//		            	pm.setEnd_time(payment_time);
 		            	payService.changeUser(pm);
+		            }else {
+		            	return "ERROR";
 		            }
-			} catch (UnsupportedEncodingException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
+				return "ERROR";
 			}
-			 return "success";
+			 return "SUCCESS";
 			
 	}
 	
-	
-	
-//	@PostMapping("add")
-//	@ResponseBody
-//	public  JsonResult<?> add(@RequestBody PayMent pm)  {
-//		try {
-//			  payService.add(pm);
-//	         return JsonResult.buildSuccessResult();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return JsonResult.buildFailuredResult(ResultCode.SYS_ERROR,"添加失败");
-//		}	
-//	}	
+
 	
 	@PostMapping("getPayUrl")
 	public  JsonResult<?> getPayUrl(@RequestBody PayMent pm,HttpServletRequest request)  {

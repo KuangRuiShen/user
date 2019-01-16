@@ -1,8 +1,13 @@
 package com.app.view.entry;
 
-public class PayInfo {
+import com.baomidou.mybatisplus.annotations.TableId;
 
+public class PayInfo {
 	
+	//订单号(客户支付的订单号)
+	@TableId
+	private String trade_no;
+
 	private String mch_id;
 	//格式为 yyyyMMddHHmmss  --实际支付时间
 	private String payment_time;
@@ -11,9 +16,7 @@ public class PayInfo {
 	
 	//金额
 	private Integer total_fee;
-	
-	//订单号(客户支付的订单号)
-	private String trade_no;
+
 
 	//商户订单(自己生成)
 	private String out_trade_no;

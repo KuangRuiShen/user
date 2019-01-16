@@ -34,4 +34,5 @@ public interface PayMapper {
 	//修改支付信息
 	void changePayInfo(Map<String, String> pi);
 
+
 }
