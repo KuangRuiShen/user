@@ -100,23 +100,23 @@ public class PayController {
 	public String cccePayresult(HttpServletRequest request, HttpServletResponse response)  {
 			try {
 		            String merno =  request.getParameter("merno");     
-		            String trade_no = request.getParameter("sn");//商户单号;
-		            String serialNo = request.getParameter("serialNo");//流水号
+		            String sn = request.getParameter("sn");//自己生成的流水号
+		            String serialNo = request.getParameter("serialNo");//商户单号;
 		            String total_fee = request.getParameter("money");//金额
 		            System.out.println("mch_id:"+merno);
-		            System.out.println("out_trade_no:"+serialNo);
-		            System.out.println("trade_no:"+trade_no);
+		            System.out.println("sn:"+sn);
+		            System.out.println("serialNo:"+serialNo);
 		            System.out.println("total_fee:"+total_fee);
-		            if(StringUtils.isNoneBlank(trade_no)){
-		            	PayMent order = payMapper.findByTradeNo(trade_no);
+		            if(StringUtils.isNotBlank(sn) && StringUtils.isNotBlank(serialNo)){
+		            	PayMent order = payMapper.findByTradeNo(sn);
 		            	if(!total_fee.equals(MyUtils.getMenoy(order.getTotal_fee()))) {
 		            		return "ERROR";
 		            	}
 		            	//设置参数
 		               	PayInfo pm = new PayInfo();
 		            	pm.setMch_id(merno);
-		            	pm.setTrade_no(trade_no);
-		            	pm.setOut_trade_no(serialNo);
+		            	pm.setTrade_no(serialNo);
+		            	pm.setOut_trade_no(sn);
 		            	pm.setTotal_fee(MyUtils.getMenoy(total_fee));
 		            	pm.setPayment_time(MyUtils.getPreTime());
 		            	payService.changeUser(pm);
